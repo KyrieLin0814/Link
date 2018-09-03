@@ -1,0 +1,392 @@
+/*初始化*/
+
+html,
+body {
+	font-size: 22px;
+}
+@media screen and (max-width: 359px) {
+	html,body {
+		font-size: 20px;
+	}
+}
+@media screen and (min-width: 768px) {
+	html,body {
+		font-size: 26px;
+	}
+}
+* {
+	margin: 0px;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+img {
+	pointer-events: none;
+}
+
+textarea {
+	padding: 0px;
+	border: none;
+	outline: none;
+	resize: none;
+}
+
+
+/*清除浮动*/
+
+.clearfix {
+	*zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+	display: table;
+	line-height: 0;
+	content: "";
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+
+/*flex布局*/
+
+.flexBox {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.flex-1 {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+
+/*文字超出一行、多行显示省略号*/
+
+.text-1 {
+	width: 300px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.text-2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+
+/*主体内容*/
+
+.body-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+}
+
+.body-container.bg {
+	background-color: #EFEFEF;
+}
+
+
+/*路由过渡*/
+
+.fade-enter-active {
+	transition: all .5s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
+
+/*checkbox*/
+
+.car-list .cube-checkbox-ui.cubeic-square-border {
+	border: 1px solid #F39800;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+}
+
+.car-list .cube-checkbox .cube-checkbox-wrap {
+	padding: 0;
+}
+
+.car-list .cube-checkbox-hollow i:before {
+	border-radius: 50%;
+}
+.car-list .cube-checkbox-input{
+	z-index:-1
+}
+.car-list .car-list .cube-checkbox-wrap {
+	padding: 5px 3px;
+}
+
+.car-list .cube-checkbox {
+	padding: 0;
+}
+
+.car-list .cube-checkbox-ui:before {
+	display: none;
+}
+
+.pay-box .cube-checkbox-ui:before {
+	color: #F39800;
+	display: inline-block;
+	-webkit-transform: scale(0.8);
+	transform: scale(0.8);
+}
+
+.pay-box .cube-checkbox_checked .cube-checkbox-ui i {
+	color: #F39800;
+	-webkit-transform: scale(0.8);
+	transform: scale(0.8);
+}
+
+.agree .cube-checkbox-label{
+	height:22px;
+}
+
+/*没有数据*/
+.no-data{
+  padding-top:40px;
+  text-align: center;
+  font-size:0.8rem;
+  color:#cccccc
+}
+
+
+/*picker*/
+
+.cube-picker-choose {
+	height: 50px;
+}
+
+.cube-picker-cancel,
+.cube-picker-confirm {
+	font-size: 0.7rem;
+	line-height: 50px;
+}
+
+.cube-picker-confirm {
+	color: #F39800
+}
+
+.cube-picker-title {
+	font-size: 0.8rem;
+}
+
+.cube-picker-wheel-item {
+	font-size: 0.8rem;
+}
+
+
+/*弹框提示  popup*/
+
+.cube-my-popup .cube-popup-content {
+	max-width:80%;
+	font-size: 0.7rem;
+	line-height:20px;
+	padding: 0.8rem;
+	border-radius: 5px;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.cube-popup_mask{
+	z-index: 9999!important;
+}
+.cube-picker .cube-popup-mask,
+.cube-dialog .cube-popup-mask{
+	background-color: #25262d;
+}
+.cube-popup-mask{
+	background-color: transparent;
+}
+/*标题*/
+
+.common-title {
+	height: 28px;
+	background-color: #E4E4E4;
+	font-size: 0;
+}
+
+.common-title i {
+	padding: 0 0.3rem 0 0.5rem;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+
+.common-title span {
+	display: inline-block;
+	font-size: .7rem;
+	color: #F39800;
+	line-height: 28px;
+	vertical-align: middle;
+}
+
+
+/*购买*/
+
+.buy-box {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	padding: 10px 0.6rem 0;
+	background-color: #FFFFFF;
+	z-index: 999;
+	border-top: 1px solid #D4D5D5;
+}
+
+.buy-box p {
+	float: left;
+	color: #3E3A39;
+	margin-top:4px;
+	font-size: 0.7rem;
+}
+
+.buy-box p span {
+	color: #F39800;
+	font-size: 1.1rem;
+}
+.buy-box a {
+	float: right;
+	margin-left:8px;
+	padding:12px 12px;
+	font-size: 0.7rem;
+	height: 16px;
+	line-height: 16px;
+	color: #fff;
+	background-color: #F39800;
+	border-radius: 3px;
+}
+.buy-box a+a{
+	margin-left:0;
+}
+
+/*下拉收回*/
+
+.slide {
+	width: 22px;
+	height: 29px;
+	display: inline-block;
+	padding-left: 10px;
+	background: url(../assets/common/up.png) no-repeat center;
+	background-size: 13px 8px;
+}
+
+.slide.active {
+	background: url(../assets/common/down.png) no-repeat center;
+	background-size: 13px 8px;
+}
+
+.cost-box {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: inherit;
+	top:61px;
+	background: #fff;
+	padding: 12px 0.8rem;
+	font-size: 0.7rem;
+	border-top: 1px solid #D4D5D5;
+}
+
+.cost-box.active {
+	top:inherit;
+	bottom: 61px;
+}
+
+.cost-box .tle {
+	color: #F39800;
+	line-height: 24px;
+}
+
+.cost-box>div {
+	line-height: 32px;
+	color: #3E3A39;
+}
+
+.cost-box .flex-1 {
+	height: 0;
+	margin: 16px 10px 0;
+	border-top: 1px dotted #D4D5D5;
+}
+
+.cost-box .price span {
+	color: #F39800;
+	padding-right: 3px;
+	font-weight: bold;
+}
+
+.cost-box ul li{
+	line-height:30px;
+}
+
+/*按钮*/
+
+.btns a {
+	display: inline-block;
+	min-width: 10rem;
+	text-align: center;
+	font-size: 0.7rem;
+	color: #fff;
+	border-radius: 5px;
+	margin-bottom: 15px;
+	line-height: 32px;
+	background-color: #F39800;
+	border: 1px solid #F39800;
+}
+
+.btns a.done {
+	color: #F39800;
+	border: 1px solid #F39800;
+	background-color: #fff;
+}
+
+
+/*确认框*/
+
+.cube-dialog-main {
+	border-radius: 15px;
+}
+
+.cube-dialog-title-def {
+	color: #F39800;
+}
+.cube-dialog-content-def{
+	text-align: center;
+}
+
+.cube-dialog-btn {
+	color: #3E3A39
+}
