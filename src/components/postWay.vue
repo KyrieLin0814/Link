@@ -85,6 +85,7 @@
 				that.$http.post("/weixin/getIccId", {
 					data: {
 						connSeqNo: that.$store.state.connSeqNo,
+						lang: that.$store.state.langType,
 						partnerCode: that.$store.state.partnerCode,
 						token: that.$store.state.token,
 						tradeData: {
@@ -118,7 +119,7 @@
 						//有卡，不再提示
 						that.$store.state.alertCard = false
 					} else {
-						that.popupTxt = "请购买旅游卡后，再来选购荔枝卡套餐"
+						that.popupTxt = "请购买旅游卡后，再来选购领科物联网卡套餐"
 						const component = that.$refs['myPopup']
 						component.show()
 						setTimeout(() => {
@@ -185,6 +186,7 @@
 				that.$http.post("/weixin/userBound", {
 					data: {
 						connSeqNo: that.$store.state.connSeqNo,
+						lang: that.$store.state.langType,
 						partnerCode: that.$store.state.partnerCode,
 						token: that.$store.state.token,
 						tradeData: {
@@ -229,6 +231,7 @@
 						that.$http.post("/SimGW/travelSimGW/busiService", {
 							data: {
 								connSeqNo: that.$store.state.connSeqNo,
+								lang: that.$store.state.langType,
 								partnerCode: that.$store.state.partnerCode,
 								token: that.$store.state.token,
 								tradeData: {
@@ -377,6 +380,7 @@
 				that.$http.post("/SimGW/travelSimGW/busiService", {
 					data: {
 						connSeqNo: that.$store.state.connSeqNo,
+						lang: that.$store.state.langType,
 						partnerCode: that.$store.state.partnerCode,
 						token: that.$store.state.token,
 						tradeData: {

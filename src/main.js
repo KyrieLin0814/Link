@@ -43,6 +43,7 @@ Vue.use(VueFullpage)
 //语言切换
 Vue.use(VueI18n)
 
+store.state.langType = localStorage.getItem("lang")?localStorage.getItem("lang") : "cn"
 const i18n = new VueI18n({
 	locale: store.state.langType,
 	messages: {	

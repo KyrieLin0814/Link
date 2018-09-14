@@ -2,20 +2,21 @@
 	<div class="body-container">
 		<div class="common-title">
 			<i></i>
-			<span>充值到已有旅游卡</span>
+			<span>{{$t("message.recharge")}}</span>
 		</div>
 
-		<a class="save" @click="scanQRCode">扫描卡片背面</a>
+		<a class="save" @click="scanQRCode" v-if="openidFlag">{{$t("message.scan")}}</a>
 
 		<div class="content">
-			<input type="number" v-model="iccid" placeholder="(输入文本框)">
-			<span>或您手动输入旅游卡背面的ICCID编号</span>
-			<span style="margin-top:60px;">注意：请您扫描您要绑定套餐的荔枝全球电话卡背面的ICCID条形码或输入这个ICCID编号，扫描不同的电话卡将以最后一次扫描为准。</span>
+			<input type="number" v-model="deviceId" :placeholder="$t('message.placeholder')">
+			<span>{{$t("message.enterTxt")}}</span>
+			<p class='checkContent' :class="{'active': active}" @click="pickerFunc">{{ deviceTypeText }}</p>
+			<span style="margin-top:60px;">{{$t("message.note")}}</span>
 		</div>
 
 		<div class="buy-box clearfix">
-			<a @click="confirm">确定</a>
-			<a @click="cancel">取消</a>
+			<a @click="confirm">{{$t("message.confirm")}}</a>
+			<a @click="cancel">{{$t("message.cancel")}}</a>
 		</div>
 
 		<cube-popup type="my-popup" :mask="false" ref="myPopup">{{ popupTxt }}</cube-popup>
@@ -27,16 +28,24 @@
 		name: 'haveCard',
 		data() {
 			return {
-				iccid: '',
+				deviceId: '',
+				deviceTypeText : '',
+				deviceType : '',
 				backRouter: this.$store.state.routerBack.haveCard,
-				popupTxt: ''
+				openidFlag:this.$store.state.openId ? true: false,
+				popupTxt: '',
+				active: false,
+				langCn: this.$store.state.langType=='cn'? true:false
 			}
 		},
-		components: {},
 		created() {
-			this.iccid = this.$store.state.iccid
+			var that = this
+			that.deviceId = that.$store.state.deviceId
+			that.deviceType = that.$store.state.deviceType
+			that.deviceTypeText = that.$store.state.deviceTypeText ? that.$store.state.deviceTypeText : (that.langCn ? '请选择deviceType' : 'Please select deviceType')
+			
 			var params = encodeURI(encodeURI(document.location.href))
-			this.$http.get("/weixin/weixinsao?reqUrl=" + params).then((res) => {
+			that.$http.get("/paypalpay/weixinsao?reqUrl=" + params).then((res) => {
 				wx.config({
 					debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。  
 					appId: res.data.appId, // 必填，公众号的唯一标识  
@@ -46,9 +55,32 @@
 					jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2  
 				})
 			})
+			
+			//下拉选数据
+			that.$http.get("/paypalpay/selectDeviceType?lang=" + that.$store.state.langType).then(function(res){
+				var result = res.data.data.tradeData
+				that.picker = that.$createPicker({
+		          	title:  that.langCn ? '请选择deviceType': 'Please select',
+		          	data: [result],
+		          	cancelTxt:that.langCn ? '取消': 'Cancel',
+		          	confirmTxt:that.langCn ? '确认': 'Confirm',
+		          	onSelect: (selectedVal, selectedIndex, selectedText) => {
+		          		that.deviceType = selectedVal[0]
+		          		that.deviceTypeText = selectedText[0]
+						that.active = false
+					},
+		          	onCancel: () => {
+						that.active = false
+					}
+		        })
+			})
+			
 		},
-		mounted() {},
 		methods: {
+			pickerFunc(){
+				this.active = true
+				this.picker.show()
+			},
 			scanQRCode() {
 				var that = this
 				wx.scanQRCode({
@@ -56,8 +88,8 @@
 					scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有  
 					success: function(res) {
 						var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果  
-						var iccid = result.split(",")[1]
-						that.iccid = iccid
+						var deviceId = result.split(",")[1]
+						that.deviceId = deviceId
 						// code 在这里面写上扫描二维码之后需要做的内容 
 					},
 					error: function(err) {
@@ -67,37 +99,45 @@
 			},
 			confirm() {
 				var that = this
-				//绑定iccid
-				if(that.iccid) {
-					that.$http.post("/weixin/userBound", {
+				//绑定deviceId
+				if(that.deviceId && that.deviceType) {
+					that.$http.post("/paypalpay/userBound", {
 						data: {
 							connSeqNo: that.$store.state.connSeqNo,
+							lang: that.$store.state.langType,
 							partnerCode: that.$store.state.partnerCode,
 							token: that.$store.state.token,
 							tradeData: {
+								company: "",
+								deviceId: that.deviceId,
+								deviceType: that.deviceType,
+								email: "",
 								expressPrice: "",
 								expressType: "",
-								iccid: that.iccid,
 								openid: that.$store.state.openId ? that.$store.state.openId : "",
 								receiveAddress: "",
 								receivePhoneNumber: "",
-								receiveUserName: ""
+								receiveUserName: "",
+								userId: that.$store.state.userId ? that.$store.state.userId : "",
 							},
 							tradeTime: new Date(),
 							tradeType: "F013",
 						}
 					}).then((res) => {
 						if(res.data.data.tradeRstCode == "1000") {
-							that.$store.state.iccid = that.iccid
-							that.$router.push({
-								name: that.backRouter
-							})
-//							that.popupTxt = res.data.data.tradeRstMessage
-//							const component = that.$refs['myPopup']
-//							component.show()
-//							setTimeout(() => {
-//								component.hide()
-//							}, 1000)
+							that.$store.state.deviceId = that.deviceId
+							that.$store.state.deviceType = that.deviceType
+							that.$store.state.deviceTypeText = that.deviceTypeText
+							
+							that.popupTxt = res.data.data.tradeRstMessage
+							const component = that.$refs['myPopup']
+							component.show()
+							setTimeout(() => {
+								component.hide()
+								that.$router.push({
+									name: that.backRouter
+								})
+							}, 1000)
 						} else {
 							that.popupTxt = res.data.data.tradeRstMessage
 							const component = that.$refs['myPopup']
@@ -108,7 +148,7 @@
 						}
 					})
 				} else {
-					that.popupTxt = "ICCID不能为空"
+					that.popupTxt = that.langCn ? 'deviceId以及deviceType不能为空':'DeviceId and deviceType can not be empty'
 					const component = that.$refs['myPopup']
 					component.show()
 					setTimeout(() => {
@@ -137,7 +177,11 @@
 		width: 60%;
 		margin: 60px auto 0;
 		line-height: 32px;
-		background-color: #F39800;
+		background:#d7013f;
+		background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
 	}
 	
 	.content {
@@ -145,7 +189,7 @@
 		padding: 0 2.5rem;
 	}
 	
-	.content input {
+	.content input, .checkContent {
 		display: block;
 		width: calc(100% - 22px);
 		font-size: 0.7rem;
@@ -153,6 +197,7 @@
 		padding: 0 0.5rem;
 		border: 1px solid #C9CACA;
 		color: #3E3A39;
+		outline: none;
 	}
 	
 	.content span {
@@ -160,5 +205,38 @@
 		color: #C9CACA;
 		font-size: 0.6rem;
 		line-height: 24px;
+	}
+	.checkContent{
+		position: relative;
+		color:#999;
+		margin-top:15px;
+		height:30px;
+	}
+	.checkContent:after{
+		content:'';
+		display: block;
+		position: absolute;
+		right:0;
+		top:0;
+		width:28px;
+		height:28px;
+		background: url(../assets/common/down.png) center no-repeat;
+		background-size: 15px;
+		transition: all 0.3s;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		-ms-transition: all 0.3s;
+		transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+	}
+	.checkContent.active:after{
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
 	}
 </style>

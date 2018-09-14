@@ -10,21 +10,21 @@
 
 		<!--无卡-->
 		<div class="card-num no-card flexBox" >
-			<p class="flex-1">卡号：</p>
-			<a class="status" >{{iccid?iccid:"暂无旅游卡" }}</a>
+			<p class="flex-1">{{$t("message.cardId")}}：</p>
+			<a class="status" >{{deviceId ? deviceId : $t("message.noCard") }}</a>
 		</div>
 		<div class="status-list">
 			<ul>
 				<li class="clearfix">
-					<span>订单号</span>
+					<span>{{$t("message.orderNum")}}</span>
 					<p>{{obj.orderId}}</p>
 				</li>
 				<li class="clearfix" v-if="obj.orderStartDate">
-					<span>购买时间</span>
+					<span>{{$t("message.buyTime")}}</span>
 					<p>{{obj.orderStartDate}}</p>
 				</li>
 				<li class="clearfix">
-					<span>当前状态</span>
+					<span>{{$t("message.status")}}</span>
 					<p>{{obj.statusTxt}}</p>
 				</li>
 			</ul>
@@ -32,7 +32,7 @@
 
 		<div class="btns">
 			<!--<a @click="toPay">去支付</a>-->
-			<router-link class="done" to="/orderList">返回</router-link>
+			<router-link class="done" to="/orderList">{{$t("message.back")}}</router-link>
 			<!--<router-link class="done" to="/quit">立即退订</router-link>-->
 		</div>
 	</div>
@@ -43,7 +43,7 @@
 		name: 'status',
 		data() {
 			return {
-				iccid: this.$store.state.iccid
+				deviceId: this.$store.state.deviceId
 			}
 		},
 		props: {

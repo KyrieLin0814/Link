@@ -9,11 +9,11 @@
 					<div class="common-title flexBox">
 						<i></i>
 						<span>{{$t('message.chooseMeal')}}</span>
-						<p class="flex-1">累计购买{{orderFullX}}元免卡费，30天内激活使用</p>
+						<p class="flex-1" v-if="$store.state.langType == 'cn'">累计购买{{orderFullX}}元免卡费，30天内激活使用</p>
 					</div>
 					<div class="car-content">
 						<div class="car-tab flexBox">
-							<div class="flex-1" @click="tabFunc(i)" :class="{'active': (tabFlag==i.nameId)}" v-for="i in mealsList"><span>{{i.nameType}}</span></div>
+							<div class="flex-1" @click="tabFunc(i)" :class="{'active fontColor': (tabFlag==i.nameId)}" v-for="i in mealsList"><span>{{i.nameType}}</span></div>
 						</div>
 						<div class="car-list" :style="{height: contentHeight + 'px'}">
 
@@ -30,8 +30,8 @@
 									<div class="price-box">
 										<div class="now">
 											<!--单价-->
-											{{Number(meal.obj.price ? meal.obj.price : meal.obj.strategy_desc).toFixed(2)}}
-											<span>元<i v-if="item.nameId == '0'">/天</i></span>
+											{{Number(meal.obj.price ? meal.obj.price : meal.obj.strategyDesc).toFixed(2)}}
+											<span>{{$t('message.yuan')}}<i v-if="item.nameId == '0'">/{{$t('message.day')}}</i></span>
 										</div>
 									</div>
 								</li>
@@ -43,8 +43,8 @@
 							</div>
 
 							<div class="num-box">
-								<p>{{number}}</p>
-								<div>
+								<p>{{$t('message.num')}}</p>
+								<div :class="{'disabled': !btnFlag }">
 									<a class="del" @click="delFunc">-</a>
 									<a class="number">{{ finalNum }}</a>
 									<a class="add" @click="addFunc">+</a>
@@ -119,21 +119,23 @@
 				scrollDown: true,
 				scrollUp: true,
 				popupTxt: '',
-				number:'天数',
+				number:'个数',
+				btnFlag:true,
 				orderFullX:this.$store.state.cartData.orderFullX
 			}
 		},
 		watch: {
 			finalNum(a, b) {
-				this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategy_desc) * Number(this.finalNum)
+				this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc) * this.finalNum
 			}
 		},
 		created() {
 			var that = this
 			that.obj = that.$store.state.routerData
-			that.$http.post("/weixin/detailsPackages", {
+			that.$http.post("/paypalpay/getDeviceDetails", {
 				data: {
 					connSeqNo: that.$store.state.connSeqNo,
+					lang: that.$store.state.langType,
 					partnerCode: that.$store.state.partnerCode,
 					token: that.$store.state.token,
 					tradeData: {
@@ -145,70 +147,90 @@
 			}).then((res) => {
 				console.log(res)
 				var result = res.data.data
+				var lang = that.$store.state.langType == 'cn'? true:false
+
+				//从小到大排序
+				var dataArr = JSON.parse(JSON.stringify(result.tradeData))
+				dataArr.sort(function(a,b){
+					return Number(a.orderUnit) - Number(b.orderUnit);
+				})
+				
 				//定义类型  mcc数组
 				var typeArr = [];
-				for(var i = 0; i < result.tradeData.length; i++) {
-					if(result.tradeData[i].maxDays == result.tradeData[i].minDays) {
-						//插入天数包类别
-						if(typeArr.indexOf(result.tradeData[i].maxDays) < 0){
-							typeArr.push(result.tradeData[i].maxDays)
+				for(var i = 0; i < dataArr.length; i++) {
+					var orderUnit = result.tradeData[i].orderUnit
+					//插入天数包类别
+					var typeArrStr = JSON.stringify(typeArr)
+					if(orderUnit == "1"){
+						if(typeArrStr.indexOf("天") < 0 && typeArrStr.indexOf("Day") < 0){
+							typeArr.push({
+								id:orderUnit,
+								txt: lang ? "天": 'Day'
+							})
 						}
-					} else {
-						//插入自选包类别
-						typeArr.push("0")
+					}else if(orderUnit == "2"){
+						if(typeArrStr.indexOf("月") < 0 && typeArrStr.indexOf("Month") < 0){
+							typeArr.push({
+								id:orderUnit,
+								txt: lang ? "月": 'Month'
+							})
+						}
+					}else if(orderUnit == "3"){
+						if(typeArrStr.indexOf("季度") < 0 && typeArrStr.indexOf("Quarter") < 0){
+							typeArr.push({
+								id:orderUnit,
+								txt:lang ? "季度": 'Quarter'
+							})
+						}
+					}else if(orderUnit == "4"){
+						if(typeArrStr.indexOf("半年") < 0 && typeArrStr.indexOf("Half a year") < 0){
+							typeArr.push({
+								id:orderUnit,
+								txt:lang ? "半年": 'Half a year'
+							})
+						}
+					}else if(orderUnit == "5"){
+						if(typeArrStr.indexOf("年") < 0  && typeArrStr.indexOf("Year") < 0){
+							typeArr.push({
+								id:orderUnit,
+								txt:lang ? "年": 'Year'
+							})
+						}
 					}
 				}
-				//从小到大排序
-				typeArr.sort(that.compare())
+				//console.log(typeArr)
 				
 				//创建基于类别数据结构
 				for(var p = 0; p < typeArr.length; p++){
-					if(typeArr[p] == "0"){
-						that.mealsList.push({
-							nameType: "自选天数包",
-							nameId: typeArr[p],
-							list:[]
-						})
-					}else{
-						that.mealsList.push({
-							nameType: typeArr[p] + "天包",
-							nameId: typeArr[p],
-							list:[]
-						})
-					}
+					that.mealsList.push({
+						nameType: typeArr[p].txt + (lang ? "包":''),
+						nameId: typeArr[p].id,
+						list:[]
+					})
 				}
 				
 				//遍历填充分类
 				for(var t = 0; t < result.tradeData.length; t++) {
-					if(result.tradeData[t].maxDays == result.tradeData[t].minDays) {
-						for(var e = 0; e < that.mealsList.length; e++){
-							if(that.mealsList[e].nameId == result.tradeData[t].maxDays){
-								that.mealsList[e].list.push({
-									name: result.tradeData[t].packageName,
-									obj: JSON.parse(JSON.stringify(result.tradeData[t]))
-								})
-							}
-						}
-					}else{
-						for(var u = 0; u < that.mealsList.length; u++){
-							if(that.mealsList[u].nameId == "0"){
-								that.mealsList[u].list.push({
-									name: result.tradeData[t].packageName,
-									obj: JSON.parse(JSON.stringify(result.tradeData[t]))
-								})
-							}
+					for(var e = 0; e < that.mealsList.length; e++){
+						if(that.mealsList[e].nameId == result.tradeData[t].orderUnit){
+							that.mealsList[e].list.push({
+								name: result.tradeData[t].packageName,
+								typeStr: lang? that.mealsList[e].nameType.substring(0,that.mealsList[e].nameType.length-1) : that.mealsList[e].nameType,
+								obj: JSON.parse(JSON.stringify(result.tradeData[t]))
+							})
 						}
 					}
 				}
-				console.log(that.mealsList)
+				//console.log(that.mealsList)
 				
-				if(typeArr.indexOf("0") != -1) {
-					that.tabFunc(that.mealsList[0])
-					that.number = "天数"
-				} else {
-					that.tabFunc(that.mealsList[0])
-					that.number = "个数"
-				}
+				that.tabFunc(that.mealsList[0])
+//				if(typeArr.indexOf("0") != -1) {
+//					that.tabFunc(that.mealsList[0])
+//					that.number = "天数"
+//				} else {
+//					that.tabFunc(that.mealsList[0])
+//					that.number = "个数"
+//				}
 			})
 		},
 		mounted() {
@@ -254,11 +276,7 @@
 			tabFunc(i) {
 				this.tabFlag = i.nameId
 				this.$store.state.tabFlag = i.nameId
-				if(i.nameId != "0") {
-					this.number = "个数"
-				} else {
-					this.number = "天数"
-				}
+				
 				this.finalNum = 1
 				//默认选中第一个
 				this.chooseFunc(i.list[0])
@@ -270,57 +288,46 @@
 				this.checkedObj['checked' + meal.obj.packageCode] = true
 				//当前套餐
 				this.judgeData = meal
-				this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategy_desc)
+				this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc)
+				if(this.judgeData.obj.orderPeriod){
+					this.btnFlag = false
+					this.finalNum = Number(this.judgeData.obj.orderPeriod)
+					this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc) * this.finalNum
+				}else{
+					this.btnFlag = true
+					this.finalNum = 1
+					this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc) * this.finalNum
+				}
 				this.finalPrice = this.finalNum * this.price
 			},
 			addFunc() {
 				var that = this
-				if(that.judgeData.obj.maxDays == that.judgeData.obj.minDays) {
+				if(!that.judgeData.obj.orderPeriod){
 					that.finalNum++
-				} else {
-					if(that.judgeData.obj.maxDays == "-1") {
-						that.finalNum++
-					} else {
-						if(that.finalNum < Number(that.judgeData.obj.maxDays)) {
-							that.finalNum++
-						} else {
-							that.popupTxt = "超出最大数量"
-							const component = this.$refs['myPopup']
-							component.show()
-							setTimeout(() => {
-								component.hide()
-							}, 1000)
-						}
-					}
 				}
 			},
 			delFunc() {
 				var that = this
-				if(that.finalNum > 1) {
-					that.finalNum--
-				} else {
-					that.popupTxt = "不能再少了"
-					const component = this.$refs['myPopup']
-					component.show()
-					setTimeout(() => {
-						component.hide()
-					}, 1000)
+				if(!that.judgeData.obj.orderPeriod){
+					if(that.finalNum > 1) {
+						that.finalNum--
+					} else {
+						that.popupTxt = "不能再少了"
+						const component = this.$refs['myPopup']
+						component.show()
+						setTimeout(() => {
+							component.hide()
+						}, 1000)
+					}
 				}
 			},
 			addCar() {
 				var that = this
 				that.$store.state.finalMeal = that.judgeData
-				that.$store.state.perPrice = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategy_desc)
+				that.$store.state.perPrice = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc)
 				that.$store.state.finalNum = that.finalNum
 				that.$store.state.finalPrice = that.finalPrice
 				that.$router.push("/payPage")
-			},
-			compare() {
-				return function(a, b) {
-					var value1 = Number(a);
-					var value2 = Number(b);
-					return value1 - value2;
-				}
 			}
 		}
 	}
@@ -354,11 +361,22 @@
 	}
 	
 	.car-tab>div.active {
-		border-bottom: 5px solid #F39800;
+		position: relative;
+		border-bottom:none;
 	}
 	
 	.car-tab>div.active span {
-		color: #F39800;
+		color: inherit;
+	}
+	.car-tab>div.active:after{
+		content:'';
+		display: block;
+		height:5px;
+		background: #d7013f;
+		background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
 	}
 	
 	.car-tab>div span {
@@ -432,10 +450,20 @@
 	}
 	
 	.list-1 li.active p {
-		color: #F39800;
+		color:#d7013f;
+		background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
+	    -webkit-background-clip: text;
+	    color: transparent;
 	}
 	.list-1 li.active p+p:before{
-		background: #F39800;
+		background: #d7013f;
+		background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
 	}
 	
 	.sale {
@@ -446,7 +474,7 @@
 		font-size: 0.5rem;
 		line-height: 15px;
 		padding: 1px 5px 0;
-		background-color: #F39800;
+		background-color: #d7013f;
 		color: #fff;
 		vertical-align: middle;
 	}
@@ -471,7 +499,13 @@
 		vertical-align: middle;
 	}
 	li.active .price-box .now{
-		color:#F39800;
+		color:#d7013f;
+		background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
+	    -webkit-background-clip: text;
+	    color: transparent;
 	}
 	
 	.price-box .now span {
@@ -486,7 +520,7 @@
 		padding: 0 3px;
 		top: 7px;
 		left: -3px;
-		border-bottom: 1px solid #F39800
+		border-bottom: 1px solid #d7013f
 	}
 	
 	.price-box .old {
@@ -610,7 +644,7 @@
 	
 	.detail-list ul p {
 		font-size: 0;
-		border-bottom: 1px solid #F39800;
+		border-bottom: 1px solid #e47a62;
 	}
 	
 	.detail-list ul p span {
@@ -618,8 +652,12 @@
 		font-size: 0.7rem;
 		padding: 4px 0.5rem 2px 0.5rem;
 		min-width:85px;
-		background-color: #F39800;
 		color: #fff;
+		background: #d7013f;
+		background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
 	}
 	
 	.detail-list ul ul {
@@ -651,7 +689,7 @@
 		position: absolute;
 		width: 8px;
 		height: 8px;
-		background-color: #F39800;
+		background-color: #d7013f;
 		border-radius: 4px;
 		top: 4px;
 		left: -15px;
@@ -667,5 +705,8 @@
 		line-height:30px;
 		color:#999;
 		padding-left:5px;
+	}
+	.num-box .disabled{
+		background-color: #f1f1f1;
 	}
 </style>

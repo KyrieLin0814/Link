@@ -16,7 +16,7 @@ module.exports = {
     host: '192.168.0.27', // can be overwritten by process.env.HOST
 //  port: 8888, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
 //  host: 'localhost', // can be overwritten by process.env.HOST
-    port: 1993, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 1994 , // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

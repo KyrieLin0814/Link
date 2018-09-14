@@ -1,15 +1,15 @@
 <template>
 	<div class="body-container">
 		<div class="pay-status"></div>
-		<p class="title">订购成功</p>
+		<p class="title">{{$t("message.paySuccess")}}</p>
 		<!--<p class="txt">
 			累计使用流量包满25天免卡费，30天内激活使用，<br/> 未使用随时退款，过期自动退款
-			<br/> 更多资讯，可前往【荔枝全球电话卡】公众号号查看哦！
+			<br/> 更多资讯，可前往【领科物联网全球电话卡】公众号号查看哦！
 		</p>-->
 		<div class="btns">
-			<router-link to="/text">查看境外上网设置办法</router-link>
+			<router-link to="/text">{{$t("message.overseas")}}</router-link>
 			<div></div>
-			<router-link class="done" to="/">确定</router-link>
+			<router-link class="done" to="/">{{$t("message.confirm")}}</router-link>
 		</div>
 	</div>
 </template>

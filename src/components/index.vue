@@ -2,16 +2,15 @@
 	<div class="body-container index">
 		<div class="banner">
 			<div class="language">
-				<a class="CN" :class="{'active': (langType == 'cn')}" @click="langCn">中文</a>
-				<a class="EN" :class="{'active': (langType == 'en')}" @click="langEn">English</a>
+				<a class="CN" :class="{'active bgColor': (langType == 'cn')}" @click="langCn">中文</a>
+				<a class="EN" :class="{'active bgColor': (langType == 'en')}" @click="langEn">English</a>
 			</div>
 			<img src="../assets/common/banner.png" />
 		</div>
 		<div class="content">
-			<p v-if="wxFlag" class="no-data">请从微信公众号打开商城</p>
 			<div class="item" v-for="(item,index) in result">
 				<div class="title">
-					<span class="area">{{item.continentName}}</span>
+					<span class="area fontColor">{{item.continentName}}</span>
 					<!--<span class="num">{{$t('message.covered')}} {{ item.list.length }} {{$t('message.regions')}}</span>-->
 					<div class="btn" v-if="item.canMore">
 						<a v-if="item.more" class="more" @click="moreFunc(index)">更多</a>
@@ -22,7 +21,7 @@
 					<li v-for="i in item.list.slice(0,4)">
 						<a @click="routerFunc(i)">
 							<div class="img" :style="{backgroundImage: 'url(' + i.pictureIndex + ')', backgroundSize: '100% 100%'}"></div>
-							<div class="txt flexBox">
+							<div class="txt bgColor flexBox">
 								<span class="text-1 flex-1">{{i.countryName}}</span>
 								<!--<a class="flex-1 text-1" v-if="i.strategyCode == '2'">{{i.strategy_desc}}元/天</a>-->
 							</div>
@@ -34,7 +33,7 @@
 					<li v-for="i in item.list">
 						<a @click="routerFunc(i)">
 							<div class="img" :style="{backgroundImage: 'url(' + i.pictureIndex + ')', backgroundSize: '100% 100%'}"></div>
-							<div class="txt flexBox">
+							<div class="txt bgColor flexBox">
 								<span class="text-1 flex-1">{{i.countryName}}</span>
 								<!--<a class="flex-1 text-1" v-if="i.strategyCode == '2'">{{i.strategy_desc}}元/天</a>-->
 							</div>
@@ -45,8 +44,9 @@
 		</div>
 
 		<div class="footer flexBox">
-			<div class="flex-1 help">
+			<div class="flex-1 help" style="border-bottom:none;">
 				<router-link :to="helpLink"><span>{{$t("message.help")}}</span></router-link>
+				<div style="height:6px;" class="bgColor"></div>
 			</div>
 			<div class="flex-1 order">
 				<router-link :to="orderLink">
@@ -62,40 +62,97 @@
 		name: 'index',
 		data() {
 			return {
-				langType: this.$store.state.langType,
+				langType: localStorage.getItem("lang") ? localStorage.getItem("lang") : "cn",
 				meals: [],
 				result: [],
-				wxFlag: false,
 				helpLink: "/help",
 				orderLink: "/orderList"
 			}
 		},
 		created() {
-			var that = this
-			const toast = that.$createToast({
-				type: 'loading',
-				time: 0,
-				mask: true,
-				txt: 'Loading'
-			})
-			toast.show()
-			//获取套餐
-			that.$http.post("/weixin/packageServer", {
-				data: {
-					connSeqNo: that.$store.state.connSeqNo,
-					partnerCode: that.$store.state.partnerCode,
-					token: that.$store.state.token,
-					tradeTime: new Date(),
-					tradeType: "F001"
-				}
-			}).then((res) => {
-				var result = res.data.data
-				//console.log(res.data.data)
-				if(res.data.data.tradeData[0].openId) {
+			this.getData()
+		},
+		methods: {
+			langCn() {
+				this.$i18n.locale = "cn"
+				this.$store.state.langType = "cn"
+				this.langType = "cn"
+				localStorage.setItem("lang","cn")
+				this.getData()
+			},
+			langEn() {
+				this.$i18n.locale = "en"
+				this.$store.state.langType = "en"
+				this.langType = "en"
+				localStorage.setItem("lang","en")
+				this.getData()
+			},
+			moreFunc(idx) {
+				this.result[idx].more = false
+				this.$forceUpdate()
+			},
+			lessFunc(idx) {
+				this.result[idx].more = true
+				this.$forceUpdate()
+			},
+			routerFunc(obj) {
+				this.$store.state.routerData = obj
+				this.$router.push("/detail")
+			},
+			compare(){
+			    return function(a,b){
+			        var value1 = a.list.length;
+			        var value2 = b.list.length;
+			        return value2 - value1;
+			    }
+			},
+			getData(){
+				var that = this
+				const toast = that.$createToast({
+					type: 'loading',
+					time: 0,
+					mask: true,
+					txt: 'Loading'
+				})
+				toast.show()
+				
+				//初始化
+				that.result = []
+				that.meals = []
+				//获取套餐
+				that.$http.post("/paypalpay/getDeviceHomepage", {
+					data: {
+						connSeqNo: that.$store.state.connSeqNo,
+						lang: that.$store.state.langType,
+						token: that.$store.state.token,
+						tradeTime: new Date(),
+						tradeType: "F001"
+					}
+				}).then((res) => {
+					var result = res.data.data
+					console.log(res.data.data)
+					
 					//记录openId
-					that.$store.state.openId = res.data.data.tradeData[0].openId
-					//记录openid
+					if(res.data.data.tradeData[0].openId){
+						that.$store.state.openId = res.data.data.tradeData[0].openId
+					}
+					//记录userId
+					if(res.data.data.tradeData[0].userId){
+						that.$store.state.userId = res.data.data.tradeData[0].userId
+					}
+					//记录deviceId
+					if(res.data.data.tradeData[0].deviceId){
+						that.$store.state.deviceId = res.data.data.tradeData[0].deviceId
+					}
+					//记录deviceType
+					if(res.data.data.tradeData[0].deviceType){
+						that.$store.state.deviceType = res.data.data.tradeData[0].deviceType
+						that.$store.state.deviceTypeText = res.data.data.tradeData[0].deviceTypeText
+					}
+					
+					//记录partnerCode
 					that.$store.state.partnerCode = res.data.data.partnerCode
+					
 					//记录各个价格
 					that.$store.state.cartData.trafficCardfee = Number(res.data.data.trafficCardfee)
 					that.$store.state.cartData.ordinaryExpressfee = Number(res.data.data.ordinaryExpressfee)
@@ -126,15 +183,17 @@
 							//that.meals[that.meals.length - 1].mcc = result.tradeData[i].coverCountry[j].mcc
 						}
 					}
-					//console.log(typeArr)
-					//console.log(mccArr)
-					//console.log(that.meals)
+//					console.log(typeArr)
+//					console.log(mccArr)
+//					console.log(that.meals)
+					
 					for(var x = 0; x < typeArr.length; x++) {
 						that.result[x] = {
 							continentName: typeArr[x],
 							list: []
 						}
 					}
+					
 					for(var x = 0; x < typeArr.length; x++) {
 						for(var y = 0; y < that.meals.length; y++) {
 							if(that.meals[y].continentName == typeArr[x]) {
@@ -158,65 +217,31 @@
 					that.result.sort(that.compare());
 					that.$store.state.mealsData = that.result
 					that.$forceUpdate()
-
-					//查询iccid
-					that.$http.post("/weixin/getIccId", {
-						data: {
-							connSeqNo: that.$store.state.connSeqNo,
-							partnerCode: that.$store.state.partnerCode,
-							token: that.$store.state.token,
-							tradeData: {
-								openid: that.$store.state.openId
-								//openid: "oQrFc1sfUYxsApu_KV70-TRrw9AA1"
-							},
-							tradeTime: new Date(),
-							tradeType: "F012",
-						}
-					}).then((res) => {
-						if(res.data.data.tradeRstCode == "1000") {
-							if(res.data.data.tradeData.length) {
-								that.$store.state.iccid = res.data.data.tradeData[res.data.data.tradeData.length - 1].iccid
-							}
-						}
-						toast.hide()
-					})
-				} else {
 					toast.hide()
-					that.wxFlag = true
-					that.helpLink = "/"
-					that.orderLink = "/"
-				}
-			})
-		},
-		methods: {
-			langCn() {
-				this.$i18n.locale = "cn"
-				this.$store.state.langType = "cn"
-				this.langType = "cn"
-			},
-			langEn() {
-				this.$i18n.locale = "en"
-				this.$store.state.langType = "en"
-				this.langType = "en"
-			},
-			moreFunc(idx) {
-				this.result[idx].more = false
-				this.$forceUpdate()
-			},
-			lessFunc(idx) {
-				this.result[idx].more = true
-				this.$forceUpdate()
-			},
-			routerFunc(obj) {
-				this.$store.state.routerData = obj
-				this.$router.push("/detail")
-			},
-			compare(){
-			    return function(a,b){
-			        var value1 = a.list.length;
-			        var value2 = b.list.length;
-			        return value2 - value1;
-			    }
+					
+//					//查询iccid
+//					that.$http.post("/weixin/getIccId", {
+//						data: {
+//							connSeqNo: that.$store.state.connSeqNo,
+//							lang: that.$store.state.langType,
+//							partnerCode: that.$store.state.partnerCode,
+//							token: that.$store.state.token,
+//							tradeData: {
+//								openid: that.$store.state.openId
+//								//openid: "oQrFc1sfUYxsApu_KV70-TRrw9AA1"
+//							},
+//							tradeTime: new Date(),
+//							tradeType: "F012",
+//						}
+//					}).then((res) => {
+//						if(res.data.data.tradeRstCode == "1000") {
+//							if(res.data.data.tradeData.length) {
+//								that.$store.state.iccid = res.data.data.tradeData[res.data.data.tradeData.length - 1].iccid
+//							}
+//						}
+//						toast.hide()
+//					})
+				})
 			}
 		}
 	}
@@ -237,7 +262,7 @@
 		right: 15px;
 		font-size: 0;
 		border-radius: 5px;
-		border: 1px solid #F39800;
+		border: 1px solid #d7013f;
 		overflow: hidden;
 	}
 	
@@ -246,14 +271,13 @@
 		padding: 0.15rem 0.12rem;
 		font-size: 0.6rem;
 		height: 12px;
-		color: #F39800;
+		color: #d7013f;
 		background-color: #fff;
 		line-height: 1;
 	}
 	
 	.language a.active {
 		color: #fff;
-		background-color: #F39800;
 	}
 	
 	.content {
@@ -269,7 +293,6 @@
 	.area {
 		font-size: 0.8rem;
 		line-height: 30px;
-		color: #F39800;
 		margin-right: .6rem;
 		vertical-align: middle;
 		font-weight: bold;
@@ -336,7 +359,6 @@
 	}
 	
 	.txt {
-		background-color: #F39800;
 		color: #fff;
 	}
 	
@@ -380,7 +402,7 @@
 	}
 	
 	.help {
-		border-bottom: 6px solid #F39800
+		border-bottom: 6px solid #d7013f
 	}
 	
 	.order {

@@ -1,14 +1,14 @@
 <template>
 	<div class="body-container">
 		<div class="pay-status"></div>
-		<p class="title">订购失败</p>
-		<p class="txt">
+		<p class="title">{{$t("message.payError")}}</p>
+		<!--<p class="txt">
 			实在抱歉，<br/>
 			您未能成功定制该流量包，<br/>
 			 我们不会扣除您的费用，请您稍后再试试看。
-		</p>
+		</p>-->
 		<div class="btns">
-			<router-link class="done" to="/">确认</router-link>
+			<router-link class="done" to="/">{{$t("message.confirm")}}</router-link>
 		</div>
 	</div>
 </template>

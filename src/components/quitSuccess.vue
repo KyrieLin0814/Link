@@ -4,7 +4,7 @@
 		<p class="title">退订申请成功</p>
 		<p class="txt">
 			更多资讯，<br/>
-			可前往【荔枝全球电话卡】公众号号查看哦！
+			可前往【领科物联网卡】公众号号查看哦！
 		</p>
 		<div class="btns">
 			<router-link to="/">完成</router-link>

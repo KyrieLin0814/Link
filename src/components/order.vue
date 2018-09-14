@@ -2,11 +2,11 @@
 	<div class="body-container">
 		<div class="common-title">
 			<i></i>
-			<span>购物车</span>
+			<span>{{$t("message.car")}}</span>
 		</div>
-		<div class="detail">商品详情</div>
-		<!--<div class="detail">SIM卡 ICCID：{{ iccid }}</div>-->
-		<p v-if="!carData.length" class="no-data">购物车为空</p>
+		<div class="detail">{{$t("message.mealDetail")}}</div>
+		<!--<div class="detail">SIM卡 ICCID：{{ deviceId }}</div>-->
+		<p v-if="!carData.length" class="no-data">{{$t("message.empty")}}</p>
 		<ul>
 			<li v-for="(i,index) in carData">
 				<div class="img-content flexBox">
@@ -24,9 +24,9 @@
 		</ul>
 
 		<div class="buy-box clearfix">
-			<p>需支付：<span>{{ price.toFixed(2) }}</span> 元</p>
-			<a @click="payFunc"> 付 款 </a>
-			<router-link to="/">继续购买</router-link>
+			<p>{{$t("message.cost")}}：<span>{{ price.toFixed(2) }}</span> {{$t("message.yuan")}}</p>
+			<a @click="payFunc"> {{$t("message.pay")}} </a>
+			<router-link to="/">{{$t("message.continue")}}</router-link>
 		</div>
 
 		<cube-popup type="my-popup" :mask="false" ref="myPopup">{{ popupTxt }}</cube-popup>
@@ -38,13 +38,14 @@
 		name: 'order',
 		data() {
 			return {
-				iccid: this.$store.state.iccid,
+				deviceId: this.$store.state.deviceId,
 				carData: [],
 				img: this.$store.state.finalMeal.obj.pictureDetails,
 				areaTxt: this.$store.state.routerData.countryName,
 				detailTxt: this.$store.state.finalMeal.obj.packageName,
 				price: 0,
-				popupTxt: ''
+				popupTxt: '',
+				langCn: this.$store.state.langType=='cn'? true:false
 			}
 		},
 		props: {
@@ -79,7 +80,7 @@
 				if(that.carData.length) {
 					that.$router.push("/postWay")
 				} else {
-					that.popupTxt = "请选择套餐后再进行下单"
+					that.popupTxt = that.langCn ? "请选择套餐后再进行下单" : "Please choose the order after the package"
 					const component = that.$refs['myPopup']
 					component.show()
 					setTimeout(() => {
@@ -91,15 +92,15 @@
 				var that = this
 				var alert = that.$createDialog({
 					type: 'confirm',
-					content: '是否要删除该套餐？',
+					content: that.langCn ? '是否要删除该套餐？' : 'Do you want to delete the package?',
 					confirmBtn: {
-						text: '确认',
+						text: that.langCn ? '确认': 'Confirm',
 						active: false,
 						disabled: false,
 						href: 'javascript:;'
 					},
 					cancelBtn: {
-						text: '取消',
+						text: that.langCn ? '取消':'Cancel',
 						active: false,
 						disabled: false,
 						href: 'javascript:;'

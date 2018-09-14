@@ -2,7 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 const state = {
-	openId: "", //微信用户在商城的唯一标识 
+	openId: "oQrFc1hRYF_CEetyWksplGS8rKC8", //微信用户在商城的唯一标识 
+	deviceId: "", //设备的标识，用户唯一标示
+	deviceType: "", //请求的设备类型
+	deviceTypeText:'',
+	userId:"", //非微信用户唯一标识
 	connSeqNo: "Flymo201608300000000001", //双方交互流水号，按照合作伙伴作为客户端时的流水号生成规则进行生成  
 	partnerCode: "P000007", //旅游卡业务接入网关提供给合作伙伴的编码
 	token: "yv8JXeTTfqyedLcU2LAqHUTKtYA4G1kz", //由旅游卡业务接入网关提供给合作伙伴的认证 Token 
@@ -35,7 +39,9 @@ const state = {
 		addressTxt: '',
 		defaultIndex: [0, 0, 0],
 		provinceVal: '',
-		cityVal: ''
+		cityVal: '',
+		company:'',
+		email:''
 	},
 	expressType: "1",
 	orderId:"",
