@@ -60,7 +60,7 @@
 			that.$http.get("/paypalpay/selectDeviceType?lang=" + that.$store.state.langType).then(function(res){
 				var result = res.data.data.tradeData
 				that.picker = that.$createPicker({
-		          	title:  that.langCn ? '请选择deviceType': 'Please select',
+		          	title:  that.langCn ? '请选择设备类型': 'Please select',
 		          	data: [result],
 		          	cancelTxt:that.langCn ? '取消': 'Cancel',
 		          	confirmTxt:that.langCn ? '确认': 'Confirm',
@@ -128,16 +128,16 @@
 							that.$store.state.deviceId = that.deviceId
 							that.$store.state.deviceType = that.deviceType
 							that.$store.state.deviceTypeText = that.deviceTypeText
-							
-							that.popupTxt = res.data.data.tradeRstMessage
-							const component = that.$refs['myPopup']
-							component.show()
-							setTimeout(() => {
-								component.hide()
-								that.$router.push({
-									name: that.backRouter
-								})
-							}, 1000)
+							that.$router.push({
+								name: that.backRouter
+							})
+//							that.popupTxt = res.data.data.tradeRstMessage
+//							const component = that.$refs['myPopup']
+//							component.show()
+//							setTimeout(() => {
+//								component.hide()
+//								
+//							}, 1000)
 						} else {
 							that.popupTxt = res.data.data.tradeRstMessage
 							const component = that.$refs['myPopup']
@@ -148,7 +148,7 @@
 						}
 					})
 				} else {
-					that.popupTxt = that.langCn ? 'deviceId以及deviceType不能为空':'DeviceId and deviceType can not be empty'
+					that.popupTxt = that.langCn ? 'deviceId以及设备类型不能为空':'DeviceId and deviceType can not be empty'
 					const component = that.$refs['myPopup']
 					component.show()
 					setTimeout(() => {

@@ -5,7 +5,7 @@
 			<span v-if="isWeixin">{{$t("message.chooseWay1")}}</span>
 			<span v-else>{{$t("message.chooseWay2")}}</span>
 		</div>
-		
+
 		<div class="choose-way car-list">
 			<ul>
 				<li @click="chooseWay(1)" v-if="isWeixin">
@@ -18,13 +18,13 @@
 					<div class="post-txt"><span>{{$t("message.express2")}}</span></div>
 					<p><span>{{SFPost.toFixed(2)}}</span>{{$t("message.yuan")}}</p>
 				</li>
-				<li @click="chooseWay(3)"  v-if="isWeixin">
+				<li @click="chooseWay(3)" v-if="isWeixin">
 					<cube-checkbox v-model="checkedObj.type3" :option="option" :hollow-style="true" shape="circle" />
 					<div class="have">{{$t("message.haveCard")}}</div>
 				</li>
 			</ul>
 		</div>
-		<div class="more-info" @click="setAddress"  v-if="isWeixin">
+		<div class="more-info" @click="setAddress" v-if="isWeixin">
 			<p>{{$t("message.address")}}</p>
 			<div>{{ addressGet ? addressGet : (langCn ? '编辑':$t('message.edit')) }}</div>
 		</div>
@@ -32,20 +32,19 @@
 			<p>{{$t("message.info")}}</p>
 			<div>{{ deviceId ? deviceId : (langCn ? '编辑':$t('message.edit')) }}</div>
 		</div>
-		
+
 		<div class="agree pay-box">
 			<cube-checkbox v-model="isOpen" shape="square">
 				<p class="agreeTxt">{{$t("message.startUse")}}</p>
 			</cube-checkbox>
 		</div>
-		
 
 		<div class="buy-box clearfix">
 			<p>{{$t("message.heji")}}：<span>{{ finalPrice.toFixed(2) }}</span> {{$t("message.yuan")}}</p>
 			<span class="slide" :class="{'active': slideFlage}" @click="slideFunc"></span>
 			<a @click="payFunc">{{$t("message.pay")}}</a>
 			<router-link to="/order">{{$t("message.return")}}</router-link>
-			
+
 			<transition name="fade" mode="out-in">
 				<div class="cost-box" :class="{'active': slideFlage}">
 					<div class="tle">{{$t("message.costDetail")}}</div>
@@ -86,8 +85,8 @@
 		name: 'name',
 		data() {
 			return {
-				langCn: this.$store.state.langType=='cn'? true:false,
-				isWeixin:false,
+				langCn: this.$store.state.langType == 'cn' ? true : false,
+				isWeixin: false,
 				option: {
 					label: '',
 					value: ''
@@ -106,17 +105,17 @@
 				mealPrice: 0,
 				deviceId: '',
 				alert: null,
-				temOrderIdList:[],
+				temOrderIdList: [],
 				orderList: [],
 				codes: "",
-				orderPeriods:"",
-				orderUnits:"",
-				cardCostFlag:true,
-				expressCost:this.$store.state.cartData.ordinaryExpressfee,
-				orderFullX:this.$store.state.cartData.orderFullX,
+				orderPeriods: "",
+				orderUnits: "",
+				cardCostFlag: true,
+				expressCost: this.$store.state.cartData.ordinaryExpressfee,
+				orderFullX: this.$store.state.cartData.orderFullX,
 				//快递信息
 				expressType: 1,
-				trafficCardfee:this.$store.state.cartData.trafficCardfee,
+				trafficCardfee: this.$store.state.cartData.trafficCardfee,
 				norPost: this.$store.state.cartData.ordinaryExpressfee,
 				SFPost: this.$store.state.cartData.sFexpressfee,
 				address: {},
@@ -143,10 +142,10 @@
 			that.finalPrice = that.$store.state.totalPrice
 			//记录套餐价格
 			that.mealPrice = that.$store.state.totalPrice
-			
+
 			//微信逻辑
-			if(that.isWeixin){
-				if(that.mealPrice >= that.orderFullX){
+			if(that.isWeixin) {
+				if(that.mealPrice >= that.orderFullX) {
 					that.cardCostFlag = false
 				}
 				//地址信息
@@ -159,19 +158,19 @@
 			//返回路由
 			that.$store.state.routerBack.haveCard = "postWay"
 
-			if(that.isWeixin){
+			if(that.isWeixin) {
 				//默认选中
 				if(that.$store.state.wayFlag) {
 					that.chooseWay(that.$store.state.wayFlag)
 				}
-			}else{
+			} else {
 				that.chooseWay(3)
 			}
-			
+
 			//初次进入页面  alert提示信息
 			if(that.$store.state.alertCard) {
 				//微信用户
-				if(that.isWeixin){
+				if(that.isWeixin) {
 					//查询deviceId
 					that.$http.post("/paypalpay/getDeviceId", {
 						data: {
@@ -190,7 +189,7 @@
 						var Num = res.data.data.tradeData.length
 						if(Num) {
 							if(Num > 1) {
-								that.popupTxt = that.langCn ? "检测到您有多张物联网卡，请绑定您将使用的物联网卡deviceId":'It is found that you have multiple cards, please bind the card deviceId you will use'
+								that.popupTxt = that.langCn ? "检测到您有多张物联网卡，请绑定您将使用的物联网卡deviceId" : 'It is found that you have multiple cards, please bind the card deviceId you will use'
 								const component = that.$refs['myPopup']
 								component.show()
 								setTimeout(() => {
@@ -211,7 +210,7 @@
 							//有卡，不再提示
 							that.$store.state.alertCard = false
 						} else {
-							that.popupTxt = that.langCn ? "检测到您还没有物联网卡，请填写收货信息并购卡": "You don't have a card yet, please fill in the information and purchase the card."
+							that.popupTxt = that.langCn ? "检测到您还没有物联网卡，请填写收货信息并购卡" : "You don't have a card yet, please fill in the information and purchase the card."
 							const component = that.$refs['myPopup']
 							component.show()
 							setTimeout(() => {
@@ -220,24 +219,24 @@
 							that.chooseWay(1)
 						}
 					})
-				}else{
-					if(that.deviceId == ""){
-						that.popupTxt = that.langCn ? "检测到您还没有绑定物联网卡，请绑定您将使用的物联网卡deviceId": "You don't have a card yet, please bind the card deviceId you will use"
+				} else {
+					if(that.deviceId == "") {
+						that.popupTxt = that.langCn ? "检测到您还没有绑定物联网卡，请绑定您将使用的物联网卡deviceId" : "You don't have a card yet, please bind the card deviceId you will use"
 						const component = that.$refs['myPopup']
 						component.show()
 						setTimeout(() => {
 							component.hide()
 						}, 1500)
-					}else{
+					} else {
 						//有卡，不再提示
 						that.$store.state.alertCard = false
 					}
 				}
 			}
-			
+
 			that.alert = that.$createDialog({
 				type: 'confirm',
-				content: that.langCn ? '请您务必确认物联网卡deviceId后，再进行支付': 'Please make sure that the deviceId is confirmed before payment',
+				content: that.langCn ? '请您务必确认物联网卡deviceId后，再进行支付' : 'Please make sure that the deviceId is confirmed before payment',
 				confirmBtn: {
 					text: that.langCn ? '确认' : 'Confirm',
 					active: false,
@@ -255,7 +254,7 @@
 				},
 				onCancel: () => {}
 			})
-			
+
 		},
 		methods: {
 			slideFunc() {
@@ -268,21 +267,21 @@
 			chooseWay(id) {
 				this.checkedObj = {}
 				this.checkedObj['type' + id] = true
-				this.$store.state.expressType = ((id == 3)? "" : id.toString());
+				this.$store.state.expressType = ((id == 3) ? "" : id.toString());
 				this.expressType = id
 				this.$store.state.wayFlag = id
-				if(id == 1){
+				if(id == 1) {
 					this.expressCost = this.norPost
-					if(this.cardCostFlag){
+					if(this.cardCostFlag) {
 						this.finalPrice = this.mealPrice + this.norPost + this.trafficCardfee
-					}else{
+					} else {
 						this.finalPrice = this.mealPrice + this.norPost
 					}
-				}else if(id == 2) {
+				} else if(id == 2) {
 					this.expressCost = this.SFPost
-					if(this.cardCostFlag){
+					if(this.cardCostFlag) {
 						this.finalPrice = this.mealPrice + this.SFPost + this.trafficCardfee
-					}else{
+					} else {
 						this.finalPrice = this.mealPrice + this.SFPost
 					}
 				} else {
@@ -294,7 +293,7 @@
 				if(!this.checkedObj.type3) {
 					this.$router.push("/adress")
 				} else {
-					this.popupTxt = this.langCn ? "若选择您已有物联网卡，请编辑、确认物联网卡信息":"If you have a card, please edit and confirm the information"
+					this.popupTxt = this.langCn ? "若选择您已有物联网卡，请编辑、确认物联网卡信息" : "If you have a card, please edit and confirm the information"
 					const component = this.$refs['myPopup']
 					component.show()
 					setTimeout(() => {
@@ -303,56 +302,56 @@
 				}
 			},
 			haveCard() {
-				if(this.isWeixin){
+				if(this.isWeixin) {
 					if(this.checkedObj.type3) {
 						this.$router.push("/haveCard")
 					} else {
-						this.popupTxt = this.langCn ? "若需购卡，请填写快递信息":"If you need to buy a card, please fill in the courier information"
+						this.popupTxt = this.langCn ? "若需购卡，请填写快递信息" : "If you need to buy a card, please fill in the courier information"
 						const component = this.$refs['myPopup']
 						component.show()
 						setTimeout(() => {
 							component.hide()
 						}, 1000)
 					}
-				}else{
+				} else {
 					this.$router.push("/haveCard")
 				}
 			},
 			payFunc() {
 				var that = this
-				if(that.isWeixin){
-					if(that.expressType == 3){
+				if(that.isWeixin) {
+					if(that.expressType == 3) {
 						if(that.deviceId == "") {
-							that.popupTxt = that.langCn ? "您还未绑定物联网卡deviceId，无法下单":"You have not bind the deviceId, unable to place the order"
+							that.popupTxt = that.langCn ? "您还未绑定物联网卡deviceId，无法下单" : "You have not bind the deviceId, unable to place the order"
 							const component = that.$refs['myPopup']
 							component.show()
 							setTimeout(() => {
 								component.hide()
 							}, 1000)
-						}else{
+						} else {
 							that.alert.show()
 						}
-					}else{
+					} else {
 						if(that.addressGet == "") {
-							that.popupTxt = that.langCn ? "您还未填写收卡快递信息，无法下单":"You have not filled in the card express information yet, you can't place the order"
+							that.popupTxt = that.langCn ? "您还未填写收卡快递信息，无法下单" : "You have not filled in the card express information yet, you can't place the order"
 							const component = that.$refs['myPopup']
 							component.show()
 							setTimeout(() => {
 								component.hide()
 							}, 1000)
-						}else{
+						} else {
 							that.alert.show()
 						}
 					}
-				}else{
-					if(that.deviceId == ""){
-						that.popupTxt = that.langCn ? "绑定您的物联网卡deviceId后，方可下单购买":"After binding your card deviceId, you can purchase it"
+				} else {
+					if(that.deviceId == "") {
+						that.popupTxt = that.langCn ? "绑定您的物联网卡deviceId后，方可下单购买" : "After binding your card deviceId, you can purchase it"
 						const component = that.$refs['myPopup']
 						component.show()
 						setTimeout(() => {
 							component.hide()
 						}, 1000)
-					}else{
+					} else {
 						//有卡，不再提示
 						that.alert.show()
 					}
@@ -366,18 +365,18 @@
 					txt: 'Loading'
 				})
 				toast.show()
-				if(that.isWeixin){
+				if(that.isWeixin) {
 					var expressPrice = 0
 					if(that.expressType == 1) {
 						expressPrice = that.norPost
-					} 
-					if(that.expressType == 2){
+					}
+					if(that.expressType == 2) {
 						expressPrice = that.SFPost
 					}
-				}else{
+				} else {
 					expressPrice = 0
 				}
-				
+
 				//绑定接口
 				that.$http.post("/paypalpay/userBound", {
 					data: {
@@ -389,14 +388,14 @@
 							company: encodeURI(encodeURI(that.$store.state.address.company)),
 							deviceId: that.$store.state.deviceId,
 							deviceType: that.$store.state.deviceType,
-							email:that.$store.state.address.email,
+							email: that.$store.state.address.email,
 							expressPrice: expressPrice.toString(),
 							expressType: that.$store.state.expressType.toString(),
 							openid: that.$store.state.openId ? that.$store.state.openId : "",
 							receiveAddress: encodeURI(encodeURI(that.addressGet)),
 							receivePhoneNumber: that.$store.state.address.phone,
 							receiveUserName: encodeURI(encodeURI(that.$store.state.address.name)),
-							userId:that.$store.state.userId
+							userId: that.$store.state.userId
 						},
 						tradeTime: new Date(),
 						tradeType: "F013",
@@ -443,13 +442,13 @@
 						that.codes = codeList.join(",")
 						that.orderPeriods = orderPeriodList.join(",")
 						that.orderUnits = orderUnitList.join(",")
-//						console.log(orderList)
-//						console.log(that.orderPeriods)
-//						console.log(that.codes)
-//						console.log(that.orderUnits)
-						
+						//						console.log(orderList)
+						//						console.log(that.orderPeriods)
+						//						console.log(that.codes)
+						//						console.log(that.orderUnits)
+
 						//订单接口
-						if(that.expressType == 3){
+						if(that.expressType == 3) {
 							//有卡情况
 							that.$http.post("/paypalpay/orderPackages", {
 								data: {
@@ -460,7 +459,7 @@
 									tradeData: {
 										deviceId: that.deviceId.toString(),
 										deviceType: that.$store.state.deviceType,
-										isOpen: that.isOpen ? '1':'0',
+										isOpen: that.isOpen ? '1' : '0',
 										orderList: orderList
 									},
 									tradeTime: new Date(),
@@ -477,8 +476,14 @@
 										that.orderList.push(res.data.data.tradeData[j].orderId)
 									}
 									that.$store.state.orderId = that.orderList.join(",")
-									//调微信支付
-									that.wxPay()
+									
+									if(that.isWeixin){
+										//调微信支付
+										that.wxPay()
+									}else{
+										//其他支付
+										that.otherPay()
+									}
 								} else {
 									toast.hide()
 									that.popupTxt = res.data.data.tradeRstMessage
@@ -491,7 +496,7 @@
 							}).catch((err) => {
 								//alert("error 订单接口" + JSON.stringify(err))
 							})
-						}else{
+						} else {
 							//无卡情况
 							that.$http.post("/paypalpay/orderNoCard", {
 								data: {
@@ -500,7 +505,7 @@
 									partnerCode: that.$store.state.partnerCode,
 									token: that.$store.state.token,
 									tradeData: {
-										isOpen: that.isOpen ? '1':'0',
+										isOpen: that.isOpen ? '1' : '0',
 										orderList: orderList
 									},
 									tradeTime: new Date(),
@@ -517,8 +522,14 @@
 										that.temOrderIdList.push(res.data.data.tradeData[m].temOrderId)
 									}
 									that.$store.state.temOrderIdList = that.temOrderIdList.join(",")
-									//调微信支付
-									that.wxPay()
+									
+									if(that.isWeixin){
+										//调微信支付
+										that.wxPay()
+									}else{
+										//其他支付
+										that.otherPay()
+									}
 								} else {
 									toast.hide()
 									that.popupTxt = res.data.data.tradeRstMessage
@@ -549,34 +560,13 @@
 				//wx pay
 				var that = this
 				//var params = encodeURI(encodeURI(document.location.href))
-				var date = new Date();
-				var month = date.getMonth() + 1;
-				if(month >= 1 && month <= 9) {
-					month = "0" + month;
-				}
-				var strDate = date.getDate();
-				if(strDate >= 0 && strDate <= 9) {
-					strDate = "0" + strDate;
-				}
-				var hour = date.getHours();
-				if(hour >= 0 && hour <= 9) {
-					hour = "0" + hour;
-				}
-				var minute = date.getMinutes();
-				if(minute >= 0 && minute <= 9) {
-					minute = "0" + minute;
-				}
-				var sec = date.getSeconds();
-				if(sec >= 0 && sec <= 9) {
-					sec = "0" + sec;
-				}
-
-				var paymentOrderId = date.getFullYear().toString() + month + strDate + hour + minute + sec + Math.floor(Math.random() * 999).toString()
-				var url = "/paypalpay/weixinpay?openId=" + that.$store.state.openId + "&deviceId=" + that.$store.state.deviceId + "&deviceType=" + that.$store.state.deviceType 
-						+ "&partnerCode=" + that.$store.state.partnerCode + "&amount=" + that.finalPrice.toFixed(2) + "&paymentOrderId=" + paymentOrderId
-						+ "&orderId=" + that.$store.state.orderId + "&temOrderId=" + that.$store.state.temOrderIdList +  "&packageCode=" + that.codes 
-						+ "&orderPeriod=" + that.orderPeriods + "&orderUnit=" + that.orderUnits
+				var paymentOrderId = that.paymentOrderFunc()
+				var url = "/paypalpay/weixinpay?openId=" + that.$store.state.openId + "&deviceId=" + that.$store.state.deviceId + "&deviceType=" + that.$store.state.deviceType +
+					"&partnerCode=" + that.$store.state.partnerCode + "&amount=" + that.finalPrice.toFixed(2) + "&paymentOrderId=" + paymentOrderId +
+					"&orderId=" + that.$store.state.orderId + "&temOrderId=" + that.$store.state.temOrderIdList + "&packageCode=" + that.codes +
+					"&orderPeriod=" + that.orderPeriods + "&orderUnit=" + that.orderUnits
 				console.log(url)
+
 				that.$http.get(url).then((res) => {
 					var appIdVal = res.data.appId;　　　　　　
 					var timeStampVal = res.data.timeStamp;
@@ -598,7 +588,7 @@
 							if(res.err_msg === 'get_brand_wcpay_request:ok') {
 								that.payNotice()
 							} else if(res.err_msg === 'get_brand_wcpay_request:cancel') {
-								that.popupTxt =  that.langCn ? '支付已取消' : "Payment has been cancelled"
+								that.popupTxt = that.langCn ? '支付已取消' : "Payment has been cancelled"
 								const component = that.$refs['myPopup']
 								component.show()
 								setTimeout(() => {
@@ -637,10 +627,10 @@
 
 				that.$router.replace("/paySuccess")
 
-//				for(var i = 0; i < that.orderList.length; i++) {
-//					var j = that.orderList.length - 1
-//					that.payResult(that.orderList[i], i, j)
-//				}
+				//				for(var i = 0; i < that.orderList.length; i++) {
+				//					var j = that.orderList.length - 1
+				//					that.payResult(that.orderList[i], i, j)
+				//				}
 			},
 			payResult(oId, idx, idxLast) {
 				//支付结果通知方法
@@ -667,7 +657,42 @@
 						//that.gggg = 'Hey girl! Succeed!'
 					}
 				})
-			}			
+			},
+			otherPay() {
+				var that = this
+				var paymentOrderId = that.paymentOrderFunc()
+				that.$store.state.payParams.paypalUrl = "/paypalpay/paypal/paypals?deviceId=" + that.$store.state.deviceId + "&deviceType=" + that.$store.state.deviceType +
+					"&orderId=" + that.$store.state.orderId + "&amount=" + that.finalPrice.toFixed(2) +
+					"&partnerCode=" + that.$store.state.partnerCode + "&packageCode=" + that.codes +
+					"&orderPeriod=" + that.orderPeriods + "&orderUnit=" + that.orderUnits +
+					"&paymentOrderId=" + paymentOrderId + "&currencyCode=CNY" + "&isOpen=" + (that.isOpen ? '1' : '0')
+				that.$router.push("/pay")
+			},
+			paymentOrderFunc() {
+				var date = new Date();
+				var month = date.getMonth() + 1;
+				if(month >= 1 && month <= 9) {
+					month = "0" + month;
+				}
+				var strDate = date.getDate();
+				if(strDate >= 0 && strDate <= 9) {
+					strDate = "0" + strDate;
+				}
+				var hour = date.getHours();
+				if(hour >= 0 && hour <= 9) {
+					hour = "0" + hour;
+				}
+				var minute = date.getMinutes();
+				if(minute >= 0 && minute <= 9) {
+					minute = "0" + minute;
+				}
+				var sec = date.getSeconds();
+				if(sec >= 0 && sec <= 9) {
+					sec = "0" + sec;
+				}
+				var paymentOrderId = date.getFullYear().toString() + month + strDate + hour + minute + sec + Math.floor(Math.random() * 999).toString()
+				return paymentOrderId
+			}
 		}
 	}
 </script>
@@ -705,12 +730,16 @@
 		line-height: 16px;
 		height: 16px;
 		background: #d7013f;
-		background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-		background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-	    -webkit-background-clip: text;
-	    color: transparent;
+		background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+		/* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #dc4731);
+		/* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #dc4731);
+		/* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f, #dc4731);
+		/* 标准的语法 */
+		-webkit-background-clip: text;
+		color: transparent;
 	}
 	
 	.post-txt {
@@ -750,51 +779,60 @@
 		background: url(../assets/common/more.png)no-repeat center right;
 		background-size: 6px 10px;
 	}
-	.text-meal{
-		font-size:14px;
-		line-height:18px;
+	
+	.text-meal {
+		font-size: 14px;
+		line-height: 18px;
 	}
-	.text-meaL-content{
-		max-width:74%;
-		padding:7px 0;
+	
+	.text-meaL-content {
+		max-width: 74%;
+		padding: 7px 0;
 	}
-	.price{
-		line-height:32px;
+	
+	.price {
+		line-height: 32px;
 		position: relative;
 	}
-	.cardCost.cardFree{
-		color:#999;
+	
+	.cardCost.cardFree {
+		color: #999;
 	}
-	.cardCost .cardFreeTxt{
-		color:#999;
-		font-size:0.6rem;
+	
+	.cardCost .cardFreeTxt {
+		color: #999;
+		font-size: 0.6rem;
 		word-break: break-all
 	}
-	.cardCost.cardFree .price{
-		font-size:0;
+	
+	.cardCost.cardFree .price {
+		font-size: 0;
 	}
+	
 	.cardCost.cardFree .price,
-	.cardCost.cardFree .price span
-	{
-		color:#999;
-		font-size:0.7rem;
-		height:32px;
+	.cardCost.cardFree .price span {
+		color: #999;
+		font-size: 0.7rem;
+		height: 32px;
 	}
-	.cardCost.cardFree .price:after{
+	
+	.cardCost.cardFree .price:after {
 		content: "";
 		display: block;
 		position: absolute;
-		top:50%;
-		left:-5px;
-		width:calc(100% + 10px);
-		border-top:1px solid #c5c5c5;
+		top: 50%;
+		left: -5px;
+		width: calc(100% + 10px);
+		border-top: 1px solid #c5c5c5;
 	}
+	
 	.agree .agreeTxt {
-	    font-size: 0.7rem;
-	    line-height:22px;
-	    color: #9FA0A0;
+		font-size: 0.7rem;
+		line-height: 22px;
+		color: #9FA0A0;
 	}
-	.cost-box{
-		padding:12px 0.6rem;
+	
+	.cost-box {
+		padding: 12px 0.6rem;
 	}
 </style>

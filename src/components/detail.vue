@@ -99,7 +99,7 @@
 					start: 0,
 					dir: 'v',
 					duration: 500,
-					der: 0.4
+					der: 0.35
 				},
 				obj: {},
 				mealsList: [],

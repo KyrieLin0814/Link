@@ -74,8 +74,11 @@ module.exports = {
 	 	detailAddress:'详细地址',
 	 	company:'公司',
 	 	email:'邮箱',
-	 	save:'保存'
+	 	save:'保存',
 	 	
-		
+	 	payType:'选择支付方式',
+	 	amount:'支付金额',
+		payment:'确认支付',
+		WxPay:'微信支付',
 	}
 }

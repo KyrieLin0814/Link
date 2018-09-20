@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 const state = {
-	openId: "oQrFc1hRYF_CEetyWksplGS8rKC8", //微信用户在商城的唯一标识 
+	openId: "", //微信用户在商城的唯一标识 oQrFc1hRYF_CEetyWksplGS8rKC8
 	deviceId: "", //设备的标识，用户唯一标示
 	deviceType: "", //请求的设备类型
 	deviceTypeText:'',
@@ -46,7 +46,10 @@ const state = {
 	expressType: "1",
 	orderId:"",
 	temOrderId:"",
-	routerBack:{}
+	routerBack:{},
+	payParams:{
+		paypalUrl:''
+	}
 }
 export default new Vuex.Store({
 	state

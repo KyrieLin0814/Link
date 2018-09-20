@@ -74,6 +74,12 @@ module.exports = {
 	 	detailAddress:'Detailed address',
 	 	company:'Company',
 	 	email:'E-mail',
-	 	save:'Save'
+	 	save:'Save',
+	 	
+	 	payType:'Choose payment method',
+	 	amount:'Amount of payment',
+		payment:'Payment',
+		WxPay:'WeChat payment',
+		
 	}
 }

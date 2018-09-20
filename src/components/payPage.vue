@@ -18,7 +18,7 @@
 				<p class="agreeTxt">{{$t("message.agree")}}<span class="fontColor">{{$t("message.txt1")}}</span>{{$t("message.and")}}<span class="fontColor">{{$t("message.txt2")}}</span></p>
 			</cube-checkbox>
 		</div>
-
+		
 		<div class="buy-box clearfix">
 			<p>{{$t("message.total")}}：<span>{{ finalPrice.toFixed(2) }}</span> {{$t("message.yuan")}}</p>
 			<span class="slide" :class="{'active': slideFlage}" @click="slideFunc"></span>
@@ -202,6 +202,7 @@
 	}
 	
 	.agree .agreeTxt span {
+		display: inline-block;
 		color: #e23768;
 	}
 	.num-box .disabled{

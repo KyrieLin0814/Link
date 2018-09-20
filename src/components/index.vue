@@ -360,6 +360,7 @@
 	
 	.txt {
 		color: #fff;
+		height: 20px;
 	}
 	
 	.txt span,

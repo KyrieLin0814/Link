@@ -163,6 +163,7 @@
 		line-height: 100px;
 		font-size: 0;
 		vertical-align: middle;
+		padding:0 5px;
 	}
 	
 	.img-content>div.text span {

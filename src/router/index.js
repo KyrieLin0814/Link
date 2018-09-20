@@ -18,6 +18,7 @@ import help from '@/components/help'
 import helpPage from '@/components/helpPage'
 import orderList from '@/components/orderList'
 import text from '@/components/text'
+import pay from '@/components/pay'
 
 Vue.use(Router)
 
@@ -116,6 +117,12 @@ const router = new Router({
 			path: '/text',
 			name: 'text',
 			component: text,
+			props: true
+		}, 
+		{
+			path: '/pay',
+			name: 'pay',
+			component: pay,
 			props: true
 		}
 	]

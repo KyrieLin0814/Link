@@ -5,8 +5,8 @@ import router from '@/router/'
 import md5 from 'js-md5'
 
 //axios配置全局参数
-//const baseURL = 'http://wx.lizhisim.com' // 配置请求路径的baseURL
-const baseURL = 'http://47.106.75.32:8081' // 配置请求路径的baseURL
+const baseURL = 'http://wx.linksfield.net' // 配置请求路径的baseURL
+//const baseURL = 'http://47.106.75.32:8081' // 配置请求路径的baseURL
 
 const Axios = axios.create({
 	transformRequest: [function(data) {
