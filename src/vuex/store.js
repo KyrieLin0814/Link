@@ -48,7 +48,9 @@ const state = {
 	temOrderId:"",
 	routerBack:{},
 	payParams:{
-		paypalUrl:''
+		paymentOrderId:'',
+		paypalUrl:'',
+		weixinUrl:''
 	}
 }
 export default new Vuex.Store({

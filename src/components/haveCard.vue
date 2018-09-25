@@ -99,6 +99,12 @@
 			},
 			confirm() {
 				var that = this
+				const toast = that.$createToast({
+					type: 'loading',
+					time: 0,
+					txt: 'Loading'
+				})
+				toast.show()
 				//绑定deviceId
 				if(that.deviceId && that.deviceType) {
 					that.$http.post("/paypalpay/userBound", {
@@ -128,6 +134,7 @@
 							that.$store.state.deviceId = that.deviceId
 							that.$store.state.deviceType = that.deviceType
 							that.$store.state.deviceTypeText = that.deviceTypeText
+							toast.hide()
 							that.$router.push({
 								name: that.backRouter
 							})

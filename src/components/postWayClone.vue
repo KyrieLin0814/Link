@@ -661,11 +661,22 @@
 			otherPay() {
 				var that = this
 				var paymentOrderId = that.paymentOrderFunc()
+				that.$store.state.payParams.paymentOrderId =  paymentOrderId
+				
+				//paypal pay
 				that.$store.state.payParams.paypalUrl = "/paypalpay/paypal/paypals?deviceId=" + that.$store.state.deviceId + "&deviceType=" + that.$store.state.deviceType +
 					"&orderId=" + that.$store.state.orderId + "&amount=" + that.finalPrice.toFixed(2) +
 					"&partnerCode=" + that.$store.state.partnerCode + "&packageCode=" + that.codes +
 					"&orderPeriod=" + that.orderPeriods + "&orderUnit=" + that.orderUnits +
 					"&paymentOrderId=" + paymentOrderId + "&currencyCode=CNY" + "&isOpen=" + (that.isOpen ? '1' : '0')
+				//weixin pay
+				
+				that.$store.state.payParams.weixinUrl = "/paypalpay/wxPayH5?deviceId=" + that.$store.state.deviceId + "&deviceType=" + that.$store.state.deviceType +
+					"&orderId=" + that.$store.state.orderId + "&amount=" + that.finalPrice.toFixed(2) +
+					"&partnerCode=" + that.$store.state.partnerCode + "&packageCode=" + that.codes +
+					"&orderPeriod=" + that.orderPeriods + "&orderUnit=" + that.orderUnits +
+					"&paymentOrderId=" + paymentOrderId + "&isOpen=" + (that.isOpen ? '1' : '0')
+					
 				that.$router.push("/pay")
 			},
 			paymentOrderFunc() {

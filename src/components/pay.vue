@@ -11,8 +11,8 @@
 
 		<ul class="payList">
 			<li class="paypal" :class="{'active': payFlag == 1}" @click="choose(1)">Paypal</li>
-			<!--<li class="ocean" :class="{'active': payFlag == 2}" @click="choose(2)">Ocean</li>
-			<li class="wxPay" :class="{'active': payFlag == 3}" @click="choose(3)">{{$t("message.WxPay")}}</li>-->
+			<!--<li class="ocean" :class="{'active': payFlag == 2}" @click="choose(2)">Ocean</li>-->
+			<li class="wxPay" :class="{'active': payFlag == 3}" @click="choose(3)">{{$t("message.WxPay")}}</li>
 		</ul>
 
 		<div class="btns">
@@ -55,7 +55,7 @@
 
 <script>
 	export default {
-		name: 'name',
+		name: 'pay',
 		data() {
 			return {
 				amount: '0.00',
@@ -70,16 +70,27 @@
 				currency_code: '',
 				payFlag: 1,
 				popupTxt: '',
-				langCn: this.$store.state.langType == 'cn' ? true : false
+				langCn: this.$store.state.langType == 'cn' ? true : false,
+				wxPayUrl:'',
 			}
 		},
 		created() {
 			var that = this
-			var url = that.$store.state.payParams.paypalUrl
-			console.log(url)
-			if(url) {
-				that.$http.get(url).then(function(res) {
-					console.log(res)
+			
+		},
+		mounted(){
+			var that = this
+			
+			//paypal pay
+			var url1 = that.$store.state.payParams.paypalUrl
+			//weixin pay
+			var url2 = that.$store.state.payParams.weixinUrl
+			console.log(url2)
+			
+			if(url1 && url2) {
+				//paypal pay
+				that.$http.get(url1).then(function(res) {
+					//console.log(res)
 					that.amount = res.data.amount
 					that.linksFlow = res.data.linksFlow
 					that.cmd = res.data.cmd
@@ -91,36 +102,52 @@
 					that.business = res.data.business
 					that.currency_code = res.data.currency_code
 				})
+				
+				//weixin pay
+				that.$http.get(url2).then(function(res){
+					console.log(res)
+					if(res.data.mweb_url){
+						that.wxPayUrl = res.data.mweb_url + '&redirect_url=' + encodeURIComponent('http://wx.linksfield.net:8080/#/payResult')
+						console.log(that.wxPayUrl)
+					}
+				})
 			} else {
 				that.$createDialog({
 			        type: 'alert',
 			        title: that.langCn ?'异常操作':'Abnormal operation',
 			        content: that.langCn ? '您的订单已失效，请重新下单':'Your order is invalid, please re order it',
 			        icon: 'cubeic-alert',
-			        confirmBtn:{text: that.langCn ?'确认':'Confirm',href:"http://wx.linksfield.net:8080/#/"}
+			        confirmBtn:{text: that.langCn ?'确认':'Confirm',href:"http://wx.linksfield.net:8080"}
 			    }).show()
 			}
 		},
 		methods: {
 			payFunc() {
+				var that = this
 				var type = this.payFlag
 				if(type == 1) {
-					var that = this
+					//paypal pay
 					const toast = that.$createToast({
 						type: 'loading',
 						time: 0,
 						txt: 'Loading'
 					})
 					toast.show()
-					console.log(document.getElementById('paypalForm'))
-					
+					//console.log(document.getElementById('paypalForm'))
 					document.getElementById('paypalForm').submit()
+				}else if(type == 3){
+					//wx pay
+					if(that.wxPayUrl){
+						localStorage.setItem("amount", that.amount)
+						localStorage.setItem("payType", type)
+						localStorage.setItem("paymentOrderId", that.$store.state.payParams.paymentOrderId)
+						window.location.href=that.wxPayUrl
+					}
 				} else {
 					alert('暂不支持')
 				}
 			},
 			choose(type) {
-				console.log(type)
 				this.payFlag = type
 			}
 		}
