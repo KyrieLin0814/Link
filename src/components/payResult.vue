@@ -10,7 +10,7 @@
 		</div>
 
 		<ul class="payList">
-			<li class="paypal" :class="{'active': payFlag == 1}" @click="choose(1)">Paypal</li>
+			<!--<li class="paypal" :class="{'active': payFlag == 1}" @click="choose(1)">Paypal</li>-->
 			<!--<li class="ocean" :class="{'active': payFlag == 2}" @click="choose(2)">Ocean</li>-->
 			<li class="wxPay" :class="{'active': payFlag == 3}" @click="choose(3)">{{$t("message.WxPay")}}</li>
 		</ul>
@@ -29,35 +29,61 @@
 			return {
 				amount: '0.00',
 				payFlag: 3,
+				paymentOrderId: '',
 				langCn: localStorage.getItem('lang') == 'cn' ? true : false
 			}
 		},
+		created() {
+			var that = this
+			var paramsObj = that.$route.query
+			that.paymentOrderId = paramsObj.paymentOrderId
+			that.amount = Number(paramsObj.amount).toFixed(2)
+			that.payFlag = paramsObj.payFlag
+		},
 		mounted() {
 			var that = this
-			that.amount = localStorage.getItem("amount")
-			that.payFlag = Number(localStorage.getItem("payType"))
-			var paymentOrderId = localStorage.getItem("paymentOrderId")
-			
-			
-			localStorage.removeItem("amount")
-			localStorage.removeItem("payType")
-			localStorage.removeItem("paymentOrderId")
-
-			const toast = this.$createToast({
-				time: 0,
-				mask:true,
-				txt: that.langCn ? '正在确认支付状态' : 'Confirming your payment status'
-			})
-			toast.show()
-			that.$http.get('/paypalpay/wxH5orderQuery?paymentOrderId=' +  paymentOrderId).then(function(res){
-				console.log(res)
-				toast.hide()
-				if(res.data.trade_state == "0"){
-					that.$router.push("/paySuccess")
-				}else{
-					that.$router.push("/payError")
+			this.$createDialog({
+				type: 'confirm',
+				title: '是否完成支付？',
+				confirmBtn: {
+					text: '已支付',
+					active: true,
+					disabled: false,
+					href: 'javascript:;'
+				},
+				cancelBtn: {
+					text: '未支付',
+					active: false,
+					disabled: false,
+					href: 'javascript:;'
+				},
+				onConfirm: () => {
+					that.comfirmFunc()
+				},
+				onCancel: () => {
+					that.$router.replace("/payError")
 				}
-			})
+			}).show()
+		},
+		methods: {
+			comfirmFunc() {
+				var that = this
+				const toast = this.$createToast({
+					time: 0,
+					mask: true,
+					txt: that.langCn ? '正在确认支付状态' : 'Confirming your payment status'
+				})
+				toast.show()
+				that.$http.get('/paypalpay/wxH5orderQuery?paymentOrderId=' + that.paymentOrderId).then(function(res) {
+					console.log(res)
+					toast.hide()
+					if(res.data.trade_state == "0") {
+						that.$router.replace("/paySuccess")
+					} else {
+						that.$router.replace("/payError")
+					}
+				})
+			}
 		}
 	}
 </script>

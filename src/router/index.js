@@ -20,6 +20,7 @@ import orderList from '@/components/orderList'
 import text from '@/components/text'
 import pay from '@/components/pay'
 import payResult from '@/components/payResult'
+import helpText from '@/components/helpText'
 
 Vue.use(Router)
 
@@ -130,6 +131,11 @@ const router = new Router({
 			path: '/payResult',
 			name: 'payResult',
 			component: payResult,
+			props: true
+		},{
+			path: '/helpText',
+			name: 'helpText',
+			component: helpText,
 			props: true
 		}
 	]

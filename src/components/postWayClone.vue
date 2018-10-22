@@ -24,11 +24,11 @@
 				</li>
 			</ul>
 		</div>
-		<div class="more-info" @click="setAddress" v-if="isWeixin">
+		<div class="more-info" @click="setAddress" v-if="isWeixin" v-show="!checkedObj.type3">
 			<p>{{$t("message.address")}}</p>
 			<div>{{ addressGet ? addressGet : (langCn ? '编辑':$t('message.edit')) }}</div>
 		</div>
-		<div class="more-info" @click="haveCard">
+		<div class="more-info" @click="haveCard" v-show="checkedObj.type3">
 			<p>{{$t("message.info")}}</p>
 			<div>{{ deviceId ? deviceId : (langCn ? '编辑':$t('message.edit')) }}</div>
 		</div>

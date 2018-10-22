@@ -25,7 +25,7 @@
 				<p class="text-1">{{ area?area:(langCn ? '请选择': $t("message.pleaseChoose")) }}</p>
 			</div>
 			<div>
-				<input type="text" maxlength="11" v-model="addressTxt" :placeholder="$t('message.detailAddress')">
+				<input type="text" v-model="addressTxt" :placeholder="$t('message.detailAddress')">
 			</div>
 			<div>
 				<input type="text" v-model="company" :placeholder="$t('message.company')">
