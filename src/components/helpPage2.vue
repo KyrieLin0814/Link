@@ -4,25 +4,28 @@
 			<img src="../assets/common/banner.png" />
 		</div>
 		
-		<div class="common-trouble" v-if="helpFlag == 1">
+		<div class="common-trouble">
 			<ul>
 				<li>
 					<p><span class="bgColor">常见问题</span></p>
 					<ul>
 						<li>
-							<router-link to="/helpRead">{{langCn ? '一直没信号' : 'There has been no signal'}}</router-link>
+							<a href="https://mp.weixin.qq.com/s/zgxdZzaHWvY7jWyWj3W68g">{{langCn ? '日韩设置方法' : 'Setting method in Japan and Korea'}}</a>
 						</li>
 						<li>
-							<a href="https://mp.weixin.qq.com/s?__biz=MzU5NjM5ODkxNA==&mid=100000058&idx=1&sn=8184b17eccf77dec3d205f87887af363&chksm=7e62071749158e01ddb5f62a32e8d94ed16a0e2ac02bf32e3a41359e125f6a41dbdcba9b390e&scene=18#wechat_redirect">{{langCn ? '有信号无流量' : 'There are signals but no traffic'}}</a>
+							<a href="http://mp.weixin.qq.com/s?__biz=MzU5NjM5ODkxNA==&mid=100000015&idx=1&sn=3f2a03abf35d14f6cd3d05a0acd381a4&chksm=7e62072249158e343a515e3eced86d9abe1b31d9062f1982bff3d803a78cdaf2d8fbb9172f00&scene=18#wechat_redirect">{{langCn ? '台湾设置方法' : 'Setting method in Taiwan'}}</a>
 						</li>
 						<li>
-							<a href="http://mp.weixin.qq.com/s?__biz=MzU5NjM5ODkxNA==&mid=100000072&idx=1&sn=9a395176587186a403cc1cad4767388f&chksm=7e62076549158e734b17be6b4f32a486287ae2e98188df6c6038c583d1c741449973662e8b57&scene=18#wechat_redirect">{{langCn ? '查看可用机型' : 'View supported cell phone models'}}</a>
+							<a href="http://mp.weixin.qq.com/s?__biz=MzU5NjM5ODkxNA==&mid=100000020&idx=1&sn=db818a56b8c1d6bf2f98032d868807b4&chksm=7e62073949158e2f053c6e7eb8304b5e368537559e1b85abd99f0f8cb8e8676d34bc6652b017&scene=18#wechat_redirect">{{langCn ? '新马泰设置方法' : 'Setting method in Singapore, Malaysia, Tailand'}}</a>
 						</li>
+						<li>
+							<a href="https://mp.weixin.qq.com/s/cibrzkzSsTfrMqvWFEu14A">{{langCn ? '印尼设置方法' : 'Setting method in Indonesia'}}</a>
+						</li>
+						
 					</ul>
 				</li>
 			</ul>
 		</div>
-		
 
 		<!--<div class="alert-btn" @click="clickFunc()">
 			<div>意见反馈</div>
@@ -44,11 +47,8 @@
 		props:{
 			helpFlag:{
 				type:Number,
-				default:1
+				default:2
 			}
-		},
-		mounted(){
-			console.log(this.helpFlag)
 		}
 //		mounted() {
 //			this.alert = this.$createDialog({

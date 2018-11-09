@@ -4,16 +4,21 @@ html,
 body {
 	font-size: 22px;
 }
+
 @media screen and (max-width: 359px) {
-	html,body {
+	html,
+	body {
 		font-size: 20px;
 	}
 }
+
 @media screen and (min-width: 768px) {
-	html,body {
+	html,
+	body {
 		font-size: 26px;
 	}
 }
+
 * {
 	margin: 0px;
 	padding: 0;
@@ -42,22 +47,34 @@ textarea {
 	outline: none;
 	resize: none;
 }
+
+
 /*字体颜色渐变*/
-.fontColor{
+
+.fontColor {
 	color: #d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-    -webkit-background-clip: text;
-    color: transparent;
+	background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #dc4731);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #dc4731);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #dc4731);
+	/* 标准的语法 */
+	-webkit-background-clip: text;
+	color: transparent;
 }
-.bgColor{
-	background:#d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
+
+.bgColor {
+	background: #d7013f;
+	background: -webkit-linear-gradient(left, #d7013f, #e47a62);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #e47a62);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #e47a62);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #e47a62);
+	/* 标准的语法 */
 }
 
 
@@ -94,6 +111,7 @@ textarea {
 	-ms-flex: 1;
 	flex: 1;
 }
+
 
 /*文字超出一行、多行显示省略号*/
 
@@ -157,13 +175,16 @@ textarea {
 .car-list .cube-checkbox-hollow i:before {
 	border-radius: 50%;
 }
+
 .car-list li.active .cube-checkbox-hollow i:before,
-.choose-way.car-list .cube-checkbox_checked.cube-checkbox-hollow i:before{
-	color:#d7013f;
+.choose-way.car-list .cube-checkbox_checked.cube-checkbox-hollow i:before {
+	color: #d7013f;
 }
-.car-list .cube-checkbox-input{
-	z-index:-1
+
+.car-list .cube-checkbox-input {
+	z-index: -1
 }
+
 .car-list .car-list .cube-checkbox-wrap {
 	padding: 5px 3px;
 }
@@ -177,28 +198,30 @@ textarea {
 }
 
 .pay-box .cube-checkbox-ui:before {
-	color:#d7013f;
+	color: #d7013f;
 	display: inline-block;
 	-webkit-transform: scale(0.8);
 	transform: scale(0.8);
 }
 
 .pay-box .cube-checkbox_checked .cube-checkbox-ui i {
-	color:#d7013f;
+	color: #d7013f;
 	-webkit-transform: scale(0.8);
 	transform: scale(0.8);
 }
 
-.agree .cube-checkbox-label{
-	height:22px;
+.agree .cube-checkbox-label {
+	height: 22px;
 }
 
+
 /*没有数据*/
-.no-data{
-  padding-top:40px;
-  text-align: center;
-  font-size:0.8rem;
-  color:#cccccc
+
+.no-data {
+	padding-top: 40px;
+	text-align: center;
+	font-size: 0.8rem;
+	color: #cccccc
 }
 
 
@@ -215,7 +238,7 @@ textarea {
 }
 
 .cube-picker-confirm {
-	color:#d7013f;
+	color: #d7013f;
 }
 
 .cube-picker-title {
@@ -230,25 +253,29 @@ textarea {
 /*弹框提示  popup*/
 
 .cube-my-popup .cube-popup-content {
-	max-width:80%;
+	max-width: 80%;
 	font-size: 0.7rem;
-	line-height:20px;
+	line-height: 20px;
 	padding: 0.8rem;
 	border-radius: 5px;
 	color: #fff;
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
-.cube-popup_mask{
+.cube-popup_mask {
 	z-index: 9999!important;
 }
+
 .cube-picker .cube-popup-mask,
-.cube-dialog .cube-popup-mask{
+.cube-dialog .cube-popup-mask {
 	background-color: #25262d;
 }
-.cube-popup-mask{
+
+.cube-popup-mask {
 	background-color: transparent;
 }
+
+
 /*标题*/
 
 .common-title {
@@ -270,13 +297,17 @@ textarea {
 	font-size: .7rem;
 	line-height: 28px;
 	vertical-align: middle;
-	color:#d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-    -webkit-background-clip: text;
-    color: transparent;
+	color: #d7013f;
+	background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #dc4731);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #dc4731);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #dc4731);
+	/* 标准的语法 */
+	-webkit-background-clip: text;
+	color: transparent;
 }
 
 
@@ -297,38 +328,49 @@ textarea {
 .buy-box p {
 	float: left;
 	color: #3E3A39;
-	margin-top:4px;
+	margin-top: 4px;
 	font-size: 0.7rem;
 }
 
 .buy-box p span {
 	font-size: 1.1rem;
-	color:#d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-    -webkit-background-clip: text;
-    color: transparent;
+	color: #d7013f;
+	background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #dc4731);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #dc4731);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #dc4731);
+	/* 标准的语法 */
+	-webkit-background-clip: text;
+	color: transparent;
 }
+
 .buy-box a {
 	float: right;
-	margin-left:8px;
-	padding:12px 12px;
+	margin-left: 8px;
+	padding: 12px 12px;
 	font-size: 0.7rem;
 	height: 16px;
 	line-height: 16px;
 	color: #fff;
 	border-radius: 3px;
 	background: #d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
+	background: -webkit-linear-gradient(left, #d7013f, #e47a62);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #e47a62);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #e47a62);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #e47a62);
+	/* 标准的语法 */
 }
-.buy-box a+a{
-	margin-left:0;
+
+.buy-box a+a {
+	margin-left: 0;
 }
+
 
 /*下拉收回*/
 
@@ -351,7 +393,7 @@ textarea {
 	left: 0;
 	right: 0;
 	bottom: inherit;
-	top:61px;
+	top: 61px;
 	background: #fff;
 	padding: 12px 0.8rem;
 	font-size: 0.7rem;
@@ -359,18 +401,22 @@ textarea {
 }
 
 .cost-box.active {
-	top:inherit;
+	top: inherit;
 	bottom: 61px;
 }
 
 .cost-box .tle {
 	color: #d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-    -webkit-background-clip: text;
-    color: transparent;
+	background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #dc4731);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #dc4731);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #dc4731);
+	/* 标准的语法 */
+	-webkit-background-clip: text;
+	color: transparent;
 	line-height: 24px;
 }
 
@@ -387,19 +433,24 @@ textarea {
 
 .cost-box .price span {
 	color: #d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-    -webkit-background-clip: text;
-    color: transparent;
+	background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #dc4731);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #dc4731);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #dc4731);
+	/* 标准的语法 */
+	-webkit-background-clip: text;
+	color: transparent;
 	padding-right: 3px;
 	font-weight: bold;
 }
 
-.cost-box ul li{
-	line-height:30px;
+.cost-box ul li {
+	line-height: 30px;
 }
+
 
 /*按钮*/
 
@@ -412,22 +463,30 @@ textarea {
 	border-radius: 5px;
 	margin-bottom: 15px;
 	line-height: 32px;
-	background:#d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
+	background: #d7013f;
+	background: -webkit-linear-gradient(left, #d7013f, #e47a62);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #e47a62);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #e47a62);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #e47a62);
+	/* 标准的语法 */
 	border: 1px solid #d7013f;
 }
 
 .btns a.done {
 	color: #d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-    -webkit-background-clip: text;
-    color: transparent;
+	background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #dc4731);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #dc4731);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #dc4731);
+	/* 标准的语法 */
+	-webkit-background-clip: text;
+	color: transparent;
 	border: 1px solid #d7013f;
 	background-color: #fff;
 }
@@ -441,17 +500,27 @@ textarea {
 
 .cube-dialog-title-def {
 	color: #d7013f;
-	background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-	background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-    -webkit-background-clip: text;
-    color: transparent;
+	background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #d7013f, #dc4731);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #d7013f, #dc4731);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #d7013f, #dc4731);
+	/* 标准的语法 */
+	-webkit-background-clip: text;
+	color: transparent;
 }
-.cube-dialog-content-def{
+
+.cube-dialog-content-def {
 	text-align: center;
 }
 
 .cube-dialog-btn {
 	color: #3E3A39
 }
+
+.xcomponent-outlet{
+	width:100%!important;	
+}
+

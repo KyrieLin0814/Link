@@ -41,6 +41,22 @@
 					</li>
 				</ul>
 			</div>
+			<ul class="footer-list flexBox bgColor" v-if="tabFlag">
+				<li class="flex-1">
+					<router-link :to="{name:'helpText',params:{helpFlag:1}}">{{CnFlag ? '关于我们' : 'ABOUT US'}}</router-link>
+					<router-link :to="{name:'helpText',params:{helpFlag:2}}">{{CnFlag ? '联系我们' : 'CONTACT US'}}</router-link>
+				</li>
+				<li class="flex-1">
+					<router-link :to="{name:'helpText',params:{helpFlag:4}}">{{CnFlag ? '隐私政策' : 'PRIVACY POLICY'}}</router-link>
+					<router-link :to="{name:'helpText',params:{helpFlag:5}}">{{CnFlag ? '退货政策' : 'RETURN POLICY'}}</router-link>
+					<router-link :to="{name:'helpText',params:{helpFlag:6}}">{{CnFlag ? '航运政策' : 'SHIPPING POLICY'}}</router-link>
+					<router-link :to="{name:'helpText',params:{helpFlag:7}}">{{CnFlag ? '服务条款' : 'TERMS OF SERVICE'}}</router-link>
+				</li>
+				<li class="flex-1">
+					<router-link :to="{name:'helpText',params:{helpFlag:3}}">{{CnFlag ? '知识产权' : 'INTELLECTUAL PROPERTY'}}</router-link>
+				</li>
+
+			</ul>
 		</div>
 
 		<div class="footer flexBox">
@@ -63,13 +79,31 @@
 		data() {
 			return {
 				langType: localStorage.getItem("lang") ? localStorage.getItem("lang") : "cn",
+				CnFlag: true,
+				tabFlag: true,
 				meals: [],
 				result: [],
 				helpLink: "/help",
 				orderLink: "/orderList"
 			}
 		},
+		watch: {
+			langType(a, b) {
+				if(a == 'cn') {
+					this.CnFlag = true
+				} else {
+					this.CnFlag = false
+				}
+				this.tabFlag = false
+				this.tabFlag = true
+				this.cookieFunc()
+			}
+		},
 		created() {
+			if(this.langType != 'cn') {
+				this.CnFlag = false
+			}
+			this.cookieFunc()
 			this.getData()
 		},
 		methods: {
@@ -77,14 +111,14 @@
 				this.$i18n.locale = "cn"
 				this.$store.state.langType = "cn"
 				this.langType = "cn"
-				localStorage.setItem("lang","cn")
+				localStorage.setItem("lang", "cn")
 				this.getData()
 			},
 			langEn() {
 				this.$i18n.locale = "en"
 				this.$store.state.langType = "en"
 				this.langType = "en"
-				localStorage.setItem("lang","en")
+				localStorage.setItem("lang", "en")
 				this.getData()
 			},
 			moreFunc(idx) {
@@ -99,14 +133,56 @@
 				this.$store.state.routerData = obj
 				this.$router.push("/detail")
 			},
-			compare(){
-			    return function(a,b){
-			        var value1 = a.list.length;
-			        var value2 = b.list.length;
-			        return value2 - value1;
-			    }
+			compare() {
+				return function(a, b) {
+					var value1 = a.list.length;
+					var value2 = b.list.length;
+					return value2 - value1;
+				}
 			},
-			getData(){
+			cookieFunc() {
+				var that = this
+				function getCookie(cookieName) {
+					var strCookie = document.cookie;
+					var arrCookie = strCookie.split("; ");
+					for(var i = 0; i < arrCookie.length; i++) {
+						var arr = arrCookie[i].split("=");
+						if(cookieName == arr[0]) {
+							return arr[1];
+						}
+					}
+					return "";
+				}
+
+				var user_deviceId = getCookie("deviceId")
+				var user_deviceType = getCookie("deviceType")
+				var user_partnerCode = getCookie("partnerCode")
+				//alert('deviceId:' + user_deviceId  + 'deviceId:' + user_deviceType  + 'deviceId:' + user_partnerCode)
+				
+				if(user_deviceId && user_deviceType && user_partnerCode) {
+					that.$store.state.deviceId = user_deviceId
+					that.$store.state.deviceType = user_deviceType
+					that.$store.state.partnerCode = user_partnerCode
+					switch(user_deviceType) {
+						case '1':
+							that.$store.state.deviceTypeText = that.CnFlag ? 'MIFI设备' : 'MIFI'
+							break;
+						case '2':
+							that.$store.state.deviceTypeText = that.CnFlag ? '模块' : 'MODAL'
+							break;
+						case '3':
+							that.$store.state.deviceTypeText = that.CnFlag ? '旅游卡' : 'CARD'
+							break;
+						case '4':
+							that.$store.state.deviceTypeText = that.CnFlag ? '物联网卡' : 'M2M'
+							break;
+						case '5':
+							that.$store.state.deviceTypeText = that.CnFlag ? 'SOC' : 'SOC'
+							break;
+					}
+				}
+			},
+			getData() {
 				var that = this
 				const toast = that.$createToast({
 					type: 'loading',
@@ -115,7 +191,7 @@
 					txt: 'Loading'
 				})
 				toast.show()
-				
+
 				//初始化
 				that.result = []
 				that.meals = []
@@ -124,6 +200,7 @@
 					data: {
 						connSeqNo: that.$store.state.connSeqNo,
 						lang: that.$store.state.langType,
+						partnerCode: that.$store.state.partnerCode,
 						token: that.$store.state.token,
 						tradeTime: new Date(),
 						tradeType: "F001"
@@ -131,35 +208,35 @@
 				}).then((res) => {
 					var result = res.data.data
 					console.log(res.data.data)
-					
+
 					//记录openId
-					if(res.data.data.tradeData[0].openId){
+					if(res.data.data.tradeData[0].openId) {
 						that.$store.state.openId = res.data.data.tradeData[0].openId
 					}
 					//记录userId
-					if(res.data.data.tradeData[0].userId){
+					if(res.data.data.tradeData[0].userId) {
 						that.$store.state.userId = res.data.data.tradeData[0].userId
 					}
 					//记录deviceId
-					if(res.data.data.tradeData[0].deviceId){
+					if(res.data.data.tradeData[0].deviceId) {
 						that.$store.state.deviceId = res.data.data.tradeData[0].deviceId
 					}
 					//记录deviceType
-					if(res.data.data.tradeData[0].deviceType){
+					if(res.data.data.tradeData[0].deviceType) {
 						that.$store.state.deviceType = res.data.data.tradeData[0].deviceType
 						that.$store.state.deviceTypeText = res.data.data.tradeData[0].deviceTypeText
 					}
-					
+
 					//记录partnerCode
 					that.$store.state.partnerCode = res.data.data.partnerCode
-					
+
 					//记录各个价格
 					that.$store.state.cartData.trafficCardfee = Number(res.data.data.trafficCardfee)
 					that.$store.state.cartData.ordinaryExpressfee = Number(res.data.data.ordinaryExpressfee)
 					that.$store.state.cartData.sFexpressfee = Number(res.data.data.sFexpressfee)
 					that.$store.state.cartData.orderFullX = Number(res.data.data.orderFullX)
 					//console.log(that.$store.state.cartData)
-					
+
 					//定义类型  mcc数组
 					var typeArr = []
 					var mccArr = []
@@ -183,17 +260,17 @@
 							//that.meals[that.meals.length - 1].mcc = result.tradeData[i].coverCountry[j].mcc
 						}
 					}
-//					console.log(typeArr)
-//					console.log(mccArr)
-//					console.log(that.meals)
-					
+					//					console.log(typeArr)
+					//					console.log(mccArr)
+					//					console.log(that.meals)
+
 					for(var x = 0; x < typeArr.length; x++) {
 						that.result[x] = {
 							continentName: typeArr[x],
 							list: []
 						}
 					}
-					
+
 					for(var x = 0; x < typeArr.length; x++) {
 						for(var y = 0; y < that.meals.length; y++) {
 							if(that.meals[y].continentName == typeArr[x]) {
@@ -211,36 +288,36 @@
 							val.more = true
 						}
 					})
-					
+
 					//从大到小排序
 					//console.log(that.result.sort(that.compare()))
 					that.result.sort(that.compare());
 					that.$store.state.mealsData = that.result
 					that.$forceUpdate()
 					toast.hide()
-					
-//					//查询iccid
-//					that.$http.post("/weixin/getIccId", {
-//						data: {
-//							connSeqNo: that.$store.state.connSeqNo,
-//							lang: that.$store.state.langType,
-//							partnerCode: that.$store.state.partnerCode,
-//							token: that.$store.state.token,
-//							tradeData: {
-//								openid: that.$store.state.openId
-//								//openid: "oQrFc1sfUYxsApu_KV70-TRrw9AA1"
-//							},
-//							tradeTime: new Date(),
-//							tradeType: "F012",
-//						}
-//					}).then((res) => {
-//						if(res.data.data.tradeRstCode == "1000") {
-//							if(res.data.data.tradeData.length) {
-//								that.$store.state.iccid = res.data.data.tradeData[res.data.data.tradeData.length - 1].iccid
-//							}
-//						}
-//						toast.hide()
-//					})
+
+					//					//查询iccid
+					//					that.$http.post("/weixin/getIccId", {
+					//						data: {
+					//							connSeqNo: that.$store.state.connSeqNo,
+					//							lang: that.$store.state.langType,
+					//							partnerCode: that.$store.state.partnerCode,
+					//							token: that.$store.state.token,
+					//							tradeData: {
+					//								openid: that.$store.state.openId
+					//								//openid: "oQrFc1sfUYxsApu_KV70-TRrw9AA1"
+					//							},
+					//							tradeTime: new Date(),
+					//							tradeType: "F012",
+					//						}
+					//					}).then((res) => {
+					//						if(res.data.data.tradeRstCode == "1000") {
+					//							if(res.data.data.tradeData.length) {
+					//								that.$store.state.iccid = res.data.data.tradeData[res.data.data.tradeData.length - 1].iccid
+					//							}
+					//						}
+					//						toast.hide()
+					//					})
 				})
 			}
 		}
@@ -281,7 +358,7 @@
 	}
 	
 	.content {
-		padding: 0 1.25rem 60px;
+		padding: 0 1.25rem 0px;
 	}
 	
 	.title {
@@ -412,5 +489,19 @@
 	
 	.help>a {
 		border-right: 1px solid #3E3A39;
+	}
+	
+	.footer-list {
+		margin: 15px -1.25rem 0;
+		padding-top: 15px;
+		padding-bottom: 50px;
+	}
+	
+	.footer-list a {
+		display: block;
+		text-align: center;
+		color: #fff;
+		font-size: 0.5rem;
+		line-height: 22px;
 	}
 </style>

@@ -16,11 +16,13 @@ import quit from '@/components/quit'
 import quitSuccess from '@/components/quitSuccess'
 import help from '@/components/help'
 import helpPage from '@/components/helpPage'
+import helpPage2 from '@/components/helpPage2'
 import orderList from '@/components/orderList'
 import text from '@/components/text'
 import pay from '@/components/pay'
 import payResult from '@/components/payResult'
 import helpText from '@/components/helpText'
+import helpRead from '@/components/helpRead'
 
 Vue.use(Router)
 
@@ -108,6 +110,11 @@ const router = new Router({
 			name: 'helpPage',
 			component: helpPage,
 			props: true
+		},{
+			path: '/helpPage2',
+			name: 'helpPage2',
+			component: helpPage2,
+			props: true
 		},
 		{
 			path: '/orderList',
@@ -136,6 +143,11 @@ const router = new Router({
 			path: '/helpText',
 			name: 'helpText',
 			component: helpText,
+			props: true
+		},{
+			path: '/helpRead',
+			name: 'helpRead',
+			component: helpRead,
 			props: true
 		}
 	]

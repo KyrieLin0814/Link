@@ -10,7 +10,7 @@
 		</div>
 
 		<ul class="payList">
-			<!--<li class="paypal" :class="{'active': payFlag == 1}" @click="choose(1)">Paypal</li>-->
+			<li class="paypal" :class="{'active': payFlag == 1}" @click="choose(1)">Paypal</li>
 			<!--<li class="ocean" :class="{'active': payFlag == 2}" @click="choose(2)">Ocean</li>-->
 			<li class="wxPay" :class="{'active': payFlag == 3}" @click="choose(3)">{{$t("message.WxPay")}}</li>
 		</ul>

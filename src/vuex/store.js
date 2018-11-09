@@ -8,7 +8,7 @@ const state = {
 	deviceTypeText:'',
 	userId:"", //非微信用户唯一标识
 	connSeqNo: "Flymo201608300000000001", //双方交互流水号，按照合作伙伴作为客户端时的流水号生成规则进行生成  
-	partnerCode: "P000007", //旅游卡业务接入网关提供给合作伙伴的编码
+	partnerCode: "0", //旅游卡业务接入网关提供给合作伙伴的编码
 	token: "yv8JXeTTfqyedLcU2LAqHUTKtYA4G1kz", //由旅游卡业务接入网关提供给合作伙伴的认证 Token 
 	iccid: "", //旅游卡ICCID ,当无卡用户购买时首次为空
 	cartData:{
