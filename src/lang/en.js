@@ -1,13 +1,14 @@
 module.exports = {
 	message: {
+		noData:'No package data.',
 		help:'Help center',
 		myOrder:'My order',
 		covered:'Covered',
 		regions: 'regions',
-		chooseMeal:'Choose a meal',
+		chooseMeal:'Choose a package',
 		pullup:'Pull up the details of the product',
 		total:'Totals',
-		yuan:'yuan',
+		yuan:'USD',
 		buyNow:'Buy now',
 		addCart:'Add to cart',
 		back:'Back',

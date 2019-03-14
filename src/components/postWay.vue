@@ -192,6 +192,7 @@
 						tradeData: {
 							iccid: that.iccid.toString(),
 							openid: that.$store.state.openId,
+							requestOrderId: that.$store.state.requestOrderId,
 						},
 						tradeTime: new Date(),
 						tradeType: "F013",

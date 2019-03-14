@@ -124,6 +124,7 @@
 								receiveAddress: "",
 								receivePhoneNumber: "",
 								receiveUserName: "",
+								requestOrderId: that.$store.state.requestOrderId,
 								userId: that.$store.state.userId ? that.$store.state.userId : "",
 							},
 							tradeTime: new Date(),
@@ -146,6 +147,7 @@
 //								
 //							}, 1000)
 						} else {
+							toast.hide()
 							that.popupTxt = res.data.data.tradeRstMessage
 							const component = that.$refs['myPopup']
 							component.show()

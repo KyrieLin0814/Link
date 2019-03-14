@@ -15,8 +15,9 @@
 		</div>
 		<div class="agree pay-box">
 			<cube-checkbox v-model="checked" shape="square">
-				<p class="agreeTxt">{{$t("message.agree")}}<span class="fontColor">{{$t("message.txt1")}}</span>{{$t("message.and")}}<span class="fontColor">{{$t("message.txt2")}}</span></p>
+				<p class="agreeTxt">{{$t("message.agree")}}<span class="fontColor" @click.stop="agreeTXT">{{$t("message.txt2")}}</span></p>
 			</cube-checkbox>
+			<!--<span class="fontColor">{{$t("message.txt1")}}</span>{{$t("message.and")}}-->
 		</div>
 		
 		<div class="buy-box clearfix">
@@ -32,7 +33,7 @@
 					<div class="flexBox">
 						<div>{{$t("message.mealCost")}} ({{ mealCost }})</div>
 						<div class="flex-1"></div>
-						<div class="price"><span>{{ mealPrice.toFixed(2) }}</span>元</div>
+						<div class="price"><span>{{ mealPrice.toFixed(2) }}</span>{{$t("message.yuan")}}</div>
 					</div>
 				</div>
 			</transition>
@@ -84,7 +85,7 @@
 		methods: {
 			cost() {
 				console.log(this.judgeData)
-				this.mealCost = this.perPrice + (this.$store.state.langType == "cn" ? "元/" : 'yuan/') + this.judgeData.typeStr + " x " + this.finalNum 
+				this.mealCost = this.perPrice + (this.$store.state.langType == "cn" ? "元/" : 'USD/') + this.judgeData.typeStr + " x " + this.finalNum 
 				this.mealPrice = this.perPrice * this.finalNum
 			},
 			addFunc() {
@@ -101,7 +102,7 @@
 						that.finalNum--
 						that.cost()
 					} else {
-						that.popupTxt = "不能再少了"
+						that.popupTxt = this.$store.state.langType == "cn" ? "不能再少了" : "It can't be less than it is now"
 						const component = this.$refs['myPopup']
 						component.show()
 						setTimeout(() => {
@@ -130,13 +131,16 @@
 					})
 					that.$router.push({name:"order",params:{addFlag:true}})
 				} else {
-					that.popupTxt = "请同意用户协议再进行下一步操作"
+					that.popupTxt = this.$store.state.langType == "cn" ? "请同意用户协议再进行下一步操作" : "Please agree to the user agreement and proceed to the next step"
 					const component = this.$refs['myPopup']
 					component.show()
 					setTimeout(() => {
 						component.hide()
 					}, 1000)
 				}
+			},
+			agreeTXT(){
+				this.$router.push('/agree')
 			}
 		}
 	}
@@ -199,6 +203,8 @@
 	.agree .agreeTxt {
 		font-size: 0.6rem;
 		color: #9FA0A0;
+		z-index:999;
+		position: relative;
 	}
 	
 	.agree .agreeTxt span {

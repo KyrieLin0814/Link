@@ -1,5 +1,6 @@
 module.exports = {
 	message: {
+		noData:'暂无套餐数据',
 		help:'帮助中心',
 		myOrder:'我的订单',
 		covered:'已覆盖',

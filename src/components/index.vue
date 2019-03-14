@@ -8,7 +8,8 @@
 			<img src="../assets/common/banner.png" />
 		</div>
 		<div class="content">
-			<div class="item" v-for="(item,index) in result">
+			<div class="noData" v-if="noData">{{$t("message.noData")}}</div>
+			<div class="item" v-for="(item,index) in result" v-else>
 				<div class="title">
 					<span class="area fontColor">{{item.continentName}}</span>
 					<!--<span class="num">{{$t('message.covered')}} {{ item.list.length }} {{$t('message.regions')}}</span>-->
@@ -41,6 +42,7 @@
 					</li>
 				</ul>
 			</div>
+			
 			<ul class="footer-list flexBox bgColor" v-if="tabFlag">
 				<li class="flex-1">
 					<router-link :to="{name:'helpText',params:{helpFlag:1}}">{{CnFlag ? '关于我们' : 'ABOUT US'}}</router-link>
@@ -57,13 +59,14 @@
 				</li>
 
 			</ul>
+
 		</div>
 
 		<div class="footer flexBox">
-			<div class="flex-1 help" style="border-bottom:none;">
+			<!--<div class="flex-1 help" style="border-bottom:none;">
 				<router-link :to="helpLink"><span>{{$t("message.help")}}</span></router-link>
 				<div style="height:6px;" class="bgColor"></div>
-			</div>
+			</div>-->
 			<div class="flex-1 order">
 				<router-link :to="orderLink">
 					<span>{{$t("message.myOrder")}}</span>
@@ -81,6 +84,7 @@
 				langType: localStorage.getItem("lang") ? localStorage.getItem("lang") : "cn",
 				CnFlag: true,
 				tabFlag: true,
+				noData: true,
 				meals: [],
 				result: [],
 				helpLink: "/help",
@@ -100,6 +104,10 @@
 			}
 		},
 		created() {
+			if(!this.$store.state.deviceId){
+				this.$router.replace('/inputIccid')
+				return
+			}
 			if(this.langType != 'cn') {
 				this.CnFlag = false
 			}
@@ -142,6 +150,7 @@
 			},
 			cookieFunc() {
 				var that = this
+
 				function getCookie(cookieName) {
 					var strCookie = document.cookie;
 					var arrCookie = strCookie.split("; ");
@@ -157,12 +166,14 @@
 				var user_deviceId = getCookie("deviceId")
 				var user_deviceType = getCookie("deviceType")
 				var user_partnerCode = getCookie("partnerCode")
+				var user_requestOrderId = getCookie("requestOrderId")
 				//alert('deviceId:' + user_deviceId  + 'deviceId:' + user_deviceType  + 'deviceId:' + user_partnerCode)
-				
-				if(user_deviceId && user_deviceType && user_partnerCode) {
+
+				if(user_deviceId && user_deviceType && user_partnerCode && user_requestOrderId) {
 					that.$store.state.deviceId = user_deviceId
 					that.$store.state.deviceType = user_deviceType
 					that.$store.state.partnerCode = user_partnerCode
+					that.$store.state.requestOrderId = user_requestOrderId
 					switch(user_deviceType) {
 						case '1':
 							that.$store.state.deviceTypeText = that.CnFlag ? 'MIFI设备' : 'MIFI'
@@ -199,6 +210,7 @@
 				that.$http.post("/paypalpay/getDeviceHomepage", {
 					data: {
 						connSeqNo: that.$store.state.connSeqNo,
+						deviceId: that.$store.state.deviceId,
 						lang: that.$store.state.langType,
 						partnerCode: that.$store.state.partnerCode,
 						token: that.$store.state.token,
@@ -208,116 +220,99 @@
 				}).then((res) => {
 					var result = res.data.data
 					console.log(res.data.data)
-
-					//记录openId
-					if(res.data.data.tradeData[0].openId) {
-						that.$store.state.openId = res.data.data.tradeData[0].openId
-					}
-					//记录userId
-					if(res.data.data.tradeData[0].userId) {
-						that.$store.state.userId = res.data.data.tradeData[0].userId
-					}
-					//记录deviceId
-					if(res.data.data.tradeData[0].deviceId) {
-						that.$store.state.deviceId = res.data.data.tradeData[0].deviceId
-					}
-					//记录deviceType
-					if(res.data.data.tradeData[0].deviceType) {
-						that.$store.state.deviceType = res.data.data.tradeData[0].deviceType
-						that.$store.state.deviceTypeText = res.data.data.tradeData[0].deviceTypeText
-					}
-
-					//记录partnerCode
-					that.$store.state.partnerCode = res.data.data.partnerCode
-
-					//记录各个价格
-					that.$store.state.cartData.trafficCardfee = Number(res.data.data.trafficCardfee)
-					that.$store.state.cartData.ordinaryExpressfee = Number(res.data.data.ordinaryExpressfee)
-					that.$store.state.cartData.sFexpressfee = Number(res.data.data.sFexpressfee)
-					that.$store.state.cartData.orderFullX = Number(res.data.data.orderFullX)
-					//console.log(that.$store.state.cartData)
-
-					//定义类型  mcc数组
-					var typeArr = []
-					var mccArr = []
-					for(var i = 0; i < result.tradeData.length; i++) {
-						for(var j = 0; j < result.tradeData[i].coverCountry.length; j++) {
-							if(typeArr.indexOf(result.tradeData[i].coverCountry[j].continentName) < 0) {
-								typeArr.push(result.tradeData[i].coverCountry[j].continentName)
-							}
-
-							if(mccArr.indexOf(result.tradeData[i].coverCountry[j].mcc) < 0) {
-								mccArr.push(result.tradeData[i].coverCountry[j].mcc)
-								that.meals.push(JSON.parse(JSON.stringify(result.tradeData[i])))
-								that.meals[that.meals.length - 1].continentName = result.tradeData[i].coverCountry[j].continentName
-								that.meals[that.meals.length - 1].countryName = result.tradeData[i].coverCountry[j].countryName
-								that.meals[that.meals.length - 1].mcc = result.tradeData[i].coverCountry[j].mcc
-							}
-							//同一个mcc只显示一个
-							//that.meals.push(JSON.parse(JSON.stringify(result.tradeData[i])))
-							//that.meals[that.meals.length - 1].continentName = result.tradeData[i].coverCountry[j].continentName
-							//that.meals[that.meals.length - 1].countryName = result.tradeData[i].coverCountry[j].countryName
-							//that.meals[that.meals.length - 1].mcc = result.tradeData[i].coverCountry[j].mcc
+					if(res.data.data.tradeData.length) {
+						that.noData = false;
+						//记录openId
+						if(res.data.data.tradeData[0].openId) {
+							that.$store.state.openId = res.data.data.tradeData[0].openId
 						}
-					}
-					//					console.log(typeArr)
-					//					console.log(mccArr)
-					//					console.log(that.meals)
-
-					for(var x = 0; x < typeArr.length; x++) {
-						that.result[x] = {
-							continentName: typeArr[x],
-							list: []
+						//记录userId
+						if(res.data.data.tradeData[0].userId) {
+							that.$store.state.userId = res.data.data.tradeData[0].userId
 						}
-					}
+						//记录deviceId
+						if(res.data.data.tradeData[0].deviceId) {
+							that.$store.state.deviceId = res.data.data.tradeData[0].deviceId
+						}
+						//记录deviceType
+						if(res.data.data.tradeData[0].deviceType) {
+							that.$store.state.deviceType = res.data.data.tradeData[0].deviceType
+							that.$store.state.deviceTypeText = res.data.data.tradeData[0].deviceTypeText
+						}
 
-					for(var x = 0; x < typeArr.length; x++) {
-						for(var y = 0; y < that.meals.length; y++) {
-							if(that.meals[y].continentName == typeArr[x]) {
-								that.result[x].list.push(that.meals[y])
+						//记录partnerCode
+						that.$store.state.partnerCode = res.data.data.partnerCode
+
+						//记录各个价格
+						that.$store.state.cartData.trafficCardfee = Number(res.data.data.trafficCardfee)
+						that.$store.state.cartData.ordinaryExpressfee = Number(res.data.data.ordinaryExpressfee)
+						that.$store.state.cartData.sFexpressfee = Number(res.data.data.sFexpressfee)
+						that.$store.state.cartData.orderFullX = Number(res.data.data.orderFullX)
+						//console.log(that.$store.state.cartData)
+
+						//定义类型  mcc数组
+						var typeArr = []
+						var mccArr = []
+						for(var i = 0; i < result.tradeData.length; i++) {
+							for(var j = 0; j < result.tradeData[i].coverCountry.length; j++) {
+								if(typeArr.indexOf(result.tradeData[i].coverCountry[j].continentName) < 0) {
+									typeArr.push(result.tradeData[i].coverCountry[j].continentName)
+								}
+
+								if(mccArr.indexOf(result.tradeData[i].coverCountry[j].mcc) < 0) {
+									mccArr.push(result.tradeData[i].coverCountry[j].mcc)
+									that.meals.push(JSON.parse(JSON.stringify(result.tradeData[i])))
+									that.meals[that.meals.length - 1].continentName = result.tradeData[i].coverCountry[j].continentName
+									that.meals[that.meals.length - 1].countryName = result.tradeData[i].coverCountry[j].countryName
+									that.meals[that.meals.length - 1].mcc = result.tradeData[i].coverCountry[j].mcc
+								}
+								//同一个mcc只显示一个
+								//that.meals.push(JSON.parse(JSON.stringify(result.tradeData[i])))
+								//that.meals[that.meals.length - 1].continentName = result.tradeData[i].coverCountry[j].continentName
+								//that.meals[that.meals.length - 1].countryName = result.tradeData[i].coverCountry[j].countryName
+								//that.meals[that.meals.length - 1].mcc = result.tradeData[i].coverCountry[j].mcc
 							}
 						}
-					}
+						//					console.log(typeArr)
+						//					console.log(mccArr)
+						//					console.log(that.meals)
 
-					that.result.map(function(val, idx) {
-						if(val.list.length > 4) {
-							val.canMore = true
-							val.more = false
-						} else {
-							val.canMore = false
-							val.more = true
+						for(var x = 0; x < typeArr.length; x++) {
+							that.result[x] = {
+								continentName: typeArr[x],
+								list: []
+							}
 						}
-					})
 
-					//从大到小排序
-					//console.log(that.result.sort(that.compare()))
-					that.result.sort(that.compare());
-					that.$store.state.mealsData = that.result
+						for(var x = 0; x < typeArr.length; x++) {
+							for(var y = 0; y < that.meals.length; y++) {
+								if(that.meals[y].continentName == typeArr[x]) {
+									that.result[x].list.push(that.meals[y])
+								}
+							}
+						}
+
+						that.result.map(function(val, idx) {
+							if(val.list.length > 4) {
+								val.canMore = true
+								val.more = false
+							} else {
+								val.canMore = false
+								val.more = true
+							}
+						})
+
+						//从大到小排序
+						//console.log(that.result.sort(that.compare()))
+						that.result.sort(that.compare());
+						that.$store.state.mealsData = that.result
+						that.$forceUpdate()
+						toast.hide()
+					} else {
+						that.noData = true;
+					}
 					that.$forceUpdate()
 					toast.hide()
-
-					//					//查询iccid
-					//					that.$http.post("/weixin/getIccId", {
-					//						data: {
-					//							connSeqNo: that.$store.state.connSeqNo,
-					//							lang: that.$store.state.langType,
-					//							partnerCode: that.$store.state.partnerCode,
-					//							token: that.$store.state.token,
-					//							tradeData: {
-					//								openid: that.$store.state.openId
-					//								//openid: "oQrFc1sfUYxsApu_KV70-TRrw9AA1"
-					//							},
-					//							tradeTime: new Date(),
-					//							tradeType: "F012",
-					//						}
-					//					}).then((res) => {
-					//						if(res.data.data.tradeRstCode == "1000") {
-					//							if(res.data.data.tradeData.length) {
-					//								that.$store.state.iccid = res.data.data.tradeData[res.data.data.tradeData.length - 1].iccid
-					//							}
-					//						}
-					//						toast.hide()
-					//					})
 				})
 			}
 		}
@@ -359,6 +354,14 @@
 	
 	.content {
 		padding: 0 1.25rem 0px;
+		min-height:calc(100% - 355px);
+		position: relative;
+		padding-bottom:14px;
+	}
+	.noData{
+		font-size:16px;
+		color:#3E3A39;
+		padding-top:20px;
 	}
 	
 	.title {
@@ -484,7 +487,8 @@
 	}
 	
 	.order {
-		border-bottom: 6px solid #9FA0A0
+		border-bottom: 6px solid #d7013f
+		/*border-bottom: 6px solid #9FA0A0*/
 	}
 	
 	.help>a {
@@ -492,7 +496,11 @@
 	}
 	
 	.footer-list {
-		margin: 15px -1.25rem 0;
+		position: absolute;
+		bottom:-153px;
+		left:0;
+		right:0;
+		margin: 0 -1.25rem;
 		padding-top: 15px;
 		padding-bottom: 50px;
 	}

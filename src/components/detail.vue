@@ -6,10 +6,12 @@
 					<div class="banner" :style="{backgroundImage: 'url(' + obj.pictureDetails + ')', backgroundSize: '100% auto', backgroundPosition:'center'}">
 						<p class="text-1">{{obj.packageDesc}}</p>
 					</div>
-					<div class="common-title flexBox">
+					<div class="common-title" id="Title">
 						<i></i>
 						<span>{{$t('message.chooseMeal')}}</span>
-						<p class="flex-1" v-if="$store.state.langType == 'cn'">累计购买{{orderFullX}}元免卡费，30天内激活使用</p>
+						<!--<p class="flex-1" v-if="$store.state.langType == 'cn'">累计购买{{orderFullX}}元免卡费，30天内激活使用</p>-->
+						<p class="" v-if="$store.state.langType == 'cn'"><span>建议三十天内激活使用，否则30天后将自动激活。使用时长为购买时长。逾期后套餐将自动清零。</span></p>
+						<p class="title-en" v-if="$store.state.langType == 'en'"><span>It is recommended to activate it within 30 days, otherwise it will be activated automatically after 30 days. The length of use is the length of purchase. The package will be automatically cleared after the deadline.</span></p>
 					</div>
 					<div class="car-content">
 						<div class="car-tab flexBox">
@@ -26,7 +28,7 @@
 										<p v-if="meal.obj.packageDetailsDesc">{{meal.obj.packageDetailsDesc}}</p>
 										<p v-if="meal.obj.packageDetailsAdd">{{meal.obj.packageDetailsAdd}}</p>
 									</div>
-									
+
 									<div class="price-box">
 										<div class="now">
 											<!--单价-->
@@ -37,7 +39,7 @@
 								</li>
 							</ul>
 						</div>
-						<div class="scroll-btn">
+						<div class="scroll-btn" @click="nextPage">
 							<div>
 								<i></i><span>{{$t('message.pullup')}}</span>
 							</div>
@@ -61,7 +63,7 @@
 								<ul>
 									<li>
 										<p><span>{{$t('message.detailsMeal')}}</span></p>
-										
+
 										<!--下拉详情列表-->
 										<ul v-for="i in mealsList" :class="{'active': (tabFlag==i.nameId)}">
 											<li v-for="j in i.list" :class="{'active': (chooseFlag == j.obj.packageCode)}">
@@ -76,6 +78,7 @@
 							</div>
 						</div>
 					</div>
+					<div class="toTop" @click="toTop" v-if="toTopShow">Top</div>
 				</div>
 			</div>
 		</div>
@@ -91,6 +94,7 @@
 </template>
 
 <script>
+	import VueFullpage from 'vue-fullpage'
 	export default {
 		name: 'detail',
 		data() {
@@ -111,7 +115,7 @@
 					value: ''
 				},
 				checkedObj: {
-//					checkedid1: true
+					//					checkedid1: true
 				},
 				price: 0.00,
 				finalNum: 1,
@@ -119,9 +123,10 @@
 				scrollDown: true,
 				scrollUp: true,
 				popupTxt: '',
-				number:'个数',
-				btnFlag:true,
-				orderFullX:this.$store.state.cartData.orderFullX
+				number: '个数',
+				btnFlag: true,
+				orderFullX: this.$store.state.cartData.orderFullX,
+				toTopShow: false
 			}
 		},
 		watch: {
@@ -147,96 +152,96 @@
 			}).then((res) => {
 				console.log(res)
 				var result = res.data.data
-				var lang = that.$store.state.langType == 'cn'? true:false
+				var lang = that.$store.state.langType == 'cn' ? true : false
 
 				//从小到大排序
 				var dataArr = JSON.parse(JSON.stringify(result.tradeData))
-				dataArr.sort(function(a,b){
+				dataArr.sort(function(a, b) {
 					return Number(a.orderUnit) - Number(b.orderUnit);
 				})
-				
+
 				//定义类型  mcc数组
 				var typeArr = [];
 				for(var i = 0; i < dataArr.length; i++) {
 					var orderUnit = result.tradeData[i].orderUnit
 					//插入天数包类别
 					var typeArrStr = JSON.stringify(typeArr)
-					if(orderUnit == "1"){
-						if(typeArrStr.indexOf("天") < 0 && typeArrStr.indexOf("Day") < 0){
+					if(orderUnit == "1") {
+						if(typeArrStr.indexOf("天") < 0 && typeArrStr.indexOf("Day") < 0) {
 							typeArr.push({
-								id:orderUnit,
-								txt: lang ? "天": 'Day'
+								id: orderUnit,
+								txt: lang ? "天" : 'Day'
 							})
 						}
-					}else if(orderUnit == "2"){
-						if(typeArrStr.indexOf("月") < 0 && typeArrStr.indexOf("Month") < 0){
+					} else if(orderUnit == "2") {
+						if(typeArrStr.indexOf("月") < 0 && typeArrStr.indexOf("Month") < 0) {
 							typeArr.push({
-								id:orderUnit,
-								txt: lang ? "月": 'Month'
+								id: orderUnit,
+								txt: lang ? "月" : 'Month'
 							})
 						}
-					}else if(orderUnit == "3"){
-						if(typeArrStr.indexOf("季度") < 0 && typeArrStr.indexOf("Quarter") < 0){
+					} else if(orderUnit == "3") {
+						if(typeArrStr.indexOf("季度") < 0 && typeArrStr.indexOf("Quarter") < 0) {
 							typeArr.push({
-								id:orderUnit,
-								txt:lang ? "季度": 'Quarter'
+								id: orderUnit,
+								txt: lang ? "季度" : 'Quarter'
 							})
 						}
-					}else if(orderUnit == "4"){
-						if(typeArrStr.indexOf("半年") < 0 && typeArrStr.indexOf("Half a year") < 0){
+					} else if(orderUnit == "4") {
+						if(typeArrStr.indexOf("半年") < 0 && typeArrStr.indexOf("Half a year") < 0) {
 							typeArr.push({
-								id:orderUnit,
-								txt:lang ? "半年": 'Half a year'
+								id: orderUnit,
+								txt: lang ? "半年" : 'Half a year'
 							})
 						}
-					}else if(orderUnit == "5"){
-						if(typeArrStr.indexOf("年") < 0  && typeArrStr.indexOf("Year") < 0){
+					} else if(orderUnit == "5") {
+						if(typeArrStr.indexOf("年") < 0 && typeArrStr.indexOf("Year") < 0) {
 							typeArr.push({
-								id:orderUnit,
-								txt:lang ? "年": 'Year'
+								id: orderUnit,
+								txt: lang ? "年" : 'Year'
 							})
 						}
 					}
 				}
 				//console.log(typeArr)
-				
+
 				//创建基于类别数据结构
-				for(var p = 0; p < typeArr.length; p++){
+				for(var p = 0; p < typeArr.length; p++) {
 					that.mealsList.push({
-						nameType: typeArr[p].txt + (lang ? "包":''),
+						nameType: typeArr[p].txt + (lang ? "包" : ''),
 						nameId: typeArr[p].id,
-						list:[]
+						list: []
 					})
 				}
-				
+
 				//遍历填充分类
 				for(var t = 0; t < result.tradeData.length; t++) {
-					for(var e = 0; e < that.mealsList.length; e++){
-						if(that.mealsList[e].nameId == result.tradeData[t].orderUnit){
+					for(var e = 0; e < that.mealsList.length; e++) {
+						if(that.mealsList[e].nameId == result.tradeData[t].orderUnit) {
 							that.mealsList[e].list.push({
 								name: result.tradeData[t].packageName,
-								typeStr: lang? that.mealsList[e].nameType.substring(0,that.mealsList[e].nameType.length-1) : that.mealsList[e].nameType,
+								typeStr: lang ? that.mealsList[e].nameType.substring(0, that.mealsList[e].nameType.length - 1) : that.mealsList[e].nameType,
 								obj: JSON.parse(JSON.stringify(result.tradeData[t]))
 							})
 						}
 					}
 				}
 				//console.log(that.mealsList)
-				
+
 				that.tabFunc(that.mealsList[0])
-//				if(typeArr.indexOf("0") != -1) {
-//					that.tabFunc(that.mealsList[0])
-//					that.number = "天数"
-//				} else {
-//					that.tabFunc(that.mealsList[0])
-//					that.number = "个数"
-//				}
+				//				if(typeArr.indexOf("0") != -1) {
+				//					that.tabFunc(that.mealsList[0])
+				//					that.number = "天数"
+				//				} else {
+				//					that.tabFunc(that.mealsList[0])
+				//					that.number = "个数"
+				//				}
 			})
 		},
 		mounted() {
 			var that = this
-			that.contentHeight = document.documentElement.clientHeight - 282
-
+//			console.log(document.getElementById("Title").offsetHeight)
+			that.contentHeight = document.documentElement.clientHeight - 254 - document.getElementById("Title").offsetHeight
 			var startX, startY, moveEndX, moveEndY, X, Y;
 
 			var overscroll = function(el) {
@@ -270,13 +275,20 @@
 				});
 			}
 			overscroll(document.querySelector('.list-scroll'));
+			
+			//判断设备
+			if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+				that.toTopShow = false
+			} else {
+				that.toTopShow = true
+			}
 
 		},
 		methods: {
 			tabFunc(i) {
 				this.tabFlag = i.nameId
 				this.$store.state.tabFlag = i.nameId
-				
+
 				this.finalNum = 1
 				//默认选中第一个
 				this.chooseFunc(i.list[0])
@@ -289,11 +301,11 @@
 				//当前套餐
 				this.judgeData = meal
 				this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc)
-				if(this.judgeData.obj.orderPeriod){
+				if(this.judgeData.obj.orderPeriod) {
 					this.btnFlag = false
 					this.finalNum = Number(this.judgeData.obj.orderPeriod)
 					this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc) * this.finalNum
-				}else{
+				} else {
 					this.btnFlag = true
 					this.finalNum = 1
 					this.price = Number(this.judgeData.obj.price ? this.judgeData.obj.price : this.judgeData.obj.strategyDesc) * this.finalNum
@@ -302,17 +314,17 @@
 			},
 			addFunc() {
 				var that = this
-				if(!that.judgeData.obj.orderPeriod){
+				if(!that.judgeData.obj.orderPeriod) {
 					that.finalNum++
 				}
 			},
 			delFunc() {
 				var that = this
-				if(!that.judgeData.obj.orderPeriod){
+				if(!that.judgeData.obj.orderPeriod) {
 					if(that.finalNum > 1) {
 						that.finalNum--
 					} else {
-						that.popupTxt = "不能再少了"
+						that.popupTxt = this.$store.state.langType == "cn" ? "不能再少了" : "It can't be less than it is now"
 						const component = this.$refs['myPopup']
 						component.show()
 						setTimeout(() => {
@@ -328,6 +340,12 @@
 				that.$store.state.finalNum = that.finalNum
 				that.$store.state.finalPrice = that.finalPrice
 				that.$router.push("/payPage")
+			},
+			nextPage() {
+				VueFullpage.moveTo(1, true)
+			},
+			toTop() {
+				VueFullpage.moveTo(0, true)
 			}
 		}
 	}
@@ -343,12 +361,16 @@
 		color: #fff;
 		text-align: center;
 		line-height: 110px;
-		width:80%;
-		margin:0 auto;
+		width: 80%;
+		margin: 0 auto;
+	}
+	
+	.common-title {
+		height: auto;
 	}
 	
 	.common-title i {
-		background: url(../assets/common/shoppingcar.png)no-repeat center;
+		background: url(../assets/common/shoppingcar.png)no-repeat 5px 6px;
 		background-size: 16px 16px;
 	}
 	
@@ -362,21 +384,26 @@
 	
 	.car-tab>div.active {
 		position: relative;
-		border-bottom:none;
+		border-bottom: none;
 	}
 	
 	.car-tab>div.active span {
 		color: inherit;
 	}
-	.car-tab>div.active:after{
-		content:'';
+	
+	.car-tab>div.active:after {
+		content: '';
 		display: block;
-		height:5px;
+		height: 5px;
 		background: #d7013f;
-		background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
-		background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
+		background: -webkit-linear-gradient(left, #d7013f, #e47a62);
+		/* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #e47a62);
+		/* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #e47a62);
+		/* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f, #e47a62);
+		/* 标准的语法 */
 	}
 	
 	.car-tab>div span {
@@ -418,52 +445,64 @@
 	.car-list .cube-checkbox {
 		position: absolute;
 		top: 50%;
-		margin-top:-10px;
+		margin-top: -10px;
 	}
 	
-	.title{
+	.title {
 		margin-left: 2rem;
-		width:calc(100% - 140px);
+		width: calc(100% - 140px);
 	}
-	.title p.name{
-		font-size:0.7rem;
+	
+	.title p.name {
+		font-size: 0.7rem;
 	}
-	.title p{
+	
+	.title p {
 		position: relative;
-		width:100%;
+		width: 100%;
 		color: #9FA0A0;
-		word-wrap:break-word;
+		word-wrap: break-word;
 		font-size: 0.5rem;
 		line-height: 20px;
-		margin-bottom:1px;
+		margin-bottom: 1px;
 	}
-	.title p+p:before{
-		content:"";
-		width:4px;
-		height:4px;
-		border-radius:2px;
+	
+	.title p+p:before {
+		content: "";
+		width: 4px;
+		height: 4px;
+		border-radius: 2px;
 		background: #C9CACA;
 		position: absolute;
-		left:-12px;
-		top:9px;
-		font-size:20px;
+		left: -12px;
+		top: 9px;
+		font-size: 20px;
 	}
 	
 	.list-1 li.active p {
-		color:#d7013f;
-		background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-		background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-	    -webkit-background-clip: text;
-	    color: transparent;
+		color: #d7013f;
+		background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+		/* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #dc4731);
+		/* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #dc4731);
+		/* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f, #dc4731);
+		/* 标准的语法 */
+		-webkit-background-clip: text;
+		color: transparent;
 	}
-	.list-1 li.active p+p:before{
+	
+	.list-1 li.active p+p:before {
 		background: #d7013f;
-		background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
-		background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
+		background: -webkit-linear-gradient(left, #d7013f, #e47a62);
+		/* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #e47a62);
+		/* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #e47a62);
+		/* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f, #e47a62);
+		/* 标准的语法 */
 	}
 	
 	.sale {
@@ -487,25 +526,30 @@
 		right: 0.7rem;
 		/*vertical-align: middle;*/
 		/*font-size:0;*/
-		height:20px;
+		height: 20px;
 	}
 	
 	.price-box .now {
 		display: inline-block;
 		font-size: 0.9rem;
 		font-weight: bold;
-		line-height:20px;
+		line-height: 20px;
 		color: #9FA0A0;
 		vertical-align: middle;
 	}
-	li.active .price-box .now{
-		color:#d7013f;
-		background: -webkit-linear-gradient(left, #d7013f , #dc4731); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(right, #d7013f, #dc4731); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(right, #d7013f, #dc4731); /* Firefox 3.6 - 15 */
-		background: linear-gradient(to right, #d7013f , #dc4731); /* 标准的语法 */
-	    -webkit-background-clip: text;
-	    color: transparent;
+	
+	li.active .price-box .now {
+		color: #d7013f;
+		background: -webkit-linear-gradient(left, #d7013f, #dc4731);
+		/* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #dc4731);
+		/* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #dc4731);
+		/* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f, #dc4731);
+		/* 标准的语法 */
+		-webkit-background-clip: text;
+		color: transparent;
 	}
 	
 	.price-box .now span {
@@ -538,7 +582,8 @@
 		line-height: 20px;
 		height: 20px;
 	}
-	.price-box .now span i{
+	
+	.price-box .now span i {
 		font-style: normal;
 	}
 	
@@ -571,14 +616,14 @@
 	
 	.num-box {
 		position: absolute;
-	    left: 0;
-	    right: 0;
-	    top: -40px;
-	    padding: 0 1.2rem;
-	    height: 38px;
-	    border-top: 1px solid #D4D5D5;
-	    background: #fff;
-	    font-size: 0;
+		left: 0;
+		right: 0;
+		top: -40px;
+		padding: 0 1.2rem;
+		height: 38px;
+		border-top: 1px solid #D4D5D5;
+		background: #fff;
+		font-size: 0;
 	}
 	
 	.num-box p {
@@ -590,9 +635,9 @@
 	
 	.num-box>div {
 		float: right;
-		font-size:0;
-		line-height:0;
-		margin-top:5px;
+		font-size: 0;
+		line-height: 0;
+		margin-top: 5px;
 	}
 	
 	.num-box>div>a {
@@ -614,9 +659,11 @@
 	.num-box>div>a.del {
 		font-size: 0.8rem;
 	}
-	.num-box>div>a.add{
+	
+	.num-box>div>a.add {
 		padding: 4px 6px;
 	}
+	
 	.num-box>div>a.del {
 		padding: 4px 8px;
 	}
@@ -651,13 +698,17 @@
 		display: inline-block;
 		font-size: 0.7rem;
 		padding: 4px 0.5rem 2px 0.5rem;
-		min-width:85px;
+		min-width: 85px;
 		color: #fff;
 		background: #d7013f;
-		background: -webkit-linear-gradient(left, #d7013f , #e47a62); /* Safari 5.1 - 6.0 */
-		background: -o-linear-gradient(right, #d7013f, #e47a62); /* Opera 11.1 - 12.0 */
-		background: -moz-linear-gradient(right, #d7013f, #e47a62); /* Firefox 3.6 - 15 */
-		background: linear-gradient(to right, #d7013f , #e47a62); /* 标准的语法 */
+		background: -webkit-linear-gradient(left, #d7013f, #e47a62);
+		/* Safari 5.1 - 6.0 */
+		background: -o-linear-gradient(right, #d7013f, #e47a62);
+		/* Opera 11.1 - 12.0 */
+		background: -moz-linear-gradient(right, #d7013f, #e47a62);
+		/* Firefox 3.6 - 15 */
+		background: linear-gradient(to right, #d7013f, #e47a62);
+		/* 标准的语法 */
 	}
 	
 	.detail-list ul ul {
@@ -674,14 +725,15 @@
 	}
 	
 	.detail-list ul ul li {
-		display:none;
+		display: none;
 		position: relative;
 		font-size: 0.7rem;
 		color: #3E3A39;
 		line-height: 16px;
 		margin-top: 10px;
 	}
-	.detail-list ul ul li.active{
+	
+	.detail-list ul ul li.active {
 		display: block;
 	}
 	/*.detail-list ul ul li:before {
@@ -694,19 +746,49 @@
 		top: 4px;
 		left: -15px;
 	}*/
-	.addCar{
-		padding:12px 24px;
+	
+	.addCar {
+		padding: 12px 24px;
 	}
-	.common-title i{
-		height:auto;
+	
+	.common-title i {
+		min-height: 28px;
 	}
-	.common-title p{
-		font-size:0.6rem;
-		line-height:30px;
-		color:#999;
-		padding-left:5px;
+	
+	.common-title p {
+		font-size:0;
+		line-height: 30px;
+		width: 100%;
 	}
-	.num-box .disabled{
+	.common-title p span{
+		font-size: 0.6rem;
+		line-height: 20px;
+		color: #999;
+		padding:0 5px;
+	}
+	
+	.common-title p.title-en span{
+		line-height:16px;
+		padding:3px;
+		font-size: 0.6rem;
+	}
+
+	.num-box .disabled {
 		background-color: #f1f1f1;
+	}
+	
+	.toTop {
+		position: absolute;
+		bottom: 80px;
+		right: 30px;
+		font-size: 16px;
+		line-height: 60px;
+		text-align: center;
+		color: #fff;
+		z-index: 99999;
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		background-color: rgba(0, 0, 0, 0.4);
 	}
 </style>

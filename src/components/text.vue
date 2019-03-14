@@ -1,10 +1,16 @@
 <template>
 	<div class="body-container">
-		<h4>查看境外上网设置办法</h4>
-		<p>在【领科物联网卡】微信公众号里，您点击【设置卡】菜单，然后可以看到不同国家或地区的设置办法，点击您套餐对应的国家或地区，就能看到对应该国家或地区的详细设置方法了。</p>
-	
+		<div v-if="langCn">
+			<h4>查看境外上网设置办法</h4>
+			<p>在【领科物联网卡】微信公众号里，您点击【设置卡】菜单，然后可以看到不同国家或地区的设置办法，点击您套餐对应的国家或地区，就能看到对应该国家或地区的详细设置方法了。</p>
+		</div>
+		<div v-else>
+			<h4>View overseas access settings</h4>
+			<p>In the package details, click "Pull up product details"---> "How to use". Please contact us if you have more questions.</p>
+		</div>
+		
 		<div class="btns">
-			<router-link class="done" :to="back">返回</router-link>
+			<router-link class="done" :to="back">{{$t("message.back")}}</router-link>
 		</div>
 	</div>
 </template>
@@ -14,7 +20,8 @@
 		name: 'name',
 		data() {
 			return {
-				back:this.$store.state.routerBack.text
+				back:this.$store.state.routerBack.text,
+				langCn: this.$store.state.langType == 'cn' ? true : false,
 			}
 		},
 		components: {},

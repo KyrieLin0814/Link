@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from '@/vuex/store'
 
 import index from '@/components/index'
+import inputIccid from '@/components/inputIccid'
 import detail from '@/components/detail'
 import order from '@/components/order'
 import payPage from '@/components/payPage'
@@ -23,6 +24,7 @@ import pay from '@/components/pay'
 import payResult from '@/components/payResult'
 import helpText from '@/components/helpText'
 import helpRead from '@/components/helpRead'
+import agree from '@/components/agree'
 
 Vue.use(Router)
 
@@ -32,6 +34,10 @@ const router = new Router({
 			path: '/',
 			name: 'index',
 			component: index
+		},{
+			path: '/inputIccid',
+			name: 'inputIccid',
+			component: inputIccid
 		},
 		{
 			path: '/detail',
@@ -149,6 +155,10 @@ const router = new Router({
 			name: 'helpRead',
 			component: helpRead,
 			props: true
+		},{
+			path: '/agree',
+			name: 'agree',
+			component: agree
 		}
 	]
 })

@@ -6,7 +6,8 @@
 		</div>
 		<div class="payBox flexBox">
 			<div class="amountTitle flex-1">{{$t("message.amount")}}</div>
-			<div class="amount"><span class="fontColor">{{amount}}</span>{{$t("message.yuan")}}</div>
+			<div class="amount" v-if="payFlag == 3"><span class="fontColor">{{amount}}</span> {{langCn ? "元" : "CNY"}}</div>
+			<div class="amount" v-if="payFlag == 1"><span class="fontColor">{{amount1}}</span>USD</div>
 		</div>
 
 		<ul class="payList">
@@ -61,6 +62,7 @@
 		data() {
 			return {
 				amount: '0.00',
+				amount1:'0.00',
 				linksFlow: '',
 				cmd: '',
 				item_name: '',
@@ -77,7 +79,8 @@
 			}
 		},
 		created() {
-			this.amount = this.$store.state.totalPrice;
+			this.amount =  (this.langCn ?  this.$store.state.totalPrice : this.$store.state.totalPrice * 6.5).toFixed(2);
+			this.amount1 = (Number(this.amount) / 6.5).toFixed(2)
 		},
 		mounted() {
 			var that = this
@@ -249,6 +252,8 @@
 			},
 			choose(type) {
 				this.payFlag = type
+				console.log(this.$store.state.payParams.weixinUrl)
+				console.log(this.$store.state.payParams.paypalUrl)
 			}
 		}
 	}

@@ -53,7 +53,7 @@
 							<div class="flexBox text-meal">
 								<div class="text-meaL-content">{{i.meal.name}} ({{ i.text }})</div>
 								<div class="flex-1"></div>
-								<div class="price"><span>{{ i.finalPrice.toFixed(2) }}</span>元</div>
+								<div class="price"><span>{{ i.finalPrice.toFixed(2) }}</span>{{$t("message.yuan")}}</div>
 							</div>
 						</li>
 					</ul>
@@ -69,7 +69,7 @@
 								<span class="cardFreeTxt" v-else> ({{$t("message.exceed") + orderFullX + $t("message.yuan")}},{{$t("message.exempted2")}})</span>
 							</div>
 							<div class="flex-1"></div>
-							<div class="price"><span>{{ trafficCardfee.toFixed(2) }}</span>元</div>
+							<div class="price"><span>{{ trafficCardfee.toFixed(2) }}</span>{{$t("message.yuan")}}</div>
 						</div>
 					</div>
 				</div>
@@ -136,7 +136,7 @@
 				} else {
 					day = val.finalNum
 				}
-				val.text = val.perPrice + (that.$store.state.langType == "cn" ? "元/" : 'yuan/') + val.meal.typeStr + " x " + val.finalNum
+				val.text = val.perPrice + (that.$store.state.langType == "cn" ? "元/" : 'USD/') + val.meal.typeStr + " x " + val.finalNum
 			})
 			that.deviceId = that.$store.state.deviceId
 			that.finalPrice = that.$store.state.totalPrice
@@ -395,6 +395,7 @@
 							receiveAddress: encodeURI(encodeURI(that.addressGet)),
 							receivePhoneNumber: that.$store.state.address.phone,
 							receiveUserName: encodeURI(encodeURI(that.$store.state.address.name)),
+							requestOrderId: that.$store.state.requestOrderId,
 							userId: that.$store.state.userId
 						},
 						tradeTime: new Date(),
@@ -460,7 +461,8 @@
 										deviceId: that.deviceId.toString(),
 										deviceType: that.$store.state.deviceType,
 										isOpen: that.isOpen ? '1' : '0',
-										orderList: orderList
+										orderList: orderList,
+										requestOrderId: that.$store.state.requestOrderId
 									},
 									tradeTime: new Date(),
 									tradeType: "F002",
@@ -663,16 +665,17 @@
 				var paymentOrderId = that.paymentOrderFunc()
 				that.$store.state.payParams.paymentOrderId =  paymentOrderId
 				
+				var money = that.langCn ? that.finalPrice : that.finalPrice * 6.5
+				console.log(money)
 				//paypal pay
 				that.$store.state.payParams.paypalUrl = "/paypalpay/paypal/paypals?deviceId=" + that.$store.state.deviceId + "&deviceType=" + that.$store.state.deviceType +
-					"&orderId=" + that.$store.state.orderId + "&amount=" + that.finalPrice.toFixed(2) +
+					"&orderId=" + that.$store.state.orderId + "&amount=" + (money / 6.5).toFixed(2) +
 					"&partnerCode=" + that.$store.state.partnerCode + "&packageCode=" + that.codes +
 					"&orderPeriod=" + that.orderPeriods + "&orderUnit=" + that.orderUnits +
 					"&paymentOrderId=" + paymentOrderId + "&currencyCode=USD" + "&isOpen=" + (that.isOpen ? '1' : '0')
 				//weixin pay
-				
 				that.$store.state.payParams.weixinUrl = "/paypalpay/wxPayH5?deviceId=" + that.$store.state.deviceId + "&deviceType=" + that.$store.state.deviceType +
-					"&orderId=" + that.$store.state.orderId + "&amount=" + that.finalPrice.toFixed(2) +
+					"&orderId=" + that.$store.state.orderId + "&amount=" + money.toFixed(2) + "&requestOrderId=" + that.$store.state.requestOrderId +
 					"&partnerCode=" + that.$store.state.partnerCode + "&packageCode=" + that.codes +
 					"&orderPeriod=" + that.orderPeriods + "&orderUnit=" + that.orderUnits +
 					"&paymentOrderId=" + paymentOrderId + "&isOpen=" + (that.isOpen ? '1' : '0')
