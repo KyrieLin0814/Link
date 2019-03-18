@@ -15,7 +15,10 @@
 		</div>
 		<div class="agree pay-box">
 			<cube-checkbox v-model="checked" shape="square">
-				<p class="agreeTxt">{{$t("message.agree")}}<span class="fontColor" @click.stop="agreeTXT">{{$t("message.txt2")}}</span></p>
+				<p class="agreeTxt">
+					{{$t("message.agree")}}
+					<span class="fontColor" @click.stop="agreeTXT(1)">{{$t("message.txt2")}}</span>，<span class="fontColor" @click.stop="agreeTXT(2)">T&C</span>
+				</p>
 			</cube-checkbox>
 			<!--<span class="fontColor">{{$t("message.txt1")}}</span>{{$t("message.and")}}-->
 		</div>
@@ -139,8 +142,13 @@
 					}, 1000)
 				}
 			},
-			agreeTXT(){
-				this.$router.push('/agree')
+			agreeTXT(i){
+				if(i == 1){
+					this.$router.push('/agree')
+				}else{
+					this.$router.push({name:'helpText',params:{helpFlag:7}});
+				}
+				
 			}
 		}
 	}
@@ -208,7 +216,7 @@
 	}
 	
 	.agree .agreeTxt span {
-		display: inline-block;
+		display: inline;
 		color: #e23768;
 	}
 	.num-box .disabled{

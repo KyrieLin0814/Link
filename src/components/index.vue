@@ -50,12 +50,13 @@
 				</li>
 				<li class="flex-1">
 					<router-link :to="{name:'helpText',params:{helpFlag:4}}">{{CnFlag ? '隐私政策' : 'PRIVACY POLICY'}}</router-link>
-					<router-link :to="{name:'helpText',params:{helpFlag:5}}">{{CnFlag ? '退货政策' : 'RETURN POLICY'}}</router-link>
+					<!--<router-link :to="{name:'helpText',params:{helpFlag:5}}">{{CnFlag ? '退货政策' : 'RETURN POLICY'}}</router-link>-->
 					<router-link :to="{name:'helpText',params:{helpFlag:6}}">{{CnFlag ? '航运政策' : 'SHIPPING POLICY'}}</router-link>
 					<router-link :to="{name:'helpText',params:{helpFlag:7}}">{{CnFlag ? '服务条款' : 'TERMS OF SERVICE'}}</router-link>
 				</li>
 				<li class="flex-1">
 					<router-link :to="{name:'helpText',params:{helpFlag:3}}">{{CnFlag ? '知识产权' : 'INTELLECTUAL PROPERTY'}}</router-link>
+					<div class="bottomImg"><img src="../assets/common/bottom.jpg"/></div>
 				</li>
 
 			</ul>
@@ -500,7 +501,6 @@
 		bottom:-153px;
 		left:0;
 		right:0;
-		margin: 0 -1.25rem;
 		padding-top: 15px;
 		padding-bottom: 50px;
 	}
@@ -511,5 +511,15 @@
 		color: #fff;
 		font-size: 0.5rem;
 		line-height: 22px;
+	}
+	.footer-list .bottomImg{
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+	.footer-list .bottomImg img{
+		display: inline-block;
+		width: 90px;
+		margin-top:5px;
 	}
 </style>

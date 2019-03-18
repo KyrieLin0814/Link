@@ -27,40 +27,20 @@
 		<div v-if="helpFlag == 2">
 			<div v-if="langCn">
 				<h4>联系我们</h4>
-				<div class="textContent">如果您有任何问题或疑虑，请随时与我们联系。</br>
-					我们很乐意听取您的意见，请联系我们：</br>
-					香港总部</br>
-					香港铜锣湾谢斐道482号信诺环球保险中心1005室</br>
-					深圳办事处</br>
-					深圳福田泰然九路一号盛唐商务大厦西座九楼911室</br>
-					北京办事处</br>
-					北京朝阳区大望路现代城C座606</br>
-					上海办事处</br>
-					上海市徐汇区宜山路900号B栋853</br>
-					其它办事处</br>
-					新加坡和英国</br>
-					</br>
-					销售：sales@linksfield.net</br>
-					技术支持：supports@linksfield.net</br>
-					客服电话：010-84681018</div>
+				<div class="textContent">
+					如果您有任何问题或疑虑，请随时联系我们。
+					</br>我们很高兴收到您的来信，请联系我们：
+					</br>邮箱：sales@linksfield.net
+				</div>
 			</div>
 			<div v-else>
 				<h4>CONTACT US</h4>
-				<div class="textContent">If you have questions or concerns then please do not hesitate to get in contact with us. </br>
-					We would love to hear from you, contact us on: </br>
-					Hong Kong headquarters</br>
-					Room 1005, CIGNA Global Insurance Centre, 482 Jaffe Road, Causeway Bay, Hong Kong</br>
-					Shenzhen Office</br>
-					Room 911, 9th Floor, West Block, Shengtang Business Building, No.1 Tairan 9th Road, Futian, Shenzhen</br>
-					Beijing Office</br>
-					606, Block C, Modern City, Dawang Road, Chaoyang District, Beijing</br>
-					Shanghai office</br>
-					Building 853, Building B, 900 Yishan Road, Xuhui District, Shanghai</br>
-					Other offices</br>
-					Singapore and the UK </br>
-					</br>
-					Sales: sales@linksfield.net</br>
-					Technical support: supports@linksfield.net</div>
+				<div class="textContent">
+					If you have any questions or concerns, please do not hesitate to contact us. 
+					</br>We would love to hear from you, contact us on: 
+					</br>Email: sales@linksfield.net
+				</div>
+
 			</div>
 		</div>
 		
@@ -68,13 +48,18 @@
 		<div v-if="helpFlag == 3">
 			<div v-if="langCn">
 				<h4>知识产权</h4>
-				<div class="textContent">如果对可能存在侵犯知识产权的行为有任何疑虑或投诉，请发送电子邮件至gary@linksfiled.net，明确说明被指控违反的权利和被控产品。</br>
-					（此电子邮件地址仅用于知识产权和法律问题。 其他请求可能无法获得响应。）</div>
+				<div class="textContent">
+					如果您对可能存在侵犯知识产权的行为有任何的疑虑或投诉，请发邮件至Legal@whosebilling.com ，特别指出被指控违反权利和被控诉的产品
+					<br />（此电子邮箱仅用于知识产权和法律问题，其他请求可能无法获得响应）
+				</div>
 			</div>
 			<div v-else>
-				<h4>INTELLECTUAL PROPERTY</h4>
-				<div class="textContent">In the event of any concerns or complaints about possible violation of intellectual property rights, please send us an email at gary@linksfiled.net  , identifying with specificity the rights alleged to be violated and the accused product(s).</br>
-					(This email address is just for intellectual property rights and legal issues. Other requests may not get respondence.)</div>
+				<h4>INTELLECTUAL PROPERTY RIGHTS</h4>
+				<div class="textContent">
+					In the event of any concerns or complaints about possible violation of intellectual property rights, please send us an email at Legal@whosebilling.com , identifying with specificity the rights alleged to be violated and the accused product(s).
+					</br>（This email address is just for intellectual property rights and legal issues. Other requests may not get response.）
+					
+				</div>
 			</div>
 		</div>
 		
@@ -323,176 +308,276 @@
 			<div v-if="langCn">
 				<h4>服务条款</h4>
 				<div class="textContent">
-					<h5>概述</h5>
+					<h5>欢迎。</h5>
 					<p>
-						本网站(wx.linksfield.net)由Links Field运营。在整个网站（wx.linksfield.net）中，术语“我们”，“我们”和“我们的”是指Links Field。 Links Field提供本网站，包括本网站向您（用户）提供的所有信息，工具和服务，条件是您接受此处所述的所有条款，条件，政策和通知。
-						</br>通过访问我们的网站和/或从我们这里购买商品，您可以参与我们的“服务”并同意遵守以下条款和条件（“服务条款”，“条款”），包括那些附加条款和条件和政策在此引用和/或通过超链接提供。这些服务条款适用于本网站的所有用户，包括但不限于浏览器，供应商，客户，商家和/或内容贡献者。
-						</br>在访问或使用我们的网站之前，请仔细阅读这些服务条款。访问或使用本网站的任何部分，即表示您同意遵守这些服务条款。如果您不同意本协议的所有条款和条件，则您不得访问本网站或使用任何服务。如果这些服务条款被视为要约，则接受明确限于这些服务条款。
-						</br>添加到当前商店的任何新功能或工具也应遵守服务条款。您可以随时在此页面上查看最新版本的服务条款。我们保留通过发布更新和/或更改我们网站来更新，更改或替换这些服务条款的任何部分的权利。您有责任定期查看此页面以了解更改。您在发布任何更改后继续使用或访问本网站即表示接受这些更改。
-						</br>第1节 - 在线商店条款
-						</br>同意这些服务条款，即表示您至少是您所在国家/地区的成年年龄，或者您已达到您所在国家/地区的成年年龄，并且您已经同意我们允许您未成年人使用本网站。
-						</br>您不得将我们的产品用于任何非法或未经授权的目的，也不得在使用本服务时违反您所在司法辖区的任何法律（包括但不限于版权法）。
-						</br>您不得传播任何蠕虫或病毒或任何具有破坏性的代码。
-						</br>违反或违反任何条款将导致您的服务立即终止。
-						</br>第2节 - 一般条件
-						</br>我们保留随时以任何理由拒绝向任何人提供服务的权利。
-						</br>您了解您的内容（不包括信用卡信息）可能未经加密转移，并涉及（a）通过各种网络传输; （b）改变以符合并适应连接网络或设备的技术要求。在通过网络传输期间，信用卡信息始终是加密的。
-						</br>您同意，未经我们明确书面许可，不得复制，复制，复制，出售，转售或利用本服务的任何部分，使用本服务，或访问本服务或提供服务的网站上的任何联系人。 。
-						</br>本协议中使用的标题仅为方便起见，不会限制或以其他方式影响这些条款。
-						</br>第3节 - 信息的准确性，完整性和及时性
-						</br>如果本网站提供的信息不准确，完整或最新，我们概不负责。本网站上的资料仅供一般参考，不应依赖或作为决策的唯一依据，无需咨询主要，更准确，更完整或更及时的信息来源。任何依赖本网站资料的风险由您自行承担。
-						</br>本网站可能包含某些历史信息。历史信息必然不是最新信息，仅供参考。我们保留随时修改本网站内容的权利，但我们没有义务更新我们网站上的任何信息。您同意监控我们网站的变更是您的责任。
-						</br>第4节 - 对服务和价格的修改
-						</br>我们产品的价格如有变更，恕不另行通知。
-						</br>我们保留随时修改或终止服务（或其任何部分或内容）的权利，恕不另行通知。
-						</br>对于本服务的任何修改，价格更改，暂停或终止，我们不对您或任何第三方承担任何责任。
-						</br>第5节 - 产品或服务（如适用）
-						</br>某些产品或服务可通过网站在线独家提供。这些产品或服务的数量有限，只能根据我们的退货政策退货或换货。
-						</br>我们尽一切努力尽可能准确地显示出现在商店的产品的颜色和图像。我们无法保证您的计算机显示器的任何颜色显示都是准确的。
-						</br>我们保留权利，但没有义务将我们的产品或服务的销售限制在任何人，地理区域或司法管辖区。我们可以根据具体情况行使此权利。我们保留限制我们提供的任何产品或服务的数量的权利。所有产品描述或产品定价均可随时更改，恕不另行通知，由我们自行决定。我们保留随时终止任何产品的权利。在本网站上提供的任何产品或服务的任何要约在禁止的情况下均无效。
-						</br>我们不保证您购买或获得的任何产品，服务，信息或其他材料的质量符合您的期望，或者本服务中的任何错误都将得到纠正。
-						</br>第6节 - 账单和账户信息的准确性
-						</br>我们保留拒绝您与我们订购的任何订单的权利。我们可以自行决定限制或取消每人，每户或每个订单购买的数量。这些限制可能包括由同一客户帐户或相同客户帐户下的订单，相同的信用卡和/或使用相同帐单和/或送货地址的订单。如果我们更改或取消订单，我们可能会尝试通过联系订单时提供的电子邮件和/或帐单地址/电话号码来通知您。我们保留限制或禁止订单的权利，根据我们的判断，这些订单似乎由经销商，经销商或分销商提供。
-						</br>您同意为我们在商店购买的所有商品提供最新，完整和准确的购买和帐户信息。您同意及时更新您的帐户和其他信息，包括您的电子邮件地址和信用卡号码以及到期日期，以便我们完成您的交易并根据需要与您联系。
-						</br>有关详细信息，请查看我们的退货政策。
-						</br>第7节 - 可选工具
-						</br>我们可能会为您提供访问第三方工具的权限，我们既不监控也不控制或输入。
-						</br>您承认并同意我们“按现状”和“可用”提供对此类工具的访问，不附带任何形式的任何保证，陈述或条件且无任何认可。对于您使用可选的第三方工具，我们不承担任何责任。
-						</br>您通过本网站提供的可选工具的任何使用完全由您自行承担风险和自由裁量权，您应确保您熟悉并批准相关第三方提供商提供工具的条款。
-						</br>我们将来还可能通过网站提供新的服务和/或功能（包括新工具和资源的发布）。此类新功能和/或服务也应遵守这些服务条款。
-						</br>第8节 - 第三方链接
-						</br>通过我们的服务提供的某些内容，产品和服务可能包含来自第三方的材料。
-						</br>本网站上的第三方链接可能会将您引导至与我们无关的第三方网站。我们不负责审查或评估内容或准确性，我们不保证也不对任何第三方材料或网站或第三方的任何其他材料，产品或服务承担任何责任或义务。
-						</br>对于因购买或使用与任何第三方网站相关的商品，服务，资源，内容或任何其他交易而造成的任何损害或损害，我们概不负责。请仔细阅读第三方的政策和做法，并确保在进行任何交易之前了解这些政策和做法。有关第三方产品的投诉，声明，疑虑或问题应直接发送给第三方。
-						</br>第9节 - 用户评论，反馈和其他提交
-						</br>如果，根据我们的要求，您发送某些特定提交内容（例如参赛作品）或未经我们提出请求，您可以发送创意，建议，提案，计划或其他材料，无论是在线，通过电子邮件，通过邮寄还是其他方式（统称“评论”），您同意我们可以在任何时间，无限制地编辑，复制，出版，分发，翻译和以其他方式使用您转发给我们的任何评论。我们现在并且没有义务（1）保密任何评论; （2）对任何意见支付赔偿金;或（3）回应任何意见。
-						</br>我们可以（但没有义务）监控，编辑或删除我们自行决定的内容，包括非法，冒犯，威胁，诽谤，诽谤，色情，淫秽或其他令人反感的内容，或违反任何一方的知识产权或本服务条款。
-						</br>您同意您的意见不会侵犯任何第三方的任何权利，包括版权，商标，隐私，个性或其他个人或所有权。您进一步同意，您的评论不会包含诽谤或其他非法，侮辱性或淫秽内容，或包含任何可能以任何方式影响服务或任何相关网站运营的计算机病毒或其他恶意软件。您不得使用虚假的电子邮件地址，伪装成您以外的其他人，或以其他方式误导我们或第三方的任何评论的来源。您对自己提出的任何意见及其准确性负全部责任。对于您或任何第三方发布的任何评论，我们不承担任何责任。
-						</br>第10节 - 个人信息
-						</br>您通过商店提交的个人信息受我们的隐私政策约束。
-						</br>第11节 - 错误，不准确和遗漏
-						</br>有时，我们网站或服务中可能包含与产品描述，定价，促销，优惠，产品运费，运输时间和可用性相关的印刷错误，不准确或遗漏的信息。如果服务或任何相关网站上的任何信息在任何时候不准确，我们保留更正或更新信息或取消订单的权利，恕不另行通知（包括您提交订单后） 。
-						</br>我们没有义务更新，修改或澄清服务或任何相关网站上的信息，包括但不限于定价信息，法律要求除外。未在服务或任何相关网站上应用指定的更新或刷新日期，应表明服务或任何相关网站上的所有信息均已被修改或更新。
-						</br>第12节 - 禁止使用
-						</br>除了服务条款中规定的其他禁令外，您不得使用本网站或其内容：（a）用于任何非法目的; （b）要求他人进行或参与任何非法行为; （c）违反任何国际或英国的法规，规则，法律或地方法令; （d）侵犯或侵犯我们的知识产权或他人的知识产权; （e）基于性别，性取向，宗教，种族，种族，年龄，国籍或残疾，骚扰，虐待，侮辱，伤害，诽谤，诽谤，贬低，恐吓或歧视; （f）提交虚假或误导性资料; （g）上传或传播将以或可能以任何方式使用的病毒或任何其他类型的恶意代码，这些代码将影响服务或任何相关网站，其他网站或互联网的功能或操作; （h）收集或追踪他人的个人资料; （i）垃圾邮件，网络钓鱼，药剂，借口，蜘蛛，爬行或刮擦; （j）任何淫亵或不道德的目的;或（k）干扰或绕过服务或任何相关网站，其他网站或互联网的安全功能。我们保留因违反任何违禁用途而终止您使用本服务或任何相关网站的权利。
-						</br>第13节 - 免责声明;责任限制
-						</br>我们不保证，声明或保证您对我们服务的使用不会中断，及时，安全或没有错误。
-						</br>我们不保证从使用服务中获得的结果将是准确或可靠的。
-						</br>您同意我们可能会不定期地取消服务或随时取消服务，恕不另行通知。
-						</br>您明确同意，您自行承担使用或无法使用服务的风险。通过服务向您提供的服务以及所有产品和服务（除非我们明确说明）以“原样”和“可用”的形式提供给您使用，没有任何明示或任何形式的保证或条件。暗示，包括所有暗示的适销性，适销性，适用于特定用途，耐久性，所有权和非侵权的保证或条件。
-						</br>在任何情况下，我们，我们的董事，高级职员，员工，附属机构，代理商，承包商，实习生，供应商，服务提供商或许可方均不对任何伤害，损失，索赔或任何直接，间接，偶然，惩罚，特殊或任何形式的后果性损害，包括但不限于利润损失，收入损失，储蓄损失，数据丢失，重置成本或任何类似的损害，无论是基于合同，侵权（包括疏忽），严格责任还是其他原因造成的使用任何服务或使用服务获得的任何产品，或以任何方式与您使用服务或任何产品相关的任何其他声明，包括但不限于任何内容中的任何错误或遗漏，或任何由于使用服务或通过服务发布，传输或以其他方式提供的任何内容（或产品）而导致的任何类型的损失或损害，即使被告知其可能性。由于某些州或司法管辖区不允许排除或限制间接或附带损害的责任，因此在这些州或司法管辖区，我们的责任应限于法律允许的最大范围内。
-						</br>第14节 - 赔偿
-						</br>您同意对我们及我们的母公司，子公司，关联公司，合作伙伴，管理人员，董事，代理商，承包商，许可人，服务提供商，分包商，供应商，实习生和员工进行赔偿，辩护并使其免受任何索赔或要求的损害，包括合理的由于您违反本服务条款或其通过引用而包含的文件，或您违反任何法律或第三方权利而由任何第三方提出的律师费。
-						</br>第15节 - 可分割性
-						</br>如果本服务条款的任何规定被确定为非法，无效或不可执行，则此类规定仍应在适用法律允许的最大范围内强制执行，并且不可执行部分应视为与本条款中的服务，此类确定不得影响任何其他剩余条款的有效性和可执行性。
-						</br>第16节 - 终止
-						</br>在终止日期之前发生的双方的义务和责任在本协议终止后仍然有效。
-						</br>除非您或我们终止，否则这些服务条款均有效。您可以随时通知我们您不再希望使用我们的服务，或者当您停止使用我们的网站时，终止这些服务条款。
-						</br>如果我们自行判断您未能或我们怀疑您未能遵守本服务条款的任何条款或规定，我们也可以随时终止本协议，恕不另行通知，您将对所有应付金额负责至终止日期;和/或因此可能拒绝您访问我们的服务（或其任何部分）。
-						</br>第17节 - 完整协议
-						</br>我们未能行使或执行本服务条款的任何权利或规定，并不构成对此类权利或规定的放弃。
-						</br>这些服务条款以及我们在本网站或本服务中发布的任何政策或操作规则构成您与我们之间的完整协议和理解，并管辖您对本服务的使用，取代任何先前或同期的协议，通信和提案您和我们之间的口头或书面形式（包括但不限于任何先前版本的服务条款）。
-						</br>对本服务条款的解释中的任何含糊之处不得解释为起草方
-						</br>第18节 - 管辖法律
-						</br>这些服务条款以及我们为您提供服务的任何单独协议均中国大陆法律管辖并按其解释。
-						</br>第19节 - 服务条款的变更
-						</br>您可以随时在此页面查看最新版本的服务条款。
-						</br>我们保留自行决定通过向我们的网站发布更新和更改来更新，更改或替换这些服务条款的任何部分的权利。您有责任定期查看我们的网站以了解更改。您在发布对这些服务条款的任何更改后继续使用或访问我们的网站或服务即表示接受这些更改
-						</br>第20节 - 联系信息
-						</br>有关服务条款的问题，请发送电子邮件至shengbin@linksfield.net
-						</br>客户只需支付一次运费（包括退货）; 不退还产品需要向消费者收取费用。
+						这些服务条款（“TOS”）适用于您和http://wx.linksfield.net。在整个网站中，术语“我们”，“我们”和“我们的”是指http://wx.linksfield.net.服务的使用也受我们的隐私政策的约束。
+						<br />作为使用服务的先决条件，您必须同意这些服务条款。如果您接受这些服务条款，则表示您年满13岁。如果您的年龄在13岁至17岁之间，或者无权签订此类服务条款等协议，则表示您的法定监护人或父母责任人已经审核并同意本服务条款。
+						<br />使用或以其他方式访问服务，即表示您同意这些服务条款。如果您不同意这些服务条款，则不得使用或以其他方式访问服务。
+						<br />除非适用服务的组件另有规定，否则服务可以免费使用或下载，但可能包含可能允许您在服务中购买的功能。
+						<br />如果您从社交网站（“SNS”）（如Facebook）访问服务，则表示您同意遵守其服务条款以及这些服务条款。
 					</p>
+					
+					<h5>1.使用服务的权利</h5>
+					<p>
+						在遵守本服务条款的前提下，我们特此授予您非独占，不可转让，不可再授权的有限权利和许可，以便将您的服务用于个人非商业用途。授予您的权利取决于您是否遵守本服务条款。
+						<br />除非事先说明，否则您不会收到任何其他许可。我们保留对服务的所有权利，所有权和利益，包括但不限于所有版权，商标，商业秘密，商品名称，所有权，专利，标题，计算机代码，视听效果，主题，字符，字符名称，故事，对话，设置，艺术品，音效，音乐作品，使用服务制作的游戏记录，精神权利，无论是否注册及其所有应用。除非经法律明确授权，否则未经我们事先书面同意，不得以任何方式或媒介，全部或部分复制，复制或分发服务。我们保留未在此明确授予您的所有权利。
+						<br />服务及其内容是许可的，不是出售的。您同意您对本服务中出现的任何内容没有任何权利或所有权，包括但不限于出现在服务中或源自服务的虚拟物品或货币，无论是在服务中获得还是从我们购买或第三方。
+					</p>
+					
+					<h5>2.服务中的购买</h5>
+					<p>
+						我们可能会向您许可在服务中使用的某些虚拟商品，您可以使用“真实世界”的钱购买，或者您可以通过游戏玩法获得或兑换（“虚拟商品”）。虚拟物品是以有限的，个人的，不可转让的，不可再授权的，可撤销的方式许可给您的，仅用于非商业用途。
+						<br />我们可以随时管理，控制，修改或消除虚拟物品，无论是否通知。
+						<br />除非服务中明确授权，否则禁止转移虚拟物品（如适用）。
+						<br />虚拟物品在现实世界中没有相应的价值，也不能代替现实世界的货币。我们或任何其他人或实体都没有义务为任何有价值的东西交换虚拟物品。我们对您的虚拟物品的黑客入侵或丢失不承担任何责任。
+						<br />虚拟物品的价格和供应情况如有变更，恕不另行通知。
+						<br />根据法律规定，通过服务进行的虚拟物品的所有购买和赎回都是最终的，不可退款。您承认并同意，在服务中使用的虚拟物品的提供是一个在购买后立即开始的过程，并且一旦该过程开始您就丧失了取消的权利。
+						<br />因此，您同意我们无需出于任何原因为虚拟物品提供退款。您进一步承认，无论您在本服务条款下的许可证是自愿还是非自愿，您都不会收到未使用虚拟物品的金钱或其他补偿。
+						<br />如果您要求按照我们的隐私政策中的说明删除您的个人数据，您将永久丧失所有虚拟物品而无权退款，因为我们将无法再将此类虚拟物品与您关联。
+					</p>
+					
+					<h5>3.行为准则</h5>
+					<p>
+						您同意在任何情况下您都不会：
+						<br />•	直接或间接使用任何作弊，漏洞利用，自动化软件，僵尸程序，黑客，mod或任何旨在修改或干扰服务的未经授权的第三方软件。
+						<br />•	违反任何适用法律或法规使用服务。
+						<br />•	将服务用于商业目的，包括但不限于广告，招揽或传播任何商业广告，如垃圾邮件，连锁信，金字塔或其他快速致富计划。
+						<br />•	将服务用于欺诈或滥用目的，包括但不限于使用服务冒充任何个人或实体，或以其他方式歪曲您与个人，实体或服务的关系;
+						<br />•	扰乱，干扰或以其他方式对服务的正常流动产生不利影响，或以其他方式对其他用户使用服务时的体验产生负面影响。
+						<br />•	破坏，负担过重或协助或协助用于提供或支持服务的任何计算机或服务器的中断或负担过重。
+						<br />•	尝试通过除我们提供的用户界面之外的任何方式（包括但不限于通过规避或修改）来未经授权访问服务，注册到他人的帐户或连接到服务的计算机，服务器或网络，试图绕过或修改，或鼓励或协助任何其他人规避或修改作为服务一部分的任何安全，技术，设备，加密或软件。
+						<br />•	发布任何包含裸露，过度暴力或辱骂，威胁，淫秽，诽谤，诽谤或种族，性，宗教攻击或其他令人反感的信息，内容或其他材料（或任何信息或内容的链接）。
+						<br />•	参与持续的毒性行为，例如在未经请求的基础上反复发布信息。
+						<br />•	尝试或骚扰，滥用或伤害，或提倡或煽动他人，团体（包括我们的员工，董事，高级职员和客户服务代表）的骚扰，虐待或伤害。
+						<br />•	通过服务提供侵犯任何个人或实体的任何版权，商标，专利，商业秘密，隐私权，公开权或其他权利，或冒充任何其他人的任何材料或信息，包括但不限于我们的员工，董事或高级职员。
+						<br />•	除非法律特别授权，否则尝试反编译，反向工程，反汇编或破解任何服务，或者破坏或克服我们传输，处理或存储的任何加密技术或安全措施或数据，或从中获取任何信息服务使用我们未明确允许的任何方法。
+						<br />•	请求或尝试从服务的其他用户索取登录信息或任何其他登录凭据或个人信息。
+						<br />•	收集，搜集或收集有关使用服务的其他人的任何信息，包括但不限于使用像素标签，Cookie，GIF或类似项目（有时也称为间谍软件）。
+						<br />•	通过服务发布任何人的私人信息，包括个人身份信息/个人数据（无论是文本，图像还是视频形式），身份证明文件或财务信息。
+						<br />•	从事任何我们认为与服务的精神或意图相冲突或不当使用我们的支持服务的行为。
+					</p>
+					
+					<h5>4.第三方服务</h5>
+					<p>
+						服务可能包括第三方服务的链接（包括但不限于第三方显示的广告）和/或第三方服务可能通过服务提供给您。这些服务可以包括但不限于游戏记录和共享，社交媒体连接和广告。这些服务受相应的第三方条款和条件的约束。请仔细阅读这些第三方条款和条件，因为它们构成您与我们未加入的相关第三方服务提供商之间的协议。
+					</p>
+					
+					<h5>5.帐户和登录信息</h5>
+					<p>
+						服务的某些元素可能使您能够创建帐户或以其他方式注册服务（“帐户”）。您可能需要为您的帐户选择密码，或者您也可以使用其他凭据访问帐户（“登录信息”）。您同意不会将您的登录信息提供给任何其他人或允许其他人使用您的登录信息或帐户。您自行负责维护登录信息的机密性，并且您对其所有用途（包括购买）负责。我们可能会假设使用您的登录信息登录您帐户的任何人都是您或在您许可的情况下登录的人。
+						<br />如果我们发现您在180天或更长时间内未对该帐户进行任何活动，我们保留删除您的帐户的权利。在这种情况下，您可能无法再访问和/或使用与该帐户关联的任何虚拟物品，也不会向您提供退款。
+					</p>
+					
+					<h5>6.用户贡献</h5>
+					<p>
+						服务可能允许您创建内容，包括但不限于游戏玩法地图，角色，屏幕截图或游戏视频（统称为“用户贡献”）。
+						<br />作为对服务的使用的交换，您特此授予我们非独家，免版税，永久，不可撤销，完全可转让和可再次授权的全球权利和许可，以任何方式和任何目的使用您的用户贡献，包括但不限于以任何现有或未来方式复制，复制，改编，修改，执行，展示，出版，广播，传播或以其他方式向公众传播的权利，并且无需另行通知或补偿即可分发您的用户贡献。你是谁。
+						<br />在法律未明确禁止的情况下，您在此放弃任何关于我们和其他玩家根据适用法律使用和享受与服务及相关商品和服务有关的用户贡献的父权，出版，声誉或归属的精神权利. .我们向我们授予许可，以及上述对任何适用的精神权利的放弃，在本服务条款终止后仍然有效。
+						<br />我们，其董事，高级职员和员工不接受或考虑任何形式的任何形式的未经请求的想法或产品提交（例如游戏或其他产品创意，故事，剧本，艺术品，音乐或视听作品，概念或任何其他创作材料），通过任何传播（“未经请求的内容”）。请勿向我们或其董事，高级职员或员工提交任何未经请求的内容。但是，如果您向我们提交未经请求的内容，您同意此类未经请求的内容不会被视为机密内容，无论您在随附的消息中另有说明。您进一步同意，我们可以使用和利用此类未经请求的内容，而无需向您或任何第三方提供任何补偿，并且您授予我们永久，非独占，不可撤销，全额付费，免版税，可分许可和可转让的内容（全部或部分）全球许可在任何目的下在所有当前或未来媒体中使用，利用，复制，传播，修改，展示和展示未经请求的内容，并根据未经请求的内容创建衍生作品。
+					</p>
+					
+					<h5>7.服务用户之间的通信</h5>
+					<p>
+						我们对服务的其他用户的行为不承担任何责任，并且对于监控服务的不当内容或行为不承担任何责任。我们不会，也不能预先筛选或监控用户的所有内容或行为。您使用服务的风险由您自行承担。
+						<br />使用服务时，您可能会接触到令人反感，不雅或不符合您的价值观的内容或行为。当您使用服务时，我们可能会利用技术来监控和/或记录您与服务或通信（包括但不限于聊天文本）的交互。您不可撤销地同意进行此类监控和录制。因此，您同意您对服务中任何内容的传输没有任何隐私期望，包括但不限于聊天文本或语音通信。
+						<br />我们保留自行决定审查，监控，禁止，编辑，删除，禁止访问或以其他方式使本服务用户提供的任何内容不可用的权利，恕不另行通知，无任何理由。如果我们在任何时候选择自行决定监控服务，我们对服务用户提供的内容不承担任何责任，我们不承担修改或删除任何不当内容的义务。
+					</p>
+					
+					<h5>8.违反暂停和终止</h5>
+					<p>
+						在不限制我们可用的任何其他补救措施的情况下，如果我们认为您违反了本服务条款，我们保留采取以下任何行动的权利，无论是单独还是组合，无论是否通知您：（i ）删除，暂停和/或修改您的帐户或部分帐户;（ii）限制，暂停和/或终止您对服务的访问;（iii）修改和/或删除任何虚拟物品;（iv）重置和/或修改与您相关的任何游戏进程或权益和特权，例如您在服务中达到的任何级别或分数。
+					</p>
+					
+					<h5>9.服务的可用性</h5>
+					<p>
+						我们可以限制，暂停或终止服务或其中的部分内容，并采取技术和法律措施，以防止用户在我们认为他们造成风险或可能的法律责任，侵犯第三方知识产权或不采取行动时访问服务按照这些服务条款的字母或精神。
+						<br />我们保留随时停止提供和/或支持服务或其中一部分（例如游戏或游戏功能）的权利，此时您将自动终止使用服务或其中一部分的许可。在这种情况下，除非适用法律另有要求，否则我们无需为虚拟物品或与此类已终止服务相关的其他物品提供退款。
+					</p>
+					
+					<h5>10.免责声明</h5>
+					<p>
+						在适用法律允许的最大范围内，服务按“原样”提供给您，不提供任何形式的保证，保证或担保。它可能有缺陷，您的使用完全由您自己承担风险。我们不作出任何及所有明示，暗示或法定保证，包括暗示的条件保证，不间断使用，数据准确性（包括但不限于位置数据），适销性，令人满意的质量，适用于特殊目的，不侵犯第三方权利，以及在交易，使用或交易过程中产生的保证（如果有）。我们不保证不会干扰您享受服务;服务将满足您的要求;服务的运作不会中断或没有错误;服务将与任何其他服务互操作或兼容;或者，服务中的任何错误都将得到纠正。我们，其员工或其他代表提供的口头或书面建议不构成保证。
+						<br />某些司法管辖区不允许上述免责声明;因此，上述条款可能对您不适用。相反，在此类司法管辖区内，上述免责声明仅适用于此类司法管辖区的法律所允许的范围。此外，您可能在您的司法管辖区拥有其他合法权利，本服务条款中的任何内容均不得侵犯您作为服务消费者的法定权利
+					</p>
+					
+					<h5>11.责任限制</h5>
+					<p>
+						对于因访问，使用或故障服务而导致的特殊，偶然或间接损失，我们不承担任何责任，包括但不限于财产损失，商誉损失，设备故障或故障，并且在允许的范围内法律，人身伤害赔偿，财产损失，利润损失或由于本服务条款或服务引起的或与之相关的任何诉讼原因造成的惩罚性赔偿，无论是因侵权行为（包括疏忽），合同，严格责任还是其他原因以及是否或我们并没有被告知这种损害的可能性。就第11条“责任限制”而言，我们的许可人和其他合作伙伴是本协议规定的责任限制的第三方受益人，并可能对您强制执行这些服务条款。
+						<br />某些司法管辖区不允许某些责任限制，例如上述规定;因此，上述条款可能对您不适用。相反，在这些司法管辖区，上述责任限制仅适用于此类司法管辖区的法律所允许的范围。此外，您可能在您的司法管辖区拥有其他合法权利，并且这些服务条款中的任何内容都不会侵犯您作为服务消费者的任何法定权利。
+					</p>
+					
+					<h5>12.知识产权</h5>
+					<p>
+						如果对可能存在侵犯知识产权的行为有任何疑虑或投诉，请发送电子邮件至Legal@whosebilling.com，明确说明被指控违反的权利和被控产品。
+					</p>
+					
+					<h5>13.与第三方产品和服务的链接</h5>
+					<p>
+						我们可能会从服务链接到第三方网站或服务。您理解我们不对此类第三方提供的任何内容，商品或服务作出任何承诺，并且您理解我们不认可它们。对于此类第三方造成的任何损失或伤害，我们也不对您负责。您对这些第三方的任何指控都是您的责任。您了解当您向第三方提供数据时，您根据其隐私政策（如果有）提供数据，并且您了解我们的隐私政策不适用于此类数据。
+					</p>
+					
+					<h5>14.这些服务条款的变更</h5>
+					<p>
+						尽管有第8条“具有约束力的仲裁/类别豁免”，我们可能会不时更新这些服务条款，以应对不断变化的法律，技术或业务发展。当我们更新这些服务条款时，我们将根据我们所做的更改的重要性，采取适当措施通过服务或其他方式通知您。
+						<br />在更新生效后继续访问或使用服务，即表示您同意受更新的服务条款的约束。
+					</p>
+					
+					<h5>15.适用法律</h5>
+					<p>这些服务条款以及我们为您提供服务的任何单独协议均受英国法律管辖并按其解释。</p>
+					
+					<h5>16.转让，可分割性和完整协议</h5>
+					<p>
+						我们可以在未经您同意的情况下随时将这些服务条款全部或部分转让给任何个人或实体。未经我们事先书面同意，您不得转让或委托本服务条款或隐私政策下的任何权利或义务，任何未经授权的转让和授权均属无效。
+						<br />如果这些服务条款的任何条款被认定无效或无法执行，则此类条款将在必要的最小范围内受到限制或消除，并且这些服务条款的其余条款将保持完全有效。我们未能执行本服务条款的任何权利或规定将不被视为放弃此类权利或规定。
+						<br />本服务条款和隐私政策规定了您和我们之间关于服务的完整协议，并取代您和我们之间之前的所有协议和谅解。
+						<br />如果您对这些服务条款有任何疑问，请联系support@linksfield.net;
+					</p>
+					
+					<p class="bottomTxt">
+						<img src="../assets/common/TXT.png"/>
+					</p>
+					
 					
 				</div>
 			</div>
 			<div v-else>
-				<h4>TERMS OF SERVICE</h4>
+				<h4>TERMS OF SERVICE ("TOS")</h4>
 				<div class="textContent">
-					<h5>OVERVIEW</h5>
+					<h5>Welcome.</h5>
 					<P>
-						This website (wx.linksfield.net ) is operated by Links Field . Throughout the site, the terms “we”, “us” and “our” refer to Links Field. Links Field offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
-						</br>Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.
-						</br>Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.
-						</br>SECTION 1 - ONLINE STORE TERMS
-						</br>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your country of residence, or that you are the age of majority in your country of residence and you have given us your consent to allow any of your minor dependents to use this site.
-						</br>You may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws).
-						</br>You must not transmit any worms or viruses or any code of a destructive nature.
-						</br>A breach or violation of any of the Terms will result in an immediate termination of your Services.
-						</br>SECTION 2 - GENERAL CONDITIONS
-						</br>We reserve the right to refuse service to anyone for any reason at any time.
-						</br>You understand that your content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit card information is always encrypted during transfer over networks.
-						</br>You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service or any contact on the website through which the service is provided, without express written permission by us.
-						</br>The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.
-						</br>SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION
-						</br>We are not responsible if information made available on this site is not accurate, complete or current. The material on this site is provided for general information only and should not be relied upon or used as the sole basis for making decisions without consulting primary, more accurate, more complete or more timely sources of information. Any reliance on the material on this site is at your own risk.
-						</br>This site may contain certain historical information. Historical information, necessarily, is not current and is provided for your reference only. We reserve the right to modify the contents of this site at any time, but we have no obligation to update any information on our site. You agree that it is your responsibility to monitor changes to our site.
-						</br>SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES
-						</br>Prices for our products are subject to change without notice.
-						</br>We reserve the right at any time to modify or discontinue the Service (or any part or content thereof) without notice at any time.
-						</br>We shall not be liable to you or to any third-party for any modification, price change, suspension or discontinuance of the Service.
-						</br>SECTION 5 - PRODUCTS OR SERVICES (if applicable)
-						</br>Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.
-						</br>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.
-						</br>We reserve the right, but are not obligated, to limit the sales of our products or Services to any person, geographic region or jurisdiction. We may exercise this right on a case-by-case basis. We reserve the right to limit the quantities of any products or services that we offer. All descriptions of products or product pricing are subject to change at anytime without notice, at the sole discretion of us. We reserve the right to discontinue any product at any time. Any offer for any product or service made on this site is void where prohibited.
-						</br>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected.
-						</br>SECTION 5 - PRODUCTS OR SERVICES (if applicable)
-						</br>Certain products or services may be available exclusively online through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.
-						</br>We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor's display of any color will be accurate.
-						</br>We reserve the right, but are not obligated, to limit the sales of our products or Services to any person, geographic region or jurisdiction. We may exercise this right on a case-by-case basis. We reserve the right to limit the quantities of any products or services that we offer. All descriptions of products or product pricing are subject to change at anytime without notice, at the sole discretion of us. We reserve the right to discontinue any product at any time. Any offer for any product or service made on this site is void where prohibited.
-						</br>We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected.
-						</br>SECTION 7 - OPTIONAL TOOLS
-						</br>We may provide you with access to third-party tools over which we neither monitor nor have any control nor input.
-						</br>You acknowledge and agree that we provide access to such tools ”as is” and “as available” without any warranties, representations or conditions of any kind and without any endorsement. We shall have no liability whatsoever arising from or relating to your use of optional third-party tools.
-						</br>Any use by you of optional tools offered through the site is entirely at your own risk and discretion and you should ensure that you are familiar with and approve of the terms on which tools are provided by the relevant third-party provider(s).
-						</br>We may also, in the future, offer new services and/or features through the website (including, the release of new tools and resources). Such new features and/or services shall also be subject to these Terms of Service.
-						</br>SECTION 8 - THIRD-PARTY LINKS
-						</br>Certain content, products and services available via our Service may include materials from third-parties.
-						</br>Third-party links on this site may direct you to third-party websites that are not affiliated with us. We are not responsible for examining or evaluating the content or accuracy and we do not warrant and will not have any liability or responsibility for any third-party materials or websites, or for any other materials, products, or services of third-parties.
-						</br>We are not liable for any harm or damages related to the purchase or use of goods, services, resources, content, or any other transactions made in connection with any third-party websites. Please review carefully the third-party's policies and practices and make sure you understand them before you engage in any transaction. Complaints, claims, concerns, or questions regarding third-party products should be directed to the third-party.
-						</br>SECTION 9 - USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS
-						</br>If, at our request, you send certain specific submissions (for example contest entries) or without a request from us you send creative ideas, suggestions, proposals, plans, or other materials, whether online, by email, by postal mail, or otherwise (collectively, 'comments'), you agree that we may, at any time, without restriction, edit, copy, publish, distribute, translate and otherwise use in any medium any comments that you forward to us. We are and shall be under no obligation (1) to maintain any comments in confidence; (2) to pay compensation for any comments; or (3) to respond to any comments.
-						</br>We may, but have no obligation to, monitor, edit or remove content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party’s intellectual property or these Terms of Service.
-						</br>You agree that your comments will not violate any right of any third-party, including copyright, trademark, privacy, personality or other personal or proprietary right. You further agree that your comments will not contain libelous or otherwise unlawful, abusive or obscene material, or contain any computer virus or other malware that could in any way affect the operation of the Service or any related website. You may not use a false e-mail address, pretend to be someone other than yourself, or otherwise mislead us or third-parties as to the origin of any comments. You are solely responsible for any comments you make and their accuracy. We take no responsibility and assume no liability for any comments posted by you or any third-party.
-						</br>SECTION 10 - PERSONAL INFORMATION
-						</br>Your submission of personal information through the store is governed by our Privacy Policy.
-						</br>SECTION 11 - ERRORS, INACCURACIES AND OMISSIONS
-						</br>Occasionally there may be information on our site or in the Service that contains typographical errors, inaccuracies or omissions that may relate to product descriptions, pricing, promotions, offers, product shipping charges, transit times and availability. We reserve the right to correct any errors, inaccuracies or omissions, and to change or update information or cancel orders if any information in the Service or on any related website is inaccurate at any time without prior notice (including after you have submitted your order).
-						</br>We undertake no obligation to update, amend or clarify information in the Service or on any related website, including without limitation, pricing information, except as required by law. No specified update or refresh date applied in the Service or on any related website, should be taken to indicate that all information in the Service or on any related website has been modified or updated.
-						</br>SECTION 12 - PROHIBITED USES
-						</br>In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international or UK’s regulations, rules, laws, or local ordinances; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet; (h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses.
-						</br>SECTION 13 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY
-						</br>We do not guarantee, represent or warrant that your use of our service will be uninterrupted, timely, secure or error-free.
-						</br>We do not warrant that the results that may be obtained from the use of the service will be accurate or reliable.
-						</br>You agree that from time to time we may remove the service for indefinite periods of time or cancel the service at any time, without notice to you.
-						</br>You expressly agree that your use of, or inability to use, the service is at your sole risk. The service and all products and services delivered to you through the service are (except as expressly stated by us) provided 'as is' and 'as available' for your use, without any representation, warranties or conditions of any kind, either express or implied, including all implied warranties or conditions of merchantability, merchantable quality, fitness for a particular purpose, durability, title, and non-infringement.
-						</br>In no case shall we, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the service or any content (or product) posted, transmitted, or otherwise made available via the service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum extent permitted by law.
-						</br>SECTION 14 - INDEMNIFICATION
-						</br>You agree to indemnify, defend and hold harmless us and our parent, subsidiaries, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees, harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arising out of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party.
-						</br>SECTION 15 - SEVERABILITY
-						</br>In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall be deemed to be severed from these Terms of Service, such determination shall not affect the validity and enforceability of any other remaining provisions.
-						</br>SECTION 16 - TERMINATION
-						</br>The obligations and liabilities of the parties incurred prior to the termination date shall survive the termination of this agreement for all purposes.
-						</br>These Terms of Service are effective unless and until terminated by either you or us. You may terminate these Terms of Service at any time by notifying us that you no longer wish to use our Services, or when you cease using our site.
-						</br>If in our sole judgment you fail, or we suspect that you have failed, to comply with any term or provision of these Terms of Service, we also may terminate this agreement at any time without notice and you will remain liable for all amounts due up to and including the date of termination; and/or accordingly may deny you access to our Services (or any part thereof).
-						</br>SECTION 17 - ENTIRE AGREEMENT
-						</br>The failure of us to exercise or enforce any right or provision of these Terms of Service shall not constitute a waiver of such right or provision.
-						</br>These Terms of Service and any policies or operating rules posted by us on this site or in respect to The Service constitutes the entire agreement and understanding between you and us and govern your use of the Service, superseding any prior or contemporaneous agreements, communications and proposals, whether oral or written, between you and us (including, but not limited to, any prior versions of the Terms of Service).
-						</br>Any ambiguities in the interpretation of these Terms of Service shall not be construed against the drafting party.
-						</br>SECTION 18 - GOVERNING LAW
-						</br>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of China.
-						</br>SECTION 19 - CHANGES TO TERMS OF SERVICE
-						</br>You can review the most current version of the Terms of Service at any time at this page.
-						</br>We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website. It is your responsibility to check our website periodically for changes. Your continued use of or access to our website or the Service following the posting of any changes to these Terms of Service constitutes acceptance of those changes.
-						</br>SECTION 20 - CONTACT INFORMATION
-						</br>Questions about the Terms of Service should be sent to us at shengbin@linksfield.net
-						</br>Customers will only be charged once for shipping costs (this includes returns); No-restocking to be charged to the consumers for the return of the product
+						These terms of service (“TOS”) apply to you andhttp://wx.linksfield.net. Throughout the site, the terms “we”, “us” and “our” refer to http://wx.linksfield.net. Use of the Services is also governed by our PRIVACY POLICY.
+						<br />As a precondition for using the Services, you must agree to these TOS. If you accept these TOS, you represent that you are age 13 or older. If you are between the ages of 13 and 17 or otherwise do not have the authority to enter into agreements such as these TOS, you represent that your legal guardian, or a holder of parental responsibility, has reviewed and agreed to these TOS.
+						<br />By using or otherwise accessing the Services, you agree to these TOS. If you do not agree to these TOS, you may not use or otherwise access the Services.
+						<br />Unless otherwise specified by a component of an applicable Service, the Services are free to use or download but may contain features that may allow you to make purchases within the Services.
+						<br />If you access the Services from a social networking site ("SNS"), such as Facebook, you agree to comply with its terms of service as well as these TOS.
 					</P>
+					
+					<h5>1. Right to Use the Services</h5>
+					<P>
+						Subject to these TOS, we hereby grant you a non-exclusive, non-transferable, non-sublicensable, limited right and license to use the Services for your personal, non-commercial use. The rights granted to you are subject to your compliance with these TOS.
+						<br />Except as previously set forth, you do not receive any other license. We retain all right, title and interest in and to the Services, including, but not limited to, all copyrights, trademarks, trade secrets, trade names, proprietary rights, patents, titles, computer codes, audiovisual effects, themes, characters, character names, stories, dialog, settings, artwork, sound effects, musical works, gameplay recordings made using the Services, moral rights, whether registered or not and all applications thereof. Unless expressly authorized by law, the Services may not be copied, reproduced or distributed in any manner or medium, in whole or in part, without Our prior written consent. We reserve all rights not expressly granted to you herein.
+						<br />The Services and its contents are licensed, not sold. You agree that you have no right or title in or to any content that appears in the Service, including, but not limited to, the Virtual Items or currency appearing in or originating from the Services, whether earned in the Services or purchased from us or third parties.
+					</P>
+					
+					<h5>2. Purchases in the Services</h5>
+					<P>
+						We may license to you certain virtual goods to be used within the Service and which you may purchase with "real world" money or which you may earn or redeem via gameplay ("Virtual Items"). Virtual Items are licensed to you on a limited, personal, non-transferable, non-sublicensable, revocable basis and are intended solely for non-commercial use.
+						<br />We may manage, control, modify or eliminate Virtual Items at any time, with or without notice.
+						<br />The transfer of Virtual Items is prohibited except where expressly authorized in the Services, as applicable.
+						<br />Virtual Items do not have an equivalent value in real world money and are not a substitute for real world money. Neither we nor any other person or entity has any obligation to exchange Virtual Items for anything of value. We are not liable for hacking or loss of your Virtual Items.
+						<br />Price and availability of Virtual Items are subject to change without notice.
+						<br />By law, all purchases and redemptions of Virtual Items made through the Services are final and non-refundable. You acknowledge and consent that the provision of Virtual Items for use in the Services is a process that commences immediately upon purchase and that you forfeit your right of cancelation once the process has commenced.
+						<br />Accordingly, you agree that we are not required to provide a refund for Virtual Items for any reason. You further acknowledge that you will not receive money or other compensation for unused Virtual Items, regardless of whether your loss of license under these TOS was voluntary or involuntary.
+						<br />If you ask for your personal data to be deleted as described in Our Privacy Policy, you will be permanently forfeit all of your Virtual Items without the right to refund, as we will no longer be able associate such Virtual Items with you.
+					</P>
+					
+					<h5>3. Code of Conduct</h5>
+					<P>
+						You agree that you will not, under any circumstances:
+						<br />•	Use, either directly or indirectly, any cheats, exploits, automation software, bots, hacks, mods or any unauthorized third-party software designed to modify or interfere with the Services.
+						<br />•	Use the Services in violation of any applicable law or regulation.
+						<br />•	Use the Services for commercial purposes, including, but not limited to, to advertising, or solicitation, or transmission of any commercial advertisements such as spam emails, chain letters, pyramid or other get-rich-quick schemes.
+						<br />•	Use the Services for fraudulent or abusive purposes including, but not limited to, using the Services to impersonate any person or entity, or otherwise misrepresent your affiliation with a person, entity or the Services;
+						<br />•	Disrupt, interfere with or otherwise adversely affect the normal flow of the Services or otherwise act in a manner that may negatively affect other users' experience when using the Services.
+						<br />•	Disrupt, overburden, or aid or assist in the disruption or overburdening of any computer or servers used to offer or support the Services.
+						<br />•	Attempt to gain unauthorized access to the Services, to accounts registered to others or to the computers, servers, or networks connected to the Services by any means other than the user interface provided by us, including, but not limited to, by circumventing or modifying, attempting to circumvent or modify, or encouraging or assisting any other person to circumvent or modify, any security, technology, device, encryption, or software that is part of the Services.
+						<br />•	Post any information, content or other material (or post links to any information or content) that contains nudity, excessive violence or is abusive, threatening, obscene, defamatory, libelous, or racially, sexually, religiously offensive or otherwise objectionable.
+						<br />•	Engage in ongoing toxic behavior, such as repeatedly posting information on an unsolicited basis.
+						<br />•	Attempt to, or harass, abuse, or harm, or advocate or incite harassment, abuse, or harm of another person, group, including our employees, directors, officers, and customer service representatives.
+						<br />•	Make available through the Services any material or information that infringes any copyright, trademark, patent, trade secret, right of privacy, right of publicity, or other right of any person or entity, or which impersonates any other person, including, but not limited to, an our employee, director or officer.
+						<br />•	Unless specifically authorized by law, attempt to decompile, reverse engineer, disassemble or hack any of the Services, or to defeat or overcome any of the encryption technologies or security measures or data transmitted, processed or stored by us, or to obtain any information from the Services using any method not expressly permitted by us.
+						<br />•	Solicit or attempt to solicit login information or any other login credentials or personal information from other users of the Services.
+						<br />•	Harvest, scrape or collect any information about or regarding other people that use the Services, including, but not limited to, through use of pixel tags, cookies, GIFs or similar items that are sometimes also referred to as spyware.
+						<br />•	Post anyone's private information, including personally identifiable information/personal data (whether in text, image or video form), identification documents, or financial information through the Services.
+						<br />•	Engage in any act that we deem to conflict with the spirit or intent of the Services or make improper use of Our support services.
+					</P>
+					
+					<h5>4. Third-Party Services</h5>
+					<P>
+						Services may include links to third-party services (including, but not limited to, advertisements displayed by third parties) and/or the third-party services may be made available to you via Services. These services may include, but are not limited to gameplay recording and sharing, social media connectivity and advertisements. These services are subject to respective third party terms and conditions. Please read these third-party terms and conditions, carefully as they constitute an agreement between you and the relevant third-party service provider to which we are not a party.
+					</P>
+					
+					<h5>5. Accounts and Login Informatio</h5>
+					<P>
+						Certain elements of the Services may enable you to create an account or otherwise register with the Services (“Account”). You may be required to select a password for your Account or you may also use other credentials to access the Account ("Login Information"). You agree that you will not give your Login Information to anyone else or allow anyone else to use your Login Information or Account. You are solely responsible for maintaining the confidentiality of the Login Information, and you are responsible for all uses thereof, including purchases. We may assume that anyone logging into your Account using your Login Information is either you or someone logging in with your permission.
+						<br />We reserve the right to delete your Account if we observe no activity by you in relation to the Account for 180 days or more. In such event, you may no longer be able to access and/or use any Virtual Items associated with that Account and no refund will be offered to you.
+					</P>
+					
+					<h5>6. User Contributions</h5>
+					<P>
+						The Services may allow you to create content, including, but not limited to, gameplay maps, characters, screenshots or videos of your gameplay (collectively “User Contributions”).
+						<br />In exchange for use of the Services, you hereby grant us a non-exclusive, royalty-free, perpetual, irrevocable, fully transferable and sub-licensable worldwide right and license to use your User Contributions in any way and for any purposes including, but not limited to, the right to reproduce, copy, adapt, modify, perform, display, publish, broadcast, transmit, or otherwise communicate to the public by any current or future means and to distribute your User Contributions without any further notice or compensation to you of any kind.
+						<br />Where not expressly prohibited by law, you hereby waive any moral rights of paternity, publication, reputation, or attribution with respect to our and other players' use and enjoyment of your User Contributions in connection with the Services and related goods and services under applicable law. This grant of license to us, and the foregoing waiver of any applicable moral rights, survives any termination of these TOS.
+						<br />We, its directors, officers and employees do not accept or consider unsolicited idea or product submissions of any kind (e.g. game or other product ideas, stories, screenplays, artwork, musical or audiovisual works, concepts or any other creative materials) in any format, by means of any transmission (“Unsolicited Content”). Please do not submit any Unsolicited Content to us or its directors, officers or employees. However, if you submit Unsolicited Content to us, you agree that such Unsolicited Content will not be treated as confidential, regardless of what you otherwise state in your accompanying message. You further agree that such Unsolicited Content may be used and exploited by us without compensation to you or any third party and you grant us a perpetual, non-exclusive, irrevocable, fully paid, royalty free, sub-licensable and transferable (in whole or in part) worldwide license to use, exploit, reproduce, transmit, amend, display and exhibit Unsolicited Content in all current or future media for any purpose and to create derivative works based upon the Unsolicited Content.
+					</P>
+					
+					<h5>7. Communications between Users of the Services</h5>
+					<P>
+						We assume no responsibility for the conduct of other users of the Services and assumes no responsibility for monitoring the Services for inappropriate content or conduct. We do not, and cannot, pre-screen or monitor all content or conduct of users. Your use of the Services is at your own risk.
+						<br />By using the Services, you may be exposed to content or conduct that is offensive, indecent or otherwise not in line with your values. We may utilize technology to monitor and/or record your interactions with the Services or communications (including, but not limited to, chat text) when you are using the Services. You irrevocably consent to such monitoring and recording. Accordingly, you agree that you have no expectation of privacy concerning the transmission of any content within the Services, including, but not limited to, chat text or voice communications.
+						<br />We reserve the right at its sole discretion to review, monitor, prohibit, edit, delete, disable access to or otherwise make unavailable any content made available by users of the Service without notice for any reason or for no reason at any time. If at any time we choose, at its sole discretion, to monitor the Services, We nonetheless assume no responsibility for content made available by users of the Services, and we assume no obligation to modify or remove any inappropriate content.
+					</P>
+					
+					<h5>8. Suspension and Termination for your Breach</h5>
+					<P>
+						Without limiting any other remedies available to us, if we believe that you are in breach of these TOS, we reserve the right to take any of the following actions, whether individually or in combination, and either with or without notice to you: (i) delete, suspend and/or modify your Account or parts of your Account; (ii) limit, suspend and/or terminate your access to the Services; (iii) modify and/or remove any of your Virtual Items; (iv) reset and/or modify any game progression or benefits and privileges associated with you, such as any level or score you have reached in the Services.
+					</P>
+					
+					<h5>9. Availability of the Services</h5>
+					<P>
+						We may limit, suspend or terminate the Services, or portions thereof, and take technical and legal steps to prevent users from accessing the Services if we believes they are creating risk or possible legal liabilities, infringing intellectual property rights of third parties, or not acting in accordance with the letter or spirit of these TOS.
+						<br />We reserve the right to stop offering and/or supporting the Services or a part thereof (e.g. a game or a feature of a game) at any time, at which point your license to use the Services or a part thereof will be terminated automatically. In such an event, unless otherwise required by applicable law, we do not have to provide refunds for Virtual Items or other items in connection with such discontinued Services.
+					</P>
+					
+					<h5>10. Disclaimer</h5>
+					<P>
+						To the fullest extent permissible under applicable law, the Services are provided to you “AS IS,” without warranty, assurances or guarantees of any kind. It may have defects, and your use is solely at your risk. We do not make, and hereby disclaims any and all express, implied or statutory warranties, including implied warranties of condition, uninterrupted use, accuracy of data (including, but not limited to, location data), merchantability, satisfactory quality, fitness for a particular purpose, non-infringement of third-party rights, and warranties (if any) arising in the course of dealing, usage, or trade practices. We do not warrant against interference with your enjoyment of the Services; that the Services will meet your requirements; that operation of the Services will be uninterrupted or error-free; that the Services will interoperate or be compatible with any other services; or, that any errors in the Services will be corrected. No oral or written advice provided by us, its employees or other representatives constitute a warranty.
+						<br />Some jurisdictions do not allow disclaimers such as those set forth above; thus, the above terms may not apply to you. Instead, in such jurisdictions, the foregoing disclaimers shall only apply to the extent permitted by the laws of such jurisdictions. Moreover, you may have additional legal rights in your jurisdiction, and nothing in these TOS shall infringe upon the statutory rights that you may have as a consumer of the Services.
+					</P>
+					
+					<h5>11. Limitations of Liability</h5>
+					<P>
+						In no way will we be liable for special, incidental or consequential damages resulting from access, use or malfunction of the Services, including but not limited to, damages to property, loss of goodwill, device failure or malfunction and, to the extent permitted by law, damages for personal injuries, property damage, lost profits or punitive damages from any causes of action arising out of or related to these TOS or the Services, whether arising in tort (including negligence), contract, strict liability or otherwise and whether or not we have been advised of the possibility of such damages. For purposes of Article 11 “Limitations of Liability,” Our licensors and other partners are third-party beneficiaries to the limitations of liability specified herein and may enforce these TOS against you.
+						<br />Some jurisdictions do not allow certain limitations of liability such as these stated above; thus, the above terms may not apply to you. Instead, in such jurisdictions, the foregoing limitations of liability shall apply only to the extent permitted by the laws of such jurisdictions. Moreover, you may have additional legal rights in your jurisdiction, and nothing in these TOS will infringe upon any statutory rights you may have as a consumer of the Services.
+					</P>
+					
+					<h5>12. INTELLECTUAL PROPERTY RIGHTS</h5>
+					<P>
+						In the event of any concerns or complaints about possible violation of intellectual property rights, please send us an email at Legal@whosebilling.com, identifying with specificity the rights alleged to be violated and the accused product(s).
+					</P>
+					
+					<h5>13. Links to Third-party Products and Services</h5>
+					<P>
+						We may link to third-party websites or services from the Services. You understand that we make no promises regarding any content, goods or services provided by such third parties and, you understand we do not endorse them. We are also not responsible to you in relation to any losses or harm caused by such third parties. Any charges you incur in relation to these third parties are your responsibility. You understand that when you provide data to such third parties you are providing it in accordance with their privacy policy (if any) and you understand our Privacy Policy does not apply in relation to such data
+					</P>
+					
+					<h5>14. Changes to these TOS</h5>
+					<P>
+						Notwithstanding Article 8 “Binding arbitration / Class Waiver,” we may update these TOS from time to time in response to changing legal, technical or business developments. When we update these TOS, we will take appropriate measures to inform you via the Services or otherwise, in accordance with the significance of the changes we make.
+						<br />By continuing to access or use the Services after updates become effective, you agree to be bound by the updated TOS.
+					</P>
+					
+					<h5>15. Governing Law</h5>
+					<P>
+						These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of UK
+					</P>
+					<h5>16. Assignment, Severability and Entire Agreement</h5>
+					<P>
+						We may assign these TOS, in whole or in part, to any person or entity at any time with or without your consent. You may not assign or delegate any rights or obligations under these TOS or the Privacy Policy without Our prior written consent, and any unauthorized assignment and delegation by you is void.
+						<br />If any provision of these TOS is held to be invalid or unenforceable, such provision will be limited or eliminated to the minimum extent necessary, and the remaining provisions of these TOS will remain in full force and effect. Our failure to enforce any right or provision of these TOS will not be deemed a waiver of such right or provision.
+						<br />This TOS and Privacy Policy set out the entire agreement between you and us regarding the Services and supersede all earlier agreements and understandings between you and us.
+						<br />If you have any questions about these TOS, please contact at support@linksfield.net;
+					</P>
+					
+					<p class="bottomTxt">
+						<img src="../assets/common/TXT.png"/>
+					</p>
 				</div>
 			</div>
 		</div>
 
 		<div class="btns">
-			<router-link class="done" :to="'/'+backRouoter">{{$t("message.back")}}</router-link>
+			<a class="done" @click="back">{{$t("message.back")}}</a>
 		</div>
 	</div>
 </template>
@@ -513,6 +598,11 @@
 			backRouoter: {
 				type:String,
 				default:''
+			}
+		},
+		methods:{
+			back(){
+				history.go(-1)
 			}
 		}
 	}
@@ -545,5 +635,12 @@
 		padding: 15px;
 		text-align: center;
 		background: #fff;
+	}
+	.bottomTxt{
+		margin-top:20px;
+	}
+	.bottomTxt img{
+		width:100%;
+		max-width: 360px;
 	}
 </style>
