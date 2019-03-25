@@ -1,5 +1,5 @@
 <template>
-	<div class="body-container index">
+	<div class="body-container index" v-show="showIndex">
 		<div class="banner">
 			<div class="language">
 				<a class="CN" :class="{'active bgColor': (langType == 'cn')}" @click="langCn">中文</a>
@@ -84,6 +84,7 @@
 			return {
 				langType: localStorage.getItem("lang") ? localStorage.getItem("lang") : "cn",
 				CnFlag: true,
+				showIndex:false,
 				tabFlag: true,
 				noData: true,
 				meals: [],
@@ -101,18 +102,24 @@
 				}
 				this.tabFlag = false
 				this.tabFlag = true
-				this.cookieFunc()
+//				this.cookieFunc()
 			}
 		},
-		created() {
+		beforeCreate(){
 			if(!this.$store.state.deviceId){
-				this.$router.replace('/inputIccid')
-				return
+				var str = window.location.href.split('?')
+				this.$router.replace('/inputIccid?'+str[1])
+				return false
+			}else{
+				
 			}
+		},
+		mounted() {
+			this.showIndex = true
 			if(this.langType != 'cn') {
 				this.CnFlag = false
 			}
-			this.cookieFunc()
+//			this.cookieFunc()
 			this.getData()
 		},
 		methods: {
@@ -163,12 +170,16 @@
 					}
 					return "";
 				}
-
-				var user_deviceId = getCookie("deviceId")
-				var user_deviceType = getCookie("deviceType")
-				var user_partnerCode = getCookie("partnerCode")
-				var user_requestOrderId = getCookie("requestOrderId")
-				//alert('deviceId:' + user_deviceId  + 'deviceId:' + user_deviceType  + 'deviceId:' + user_partnerCode)
+				
+				function getQuery(paramName) {
+					return that.$route.query[paramName]
+				}
+		
+				var user_deviceId = getCookie("deviceId") ? getCookie("deviceId") : getQuery("deviceId");
+				var user_deviceType = getCookie("deviceType")? getCookie("deviceType") : getQuery("deviceType");
+				var user_partnerCode = getCookie("partnerCode")? getCookie("partnerCode") : getQuery("partnerCode");
+				var user_requestOrderId = getCookie("requestOrderId")? getCookie("requestOrderId") : getQuery("requestOrderId");
+//				alert('deviceId:' + user_deviceId  + 'deviceId:' + user_deviceType  + 'deviceId:' + user_partnerCode)
 
 				if(user_deviceId && user_deviceType && user_partnerCode && user_requestOrderId) {
 					that.$store.state.deviceId = user_deviceId
@@ -192,6 +203,8 @@
 							that.$store.state.deviceTypeText = that.CnFlag ? 'SOC' : 'SOC'
 							break;
 					}
+				}else{
+					
 				}
 			},
 			getData() {

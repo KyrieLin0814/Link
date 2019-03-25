@@ -195,7 +195,8 @@
 							})
 						}
 					} else if(orderUnit == "5") {
-						if(typeArrStr.indexOf("年") < 0 && typeArrStr.indexOf("Year") < 0) {
+						var typeArrStrClone = typeArrStr.split(lang ? "半年" : 'Half a year').join('');
+						if(typeArrStrClone.indexOf("年") < 0 && typeArrStrClone.indexOf("Year") < 0) {
 							typeArr.push({
 								id: orderUnit,
 								txt: lang ? "年" : 'Year'
